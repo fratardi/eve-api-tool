@@ -1,6 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 
+interface scope{
+  scopeName : string
+
+}
+
 
 @Component({
   selector: 'app-first',
@@ -11,52 +16,51 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 
 
 
-export class FirstComponent implements OnInit {
-  Swagger : any;
 
+
+
+
+
+export class FirstComponent implements OnInit {
+  Swagger : any = null;
+
+  scopes: any;
     constructor(private http: HttpClient) { }
 
+  printSwagger(){
+
+this.scopes = this.Swagger.securityDefinitions.evesso.scopes;
+
+    console.log( this.scopes   )
 
 
-  logIn()
-  {
-
-
-    let url = "https://esi.evetech.net/latest/swagger.json?datasource=tranquility"
-    this.http.get<any>(url
-       
-      // , { t// itle: 'Angular POST Request Example' }
-      ).subscribe(data => {
-          this.Swagger = data.id;
-          console.log(this.Swagger, data.securityDefinitions
-            );
-      })
-     // window.location.href = 'http://www.cnn.com/';
-
-
+   console.log( this.Swagger )
 
   }
 
+  getSwagger()
+  {
+    let swaggerUrl = "https://esi.evetech.net/latest/swagger.json?datasource=tranquility"
 
-    bloodline :any ; 
- //   https://esi.evetech.net/latest/universe/bloodlines/?datasource=tranquility&language=en
-    ngOnInit() {      
-    
-      let url = 'https://esi.evetech.net/latest/universe/bloodlines/?datasource=tranquility&language=en'
-      // SimpleGET  request with a JSON body and response type <any>
-        this.http.get<any>(url
-       
-        // , { title: 'Angular POST Request Example' }
-        
-        ).subscribe(data => {
-            this.bloodline = data.id;
-        })
-
-
-        console.log(this.bloodline);
-
+    let  headerDict = {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+      'Access-Control-Allow-Headers': 'Content-Type',
     }
 
-  
 
+
+    this.http.get<any>(swaggerUrl )
+      .subscribe(data => {
+          this.Swagger = data
+          //data;
+        //  const obj = JSON.parse(data)
+          console.log(data)
+      })
+     // window.location.href = 'http://www.cnn.com/';
+  }
+
+    ngOnInit() {      
+        this.getSwagger();
+    }
 }
