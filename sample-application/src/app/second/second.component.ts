@@ -1,61 +1,85 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { switchMap } from 'rxjs';
 // express = require('express');
 @Component({
-  selector: 'app-second',
-  templateUrl: './second.component.html',
-  styleUrls: ['./second.component.less']
+	selector: 'app-second',
+	templateUrl: './second.component.html',
+	styleUrls: ['./second.component.less']
 })
+
+
+
 export class SecondComponent implements OnInit {
 
-  constructor(
-    private http: HttpClient
-  ) { }
+	constructor(
+		private http: HttpClient
+		,
+
+		private route: ActivatedRoute
+		//,
+	) { 
+	
+	}
+
+	// curl -XPOST -H "Content-Type:application/json" -H "Authorization:Basic Y2xpZW50X2lkOmNsaWVudHNlY3JldDE="
+	// -d '{"grant_type":"authorization_code", "code":"ckEZIa6JUOdoN6ijmqBI...qgpU-SmPsZ0"}'
 
 
 
-  // curl -XPOST -H "Content-Type:application/json" -H "Authorization:Basic Y2xpZW50X2lkOmNsaWVudHNlY3JldDE=" 
-  // -d '{"grant_type":"authorization_code", "code":"ckEZIa6JUOdoN6ijmqBI...qgpU-SmPsZ0"}' 
+	// https://login.eveonline.com/oauth/token
 
 
 
-  // https://login.eveonline.com/oauth/token
+	ngOnInit(): void {
+
+	let secretKey  =  	"jcVXo0IZFt5YDr8AJ3Z7cKCDfVijNxKhupOKCQ2I"
+	let client_id 	=	"7f45c8124b2640beba3a6902df6832a2";
+	let authorizationToken  : any ; 
+	this.route.queryParams.  subscribe(e => authorizationToken = e)
+	this.route.data.subscribe(element => console.log(element));
+
+	console.log( "authorizationToken",  authorizationToken);
+	console.log( "secretKey",  secretKey);
+	console.log( "client_id",  client_id);
 
 
 
-  ngOnInit(): void {
 
-   let secretKey  =  "jcVXo0IZFt5YDr8AJ3Z7cKCDfVijNxKhupOKCQ2I"
-   let  client_id ="7f45c8124b2640beba3a6902df6832a2";
-   let toEncode   = client_id + ":" + secretKey
-
-let encoded  = btoa(toEncode)
-
-   //toEncode.toString('base64')
-     console.log(  "ENCODED " ,  btoa(toEncode));
+	let something =  client_id+ ":" + secretKey;
+	let encodedSomething = btoa(something);
 
 
-     const headers = { 
-      "Authorization": "Basic " + encoded.slice(0, -1),
-      "Content-Type": "application/x-www-form-urlencoded",
-      // "Host": "login.eveonline.com",
-      // "Access-Control-Allow-Origin": "*"
-    }
+	 	console.log("encoded something",encodedSomething)
 
-      
-    console.log( "this = " , this, window.location.search.substring(6, window.location.search.length) );
-    let  authorization_code  = window.location.search.substring(6, window.location.search.length);
-   //  base-64 encoded string of {client id}:{client_secret}. 
-
-    const body = encoded.toString();
-    //JSON.stringify(window.location.search);
+	// let toEncode   = "client_id:" + secretKey
+	// let encoded  = btoa(toEncode)
 
 
- let formEncodedValue = "grant_type=authorization_code&code="+  authorization_code;
+	const headers = {
+		"Authorization": "Basic " + encodedSomething,
+		"Content-Type": "application/json",
+	 	    "Host": "login.eveonline.com",
+	//	"Access-Control-Allow-Origin": "*"
+	}
 
-    console.log(formEncodedValue);
 
-// let string =  "{
+
+	//	console.log( "this = " , this, window.location.search.substring(6, window.location.search.length) );
+		let  authorization_code  = window.location.search.substring(6, window.location.search.length) ;
+		console.log("AUTH:" + authorization_code);
+	 //  base-64 encoded string of {client id}:{client_secret}.
+
+		const body = JSON.stringify({
+			"grant_type":"authorization_code",
+			"code": authorizationToken
+		});
+
+ let formEncodedValue = "grant_type=authorization_code&code="+  authorizationToken;
+
+
+// let string =  "{-
 //   "grant_type":"authorization_code",
 //   "code":"{the authorization code}"
 // }";
@@ -65,16 +89,13 @@ let encoded  = btoa(toEncode)
 
 
 
-   // this.http.post(,  header : "Content-Type:application/json" )
-
-    this.http.post('https://login.eveonline.com/v2/oauth/token',
-     body,
-     {headers})
-    .subscribe(data => console.log("DATA  = ",data))
+		this.http.post('https://login.eveonline.com/v2/oauth/token',
+		 body,
+		 {headers}
+		 )
+		.subscribe(data => console.log("DATA  = ",data))
 // https://login.eveonline.com/v2/oauth/token
 
- 
-  
 
-}
+	}
 }

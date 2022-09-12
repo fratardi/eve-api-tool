@@ -12,7 +12,9 @@ import { SecureComponent } from './secure/secure.component';
 
 const routes: Routes = [
   { path: 'first-component', component: FirstComponent },
-  { path: '**', component: SecondComponent },
+  { path: '**', component: SecondComponent, data : {truc : this}
+
+},
 
   { path: '', redirectTo: 'secure', pathMatch: 'full' },
   { path: 'secure', canActivate: [ AuthGuard ], component: SecureComponent },
