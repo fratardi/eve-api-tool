@@ -38,3 +38,5 @@ npx -p @angular/cli@latest ng new sample-application
 npx -p @angular/cli@latest ng  generate component first 
 
 npx -p @angular/cli@latest ng serve
+
+https://www.djamware.com/post/5f8f99673b3daf2033c40cac/angular-10-tutorial-oauth2-login-and-refresh-token
