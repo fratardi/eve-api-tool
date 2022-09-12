@@ -21,11 +21,20 @@ export class FirstComponent implements OnInit {
   scopes: any;
     constructor(private http: HttpClient) { }
 
+
+
+
+
+
+ //   curl -XPOST -H "Content-Type:application/json" -H "Authorization:Basic Y2xpZW50X2lkOmNsaWVudHNlY3JldDE=" -d '{"grant_type":"authorization_code", "code":"ckEZIa6JUOdoN6ijmqBI...qgpU-SmPsZ0"}' https://login.eveonline.com/oauth/token
+
+
+
+
+
   
   goToLogin()
   {
-
-    
 
    let  url  = 'https://login.eveonline.com/oauth/authorize?response_type=code&redirect_uri=http://localhost:4200/esi_callback&client_id=7f45c8124b2640beba3a6902df6832a2&scope=esi-characters.read_standings.v1'
 

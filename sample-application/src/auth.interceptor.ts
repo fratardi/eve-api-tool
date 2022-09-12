@@ -17,7 +17,7 @@ export class AuthInterceptor implements HttpInterceptor {
 
 
       intercept(request: HttpRequest<any>, next: HttpHandler): any {
-
+ 
         const token = this.tokenService.getToken();
         const refreshToken = this.tokenService.getRefreshToken();
     
