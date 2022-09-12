@@ -27,7 +27,7 @@ export class FirstComponent implements OnInit {
 
     
 
-   let  url  = 'https://login.eveonline.com/oauth/authorize?response_type=code&redirect_uri=http://localhost/oauth-callback&client_id={client id}&scope=esi-characters.read_standings.v1'
+   let  url  = 'https://login.eveonline.com/oauth/authorize?response_type=code&redirect_uri=http://localhost:4200/esi_callback&client_id=7f45c8124b2640beba3a6902df6832a2&scope=esi-characters.read_standings.v1'
 
 
    window.location.href = url;
