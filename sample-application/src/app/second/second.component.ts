@@ -25,26 +25,44 @@ export class SecondComponent implements OnInit {
 
   ngOnInit(): void {
 
-  //  let code = 0;
-    const headers = { 'Content-Type': 'application/json'}  
- 
+   let secretKey  =  "jcVXo0IZFt5YDr8AJ3Z7cKCDfVijNxKhupOKCQ2I"
+   let  client_id ="7f45c8124b2640beba3a6902df6832a2";
+   let toEncode   = client_id + ":" + secretKey
+
+let encoded  = btoa(toEncode)
+
+   //toEncode.toString('base64')
+     console.log(  "ENCODED " ,  btoa(toEncode));
 
 
-    console.log( "this = " , this, window.location.search.substring(6, window.location.search.length) );
-    const body =JSON.stringify(window.location.search);
+    const headers = { 
+      "Authorization": "Basic <Base64 encoded credentials>",
+      "Content-Type": "application/x-www-form-urlencoded",
+      "Host": "login.eveonline.com"
+    }
 
- let    client_id = window.location.search.substring(6, window.location.search.length);
       
+    console.log( "this = " , this, window.location.search.substring(6, window.location.search.length) );
+    let  authorization_code  = window.location.search.substring(6, window.location.search.length);
+   //  base-64 encoded string of {client id}:{client_secret}. 
 
+    const body = encoded;
+    //JSON.stringify(window.location.search);
+
+
+ let formEncodedValue = "grant_type=authorization_code&code="+  authorization_code;
+// let string =  "{
+//   "grant_type":"authorization_code",
+//   "code":"{the authorization code}"
+// }";
 
 
    // this.http.post(,  header : "Content-Type:application/json" )
 
     this.http.post('https://login.eveonline.com/v2/oauth/token', body,{'headers':headers}).subscribe(data => console.log(data))
+// https://login.eveonline.com/v2/oauth/token
 
-
-  // https://https://esi.evetech.net/oauth/token
-
+ 
   
 
 }
