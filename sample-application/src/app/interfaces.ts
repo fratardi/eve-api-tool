@@ -8367,3 +8367,22 @@ export interface Evesso {
     scopes:           { [key: string]: string };
     type:             string;
 }
+
+export interface Tokens 
+{
+	access_token:  string,
+	expires_in: 	number,
+	refresh_token	: 	string,
+	token_type: 	string,
+}
+
+export interface UsrInfo{
+
+    CharacterID: number
+    CharacterName: string//"Golden Buddha"
+    CharacterOwnerHash: string//"0EKQBXIDa5v1nlmFbf996baIGnI="
+    ExpiresOn: string//"2022-09-13T21:52:48"
+    IntellectualProperty:  string//"EVE"
+    Scopes :  string[]//"esi-characters.read_standings.v1"
+  	TokenType :  string//"Character"
+}

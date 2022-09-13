@@ -7,38 +7,32 @@ import * as Swagger from '../interfaces'
 
 
 
-interface ownUsrInfo{
+// interface ownUsrInfo{
 
-CharacterID
-: 
-number
-CharacterName
-: 
-string//"Golden Buddha"
-CharacterOwnerHash
-: 
-string//"0EKQBXIDa5v1nlmFbf996baIGnI="
-ExpiresOn
-: 
-string//"2022-09-13T21:52:48"
-IntellectualProperty
-: 
-string//"EVE"
-Scopes
-: 
-string[]//"esi-characters.read_standings.v1"
-TokenType
-: 
-string//"Character"
-}
+// CharacterID
+// : 
+// number
+// CharacterName
+// : 
+// string//"Golden Buddha"
+// CharacterOwnerHash
+// : 
+// string//"0EKQBXIDa5v1nlmFbf996baIGnI="
+// ExpiresOn
+// : 
+// string//"2022-09-13T21:52:48"
+// IntellectualProperty
+// : 
+// string//"EVE"
+// Scopes
+// : 
+// string[]//"esi-characters.read_standings.v1"
+// TokenType
+// : 
+// string//"Character"
+// }
 
-interface Tokens 
-{
-	access_token:  string,
-	expires_in: 	number,
-	refresh_token	: 	string,
-	token_type: 	string,
-}
+
 
 // express = require('express');
 @Component({
@@ -124,7 +118,7 @@ export class SecondComponent implements OnInit {
 	let infos =	this.generateCurlRequest(encodedSomething, authorizationToken.code.toString());
 	let base64encodedstring : string =infos.base64encodedstring
 	let body = {"grant_type":"authorization_code", "code":""+base64encodedstring+""    }
-	let access_token : Tokens;
+	let access_token : Swagger.Tokens;
 
 
 	let paths : Swagger.Paths ;
@@ -132,19 +126,19 @@ export class SecondComponent implements OnInit {
 
 
 
-	let userOwn :ownUsrInfo;
+	let userOwn :Swagger.UsrInfo;
 	this.http.post('http://localhost:4200/postCodes',
 		body,
 		{ headers: httpHeaders }
 		 )
 		.subscribe(data  => {
-			access_token = data as Tokens;
+			access_token = data as Swagger.Tokens;
 			console.log("DATA  = ",data )
 			let httpHeaders2 = new HttpHeaders({"Authorization":" Bearer " +  access_token.access_token})	
 			this.http.get('http://localhost:4200/verify',{headers  : httpHeaders2})
 				.subscribe(e => {console.log("makumbass",e)
 			
-				userOwn = e as ownUsrInfo;
+				userOwn = e as Swagger.UsrInfo;
 				// this.http.get('http://localhost:4200/latest/characters/'+userOwn.CharacterID+'/standings/',{headers  : httpHeaders2})
 				// .subscribe(e => {console.log("makumbass",e)})
 			})
