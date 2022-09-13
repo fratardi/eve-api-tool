@@ -113,65 +113,18 @@ export class SecondComponent implements OnInit {
 	let authorizationToken  : any ; 
 	this.route.queryParams.  subscribe(e => authorizationToken = e)
 	let something =  client_id+ ":" + secretKey;
-
-
-
 	let encodedSomething = btoa(something);
-
-
-
-
-
-	
 	let httpHeaders = new HttpHeaders({
 		"Authorization": "Basic " + encodedSomething,
-		//	"Content-Type": "application/json",
-		// 	"Host": "login.eveonline.com",
-
-
-//		 "Access-Control-Allow-Origin": "https://login.eveonline.com",
-		//	'Content-Type': 'application/json',
 		'Content-Type': 'application/json',
-
-
-
-		// mode: 'cors',
 	});
-
-
-
-	//console.log("HEADERS ",headers);
-
-	//  base-64 encoded string of {client id}:{client_secret}.
-	let stringAuthCode = authorizationToken.toString();
-	//console.log("yoloooL",authorizationToken.code)
-
-
 	let infos =	this.generateCurlRequest(encodedSomething, authorizationToken.code.toString());
-	console.log(infos)
-
-
 	let base64encodedstring : string =infos.base64encodedstring
+	let body = {"grant_type":"authorization_code", "code":""+base64encodedstring+""    }
+	let access_token : Tokens;
 
 
-	//	});
- 	//   curl -XPOST -H "Content-Type:application/json" -H 
-	// "Authorization:Basic 6316r0k1zPFjozFC0dH0gcux6ahu4mGSXi-59JdeN1LuX4ylWNE4cNykqy3KQrn4=" -d 
-	// '{"grant_type":"authorization_code", "code":"N2Y0NWM4MTI0YjI2NDBiZWJhM2E2OTAyZGY2ODMyYTI6amNWWG8wSVpGdDVZRHI4QUozWjdjS0NEZlZpak54S2h1cE9LQ1EySQ"}' https://login.eveonline.com/v2/oauth/token
-
-
-	// https://www.githubstatus.com/api/v2/status.json
-
-
-let body = {"grant_type":"authorization_code", "code":""+base64encodedstring+""    }
-
-	//this.http.get('https://login.eveonline.com/oauth/token', options :{ httpHeaders}).subscribe(e=> console.log())
-
-let access_token : Tokens;
-
-
-let userOwn :ownUsrInfo;
-
+	let userOwn :ownUsrInfo;
 	this.http.post('http://localhost:4200/postCodes',
 		body,
 		{ headers: httpHeaders }
@@ -184,12 +137,8 @@ let userOwn :ownUsrInfo;
 				.subscribe(e => {console.log("makumbass",e)
 			
 				userOwn = e as ownUsrInfo;
-			
-
 				this.http.get('http://localhost:4200/latest/characters/'+userOwn.CharacterID+'/standings/',{headers  : httpHeaders2})
 				.subscribe(e => {console.log("makumbass",e)})
-
-
 			})
 
 
