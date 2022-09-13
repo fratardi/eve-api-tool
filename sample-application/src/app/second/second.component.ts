@@ -82,27 +82,20 @@ export class SecondComponent implements OnInit {
 	let authorizationToken  : any ; 
 	this.route.queryParams.  subscribe(e => authorizationToken = e)
 	let something =  client_id+ ":" + secretKey;
+
+
+
 	let encodedSomething = btoa(something);
 
 
-	//console.log("encoded something",encodedSomething)
 
-	let httpInterceptor : HttpInterceptor  ;
-
-
-
-
-	
-	const headers = {
-	
-	}
 
 
 	
 	let httpHeaders = new HttpHeaders({
 		"Authorization": "Basic " + encodedSomething,
 		//	"Content-Type": "application/json",
-		 	"Host": "login.eveonline.com",
+		// 	"Host": "login.eveonline.com",
 
 
 //		 "Access-Control-Allow-Origin": "https://login.eveonline.com",
@@ -123,8 +116,12 @@ export class SecondComponent implements OnInit {
 	//console.log("yoloooL",authorizationToken.code)
 
 
-	let infos =				this.generateCurlRequest(encodedSomething, authorizationToken.code.toString());
+	let infos =	this.generateCurlRequest(encodedSomething, authorizationToken.code.toString());
 	console.log(infos)
+
+
+	let base64encodedstring : string =infos.base64encodedstring
+
 
 	//	});
  	//   curl -XPOST -H "Content-Type:application/json" -H 
@@ -135,19 +132,23 @@ export class SecondComponent implements OnInit {
 	// https://www.githubstatus.com/api/v2/status.json
 
 
-
+let body = {"grant_type":"authorization_code", "code":base64encodedstring}
 
 	//this.http.get('https://login.eveonline.com/oauth/token', options :{ httpHeaders}).subscribe(e=> console.log())
 
-	// this.http.post('https://login.eveonline.com/oauth/token',
-	// 	"{"+"YOLO"+"}",
-	// 	{ headers: httpHeaders }
-	// 	 )
-	// 	.subscribe(data => console.log("DATA  = ",data ? "data" : "fail"))
+	this.http.post('http://localhost:4200/xway',
+		"{"+"YOLO"+"}",
+		{ headers: httpHeaders }
+		 )
+		.subscribe(data => console.log("DATA  = ",data ? "data" : "fail"))
 
+	this.http.get('http://localhost:4200/api').subscribe(e => console.log("makumbass",e))
 
-		this.http.get('http://localhost:4200/api').subscribe(e => console.log(e))
+	this.http.get('http://localhost:4200/lol').subscribe(e => console.log("makumbass",e))
 
+	this.http.post('http://localhost:4200/xway', body).subscribe(e => console.log("makumbass",e))
+
+//this.http.get('http://localhost:4200/api').subscribe(e => console.log("makumba",e))
 
 
 
