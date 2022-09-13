@@ -3,6 +3,9 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { switchMap } from 'rxjs';
 
+import * as Swagger from '../interfaces'
+
+
 
 interface ownUsrInfo{
 
@@ -124,6 +127,11 @@ export class SecondComponent implements OnInit {
 	let access_token : Tokens;
 
 
+	let paths : Swagger.Paths ;
+
+
+
+
 	let userOwn :ownUsrInfo;
 	this.http.post('http://localhost:4200/postCodes',
 		body,
@@ -137,15 +145,20 @@ export class SecondComponent implements OnInit {
 				.subscribe(e => {console.log("makumbass",e)
 			
 				userOwn = e as ownUsrInfo;
-				this.http.get('http://localhost:4200/latest/characters/'+userOwn.CharacterID+'/standings/',{headers  : httpHeaders2})
-				.subscribe(e => {console.log("makumbass",e)})
+				// this.http.get('http://localhost:4200/latest/characters/'+userOwn.CharacterID+'/standings/',{headers  : httpHeaders2})
+				// .subscribe(e => {console.log("makumbass",e)})
 			})
 
 
-			
-
 		})
-		this.http.get('http://localhost:4200/api').subscribe(e => console.log("makumbass",e))
+
+		let truc : Swagger.Welcome;
+
+		this.http.get('http://localhost:4200/api').subscribe(e =>{ truc = e as Swagger.Welcome
+	
+		console.log(truc.paths['/characters/{character_id}/bookmarks/folders/'])
+	
+	})
 	
 	//this.http.post('http://localhost:4200/xway', body).subscribe(e => console.log("makumbass",e))
 
