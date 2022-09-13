@@ -137,18 +137,16 @@ let body = {"grant_type":"authorization_code", "code":base64encodedstring}
 	//this.http.get('https://login.eveonline.com/oauth/token', options :{ httpHeaders}).subscribe(e=> console.log())
 
 	this.http.post('http://localhost:4200/xway',
-		"{"+"YOLO"+"}",
+		body,
 		{ headers: httpHeaders }
 		 )
 		.subscribe(data => console.log("DATA  = ",data ? "data" : "fail"))
 
-	this.http.get('http://localhost:4200/api').subscribe(e => console.log("makumbass",e))
+	// this.http.get('http://localhost:4200/api').subscribe(e => console.log("makumbass",e))
 
-	this.http.get('http://localhost:4200/lol').subscribe(e => console.log("makumbass",e))
+	// this.http.get('http://localhost:4200/lol').subscribe(e => console.log("makumbass",e))
 
-	this.http.post('http://localhost:4200/xway', body).subscribe(e => console.log("makumbass",e))
-
-//this.http.get('http://localhost:4200/api').subscribe(e => console.log("makumba",e))
+	//this.http.post('http://localhost:4200/xway', body).subscribe(e => console.log("makumbass",e))
 
 
 
