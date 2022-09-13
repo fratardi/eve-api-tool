@@ -7,21 +7,13 @@
         "^/api": ""
       },
       "changeOrigin": true
-    },
-    "/lol": {
-      "target": "https://esi.evetech.net/latest/swagger.json?datasource=tranquility",
-      "secure": false,
-      "pathRewrite": {
-        "^/lol": ""
-      },
-      "changeOrigin": true
     }
     ,
-    "/xway": {
+    "/postCodes": {
       "target": "https://login.eveonline.com/oauth/token",
       "secure": false,
       "pathRewrite": {
-        "^/xway": ""
+        "^/postCodes": ""
       },
       "changeOrigin": true
     }
@@ -31,6 +23,15 @@
       "secure": false,
       "pathRewrite": {
         "^/verify": ""
+      },
+      "changeOrigin": true
+    }
+    ,
+    "/latest": {
+      "target": "https://esi.evetech.net/latest/",
+      "secure": false,
+      "pathRewrite": {
+        "^/latest^": ""
       },
       "changeOrigin": true
     }

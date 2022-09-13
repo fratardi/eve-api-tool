@@ -4,9 +4,32 @@ import { ActivatedRoute } from '@angular/router';
 import { switchMap } from 'rxjs';
 
 
+interface ownUsrInfo{
 
+CharacterID
+: 
+number
+CharacterName
+: 
+string//"Golden Buddha"
+CharacterOwnerHash
+: 
+string//"0EKQBXIDa5v1nlmFbf996baIGnI="
+ExpiresOn
+: 
+string//"2022-09-13T21:52:48"
+IntellectualProperty
+: 
+string//"EVE"
+Scopes
+: 
+string[]//"esi-characters.read_standings.v1"
+TokenType
+: 
+string//"Character"
+}
 
-interface Secret 
+interface Tokens 
 {
 	access_token:  string,
 	expires_in: 	number,
@@ -112,7 +135,7 @@ export class SecondComponent implements OnInit {
 
 
 
-		 mode: 'cors',
+		// mode: 'cors',
 	});
 
 
@@ -144,24 +167,37 @@ let body = {"grant_type":"authorization_code", "code":""+base64encodedstring+"" 
 
 	//this.http.get('https://login.eveonline.com/oauth/token', options :{ httpHeaders}).subscribe(e=> console.log())
 
-let access_token : Secret;
+let access_token : Tokens;
 
-	this.http.post('http://localhost:4200/xway',
+
+let userOwn :ownUsrInfo;
+
+	this.http.post('http://localhost:4200/postCodes',
 		body,
 		{ headers: httpHeaders }
 		 )
 		.subscribe(data  => {
-
-			access_token = data as Secret;
-
+			access_token = data as Tokens;
 			console.log("DATA  = ",data )
 			let httpHeaders2 = new HttpHeaders({"Authorization":" Bearer " +  access_token.access_token})	
-			this.http.get('http://localhost:4200/verify',{headers  : httpHeaders2}).subscribe(e => console.log("makumbass",e))
+			this.http.get('http://localhost:4200/verify',{headers  : httpHeaders2})
+				.subscribe(e => {console.log("makumbass",e)
+			
+				userOwn = e as ownUsrInfo;
+			
+
+				this.http.get('http://localhost:4200/latest/characters/'+userOwn.CharacterID+'/standings/',{headers  : httpHeaders2})
+				.subscribe(e => {console.log("makumbass",e)})
+
+
+			})
+
+
+			
+
 		})
-
-	this.http.get('http://localhost:4200/api').subscribe(e => console.log("makumbass",e))
-	this.http.get('http://localhost:4200/lol').subscribe(e => console.log("makumbass",e))
-
+		this.http.get('http://localhost:4200/api').subscribe(e => console.log("makumbass",e))
+	
 	//this.http.post('http://localhost:4200/xway', body).subscribe(e => console.log("makumbass",e))
 
 //this.http.get('http://localhost:4200/api').subscribe(e => console.log("makumba",e))
