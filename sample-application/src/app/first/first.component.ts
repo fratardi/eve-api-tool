@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
-import { elementAt } from 'rxjs';
+import { HttpClient, HttpClientModule, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
+import { elementAt, Observable } from 'rxjs';
 
 interface scope{
   scopeName : string
@@ -20,6 +20,7 @@ export class FirstComponent implements OnInit {
 
   scopes: any;
     constructor(private http: HttpClient) { }
+
 
   
   goToLogin()

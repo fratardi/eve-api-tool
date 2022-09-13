@@ -1,0 +1,10 @@
+{
+    "/api": {
+      "target": "https://api.genderize.io/?name=scott",
+      "secure": false,
+      "pathRewrite": {
+        "^/api": ""
+      },
+      "changeOrigin": true
+    }
+  }

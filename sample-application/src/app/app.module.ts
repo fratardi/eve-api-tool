@@ -56,11 +56,11 @@ import {MatIconModule} from '@angular/material/icon';
   ],
   providers: [
 
-    // {
-    //   provide: HTTP_INTERCEPTORS,
-    //   useClass: AuthInterceptor,
-    //   multi: true
-    // }
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
+    }
 
   ],
   bootstrap: [AppComponent]

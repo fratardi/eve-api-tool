@@ -3,11 +3,12 @@ import { HttpClient, HttpClientModule, HttpErrorResponse, HttpHeaders, HttpParam
 import { catchError, Observable, tap, throwError } from 'rxjs';
 import { TokenService } from './token.service';
 
+let secretKey  =  	'jcVXo0IZFt5YDr8AJ3Z7cKCDfVijNxKhupOKCQ2I'
+let client_id 	=	'7f45c8124b2640beba3a6902df6832a2';
 
-
-const OAUTH_CLIENT = 'express-client';
-const OAUTH_SECRET = 'express-secret';
-const API_URL = 'http://localhost:3000/';
+const OAUTH_CLIENT = client_id;
+const OAUTH_SECRET = secretKey;
+const API_URL = 'https://login.eveonline.com/';
 const HTTP_OPTIONS = {
   headers: new HttpHeaders({
     'Content-Type': 'application/x-www-form-urlencoded',
@@ -38,7 +39,7 @@ export class AuthService {
     console.log(message);
   }   
 
-  constructor(private http: HttpClient, private tokenService: TokenService) {
+    constructor(private http: HttpClient, private tokenService: TokenService) {
 
   }
 

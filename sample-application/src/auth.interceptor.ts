@@ -41,6 +41,8 @@ export class AuthInterceptor implements HttpInterceptor {
           headers: request.headers.set('Accept', 'application/json')
         });
     
+
+        
         return next.handle(request).pipe(
           map((event: HttpEvent<any>) => {
             if (event instanceof HttpResponse) {
