@@ -4,14 +4,22 @@ import { ActivatedRoute } from '@angular/router';
 import { switchMap } from 'rxjs';
 
 
+
+
+interface Secret 
+{
+	access_token:  string,
+	expires_in: 	number,
+	refresh_token	: 	string,
+	token_type: 	string,
+}
+
 // express = require('express');
 @Component({
 	selector: 'app-second',
 	templateUrl: './second.component.html',
 	styleUrls: ['./second.component.less']
 })
-
-
 
 export class SecondComponent implements OnInit {
 
@@ -136,15 +144,23 @@ let body = {"grant_type":"authorization_code", "code":""+base64encodedstring+"" 
 
 	//this.http.get('https://login.eveonline.com/oauth/token', options :{ httpHeaders}).subscribe(e=> console.log())
 
+let access_token : Secret;
+
 	this.http.post('http://localhost:4200/xway',
 		body,
 		{ headers: httpHeaders }
 		 )
-		.subscribe(data => console.log("DATA  = ",data ? "data" : "fail"))
+		.subscribe(data  => {
 
-//	this.http.get('http://localhost:4200/api').subscribe(e => console.log("makumbass",e))
+			access_token = data as Secret;
 
-//	this.http.get('http://localhost:4200/lol').subscribe(e => console.log("makumbass",e))
+			console.log("DATA  = ",data )
+			let httpHeaders2 = new HttpHeaders({"Authorization":" Bearer " +  access_token.access_token})	
+			this.http.get('http://localhost:4200/verify',{headers  : httpHeaders2}).subscribe(e => console.log("makumbass",e))
+		})
+
+	this.http.get('http://localhost:4200/api').subscribe(e => console.log("makumbass",e))
+	this.http.get('http://localhost:4200/lol').subscribe(e => console.log("makumbass",e))
 
 	//this.http.post('http://localhost:4200/xway', body).subscribe(e => console.log("makumbass",e))
 
