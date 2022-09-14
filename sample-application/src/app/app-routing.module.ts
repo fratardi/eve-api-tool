@@ -10,7 +10,7 @@ const routes: Routes = [
   { path: 'first-component', component: FirstComponent },
 
   // { path: '404', component: NotFoundComponent },
-  { path: '**', component: SecondComponent},
+  { path: 'esi_callback', component: SecondComponent},
 
  // { path: '**', redirectTo: '404' }
 
