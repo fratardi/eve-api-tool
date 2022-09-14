@@ -1,11 +1,12 @@
 <div *ngIf="Swagger!== undefined">
-    Swagger OK 
+   <h4> Swagger OK </h4>
     <img  class="imgButton"
     (click)="goToLogin()"
     src="https://web.ccpgamescdn.com/eveonlineassets/developers/eve-sso-login-black-small.png" 
 />
+
 </div>
 <div *ngIf="Swagger=== undefined">
-    Swagger NOT OK 
-    {{Swagger}}
+
+    Api Is Not Available
 </div>

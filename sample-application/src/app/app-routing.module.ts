@@ -8,13 +8,10 @@ import { SecondComponent } from './second/second.component';
 
 const routes: Routes = [
   { path: 'first-component', component: FirstComponent },
-
-  // { path: '404', component: NotFoundComponent },
+  { path: '404', component: NotFoundComponent },
   { path: 'esi_callback', component: SecondComponent},
-
   //{ path: '**', redirectTo: '404' },
-
- { path: 'second-component', component: SecondComponent },
+  { path: 'second-component', component: SecondComponent },
 ];
 
 @NgModule({

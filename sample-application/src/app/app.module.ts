@@ -18,11 +18,6 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatTableModule} from '@angular/material/table';
 import {MatIconModule} from '@angular/material/icon';
 
-
-
-
-
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -47,15 +42,7 @@ import {MatIconModule} from '@angular/material/icon';
     MatCardModule,
     MatFormFieldModule,
   ],
-  providers: [
-
-    // {
-    //   provide: HTTP_INTERCEPTORS,
-    //   useClass: AuthInterceptor,
-    //   multi: true
-    // }
-
-  ],
+  providers: [ ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
