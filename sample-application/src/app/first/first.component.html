@@ -1,17 +1,11 @@
-<p>first works!</p>
-<button (click)="printSwagger()" >YOLO</button>
-
 <div *ngIf="Swagger!== undefined">
-    SwaggerOK {{Swagger}}
+    Swagger OK 
+    <img  class="imgButton"
+    (click)="goToLogin()"
+    src="https://web.ccpgamescdn.com/eveonlineassets/developers/eve-sso-login-black-small.png" 
+/>
 </div>
-<div *ngIf="Swagger!== undefined">
-    SwaggerOK {{Swagger}}
+<div *ngIf="Swagger=== undefined">
+    Swagger NOT OK 
+    {{Swagger}}
 </div>
-<!-- 
-
-<li *ngFor="let scope of scopes">{{ scope}}</li> -->
-        <img  class="imgButton"
-            (click)="goToLogin()"
-            src="https://web.ccpgamescdn.com/eveonlineassets/developers/eve-sso-login-white-large.png" 
-        />
-

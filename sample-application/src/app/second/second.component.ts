@@ -43,6 +43,10 @@ import * as Swagger from '../interfaces'
 
 export class SecondComponent implements OnInit {
 
+
+
+	userOwn : Swagger.UserInfo | undefined;
+	
 	constructor(
 		private http: HttpClient,
 		private route: ActivatedRoute
@@ -50,61 +54,21 @@ export class SecondComponent implements OnInit {
 		
 	) { }
 
-
-	crapFunc(encodedSomething : string , base64encodedstring : string )
-	{
-
-		// console.log("Prefetch")
-
-
-		// fetch('https://login.eveonline.com/oauth/token', {
-		// 	method: 'POST',
-		// //	mode: "no-cors",
-			
-		// 	headers: {
-		// 		'Sec-Fetch-Site': 'cross-site',
-		// //		'access-control-allow-origin': '*',
-		// 		'Content-Type': 'application/json',
-		// 		'Authorization': 'Basic ' + encodedSomething//N2Y0NWM4MTI0YjI2NDBiZWJhM2E2OTAyZGY2ODMyYTI6amNWWG8wSVpGdDVZRHI4QUozWjdjS0NEZlZpak54S2h1cE9LQ1EySQ=='
-		// 		//,
-		// 		//'Referrer-Policy': 'no-referrer'
-				
-		// 	},
-		// 	// body: '{"grant_type":"authorization_code", "code":"4viSS1nqvBv9NzWVkVfRnByr4AeoxUbSAlLE_OjAvwGJeasTrXgB5sHPLEdmZQQm"}',
-		// 	body: JSON.stringify({
-		// 		'grant_type': 'authorization_code',
-		// 		'code': encodedSomething
-		// 	})
-		// }).then(e => console.log(e));
-		// console.log("afterfetch")
-
-	}
-
-
-	generateCurlRequest(encodedSomething : string , base64encodedstring : string)
-	{
+	generateCurlRequest(encodedSomething : string , base64encodedstring : string){
 		let command =	'curl -XPOST -H ';
 		let header = '"Content-Type:application/json" -H "Authorization:Basic '+ encodedSomething +'" -d ';
 		let payload  = "'"+'{"grant_type":"authorization_code", "code":"'+base64encodedstring+'"}' + "' ";
 		let url = "https://login.eveonline.com/oauth/token"
-		//let request = {command : command , header : header , payload: payload , url : url}
-		console.log( command +header + payload + url  );
-		this.crapFunc(encodedSomething , base64encodedstring);
-
+	//	console.log( command +header + payload + url  );
 		return ({ encodedSomething: encodedSomething , base64encodedstring : base64encodedstring     })  ;
-
-
 	}
 
-
-	base64encodedstring(client_id :string ,  secret  : string)
-	{
+	base64encodedstring(client_id :string ,  secret  : string){
 		let stringToEncode = client_id+ ":"+secret;
 		return( "Basic "+btoa(stringToEncode))
 	}
 
 	ngOnInit(): void {
-
 	let secretKey  =  	"jcVXo0IZFt5YDr8AJ3Z7cKCDfVijNxKhupOKCQ2I"
 	let client_id 	=	"7f45c8124b2640beba3a6902df6832a2";
 	let authorizationToken  : any ; 
@@ -119,14 +83,8 @@ export class SecondComponent implements OnInit {
 	let base64encodedstring : string =infos.base64encodedstring
 	let body = {"grant_type":"authorization_code", "code":""+base64encodedstring+""    }
 	let access_token : Swagger.Tokens;
-
-
 	let paths : Swagger.Paths ;
 
-
-
-
-	let userOwn :Swagger.UsrInfo;
 	this.http.post('http://localhost:4200/postCodes',
 		body,
 		{ headers: httpHeaders }
@@ -136,21 +94,17 @@ export class SecondComponent implements OnInit {
 			console.log("DATA  = ",data )
 			let httpHeaders2 = new HttpHeaders({"Authorization":" Bearer " +  access_token.access_token})	
 			this.http.get('http://localhost:4200/verify',{headers  : httpHeaders2})
-				.subscribe(e => {console.log("makumbass",e)
+				.subscribe(e => {console.log(e)
 			
-				userOwn = e as Swagger.UsrInfo;
+				this.userOwn = e as	 Swagger.UserInfo;
 				// this.http.get('http://localhost:4200/latest/characters/'+userOwn.CharacterID+'/standings/',{headers  : httpHeaders2})
 				// .subscribe(e => {console.log("makumbass",e)})
 			})
-
-
 		})
-
 		let truc : Swagger.Welcome;
-
 		this.http.get('http://localhost:4200/api').subscribe(e =>{ truc = e as Swagger.Welcome
 	
-		console.log(truc.paths['/characters/{character_id}/bookmarks/folders/'])
+		console.log(truc.paths['/markets/prices/'])
 	
 	})
 	

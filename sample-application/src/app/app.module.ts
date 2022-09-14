@@ -4,11 +4,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FirstComponent } from './first/first.component';
 import { SecondComponent } from './second/second.component';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { AuthInterceptor } from 'src/auth.interceptor';
-import { LoginComponent } from './login/login.component';
-import { RegisterComponent } from './register/register.component';
-import { SecureComponent } from './secure/secure.component';
+import { HttpClientModule } from '@angular/common/http';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
@@ -32,9 +28,6 @@ import {MatIconModule} from '@angular/material/icon';
     AppComponent,
     FirstComponent,
     SecondComponent,
-    LoginComponent,
-    RegisterComponent,
-    SecureComponent,
     NotFoundComponent,
   ],
   imports: [

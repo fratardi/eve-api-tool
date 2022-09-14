@@ -28,7 +28,7 @@
     }
     ,
     "/latest": {
-      "target": "https://esi.evetech.net/latest/^",
+      "target": "https://esi.evetech.net/latest/",
       "secure": false,
       "pathRewrite": {
         "^/latest^": ""

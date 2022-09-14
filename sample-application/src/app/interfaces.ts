@@ -8376,10 +8376,10 @@ export interface Tokens
 	token_type: 	string,
 }
 
-export interface UsrInfo{
+export interface UserInfo{
 
     CharacterID: number
-    CharacterName: string//"Golden Buddha"
+    CharacterName: string
     CharacterOwnerHash: string//"0EKQBXIDa5v1nlmFbf996baIGnI="
     ExpiresOn: string//"2022-09-13T21:52:48"
     IntellectualProperty:  string//"EVE"

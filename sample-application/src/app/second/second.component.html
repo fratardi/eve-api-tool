@@ -1,1 +1,12 @@
-<p>second works!</p>
+<div *ngIf="userOwn !== undefined">
+    <h1>YAY LOGGED IN  YOU ARE </h1>
+<h5>
+    {{userOwn.CharacterID}}
+</h5>    
+<h5>
+    {{userOwn.CharacterName}}
+</h5>
+</div>
+<div *ngIf="userOwn === undefined">
+    <h1>You Need to Log In first </h1>
+</div>
