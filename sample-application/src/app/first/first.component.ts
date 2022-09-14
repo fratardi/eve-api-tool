@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import * as Swagger from '../interfaces'
+
 
 interface scope{
   scopeName : string
@@ -15,7 +17,11 @@ interface scope{
 export class FirstComponent implements OnInit {
   	Swagger : any = null;
   	scopes: any;
+
+	paths!: Swagger.Paths;
 	
+
+
 	constructor(private http: HttpClient,)
 	{ }
 		
@@ -39,6 +45,28 @@ export class FirstComponent implements OnInit {
 	this.http.get<any>(swaggerUrl )
 	  .subscribe((data : any ) => {
 		  this.Swagger = data
-		  console.log(data)
+		  console.log(data.securityDefinitions.evesso.scopes)
+
+		  
+		console.log(Array.from(data.securityDefinitions.evesso))
+		var result = [];
+
+	for(var i in data.securityDefinitions.evesso.scopes)
+   	 	result.push([i, data.securityDefinitions.evesso.scopes[i]]);
+
+			console.log(result)
+		
+		//   data.securityDefinitions.evesso.scopes.forEach(element => {
+		// 	console.log(element)
+		//   });
+
+		// data.securityDefinitions.evesso.scopes.forEach((element: any) => {
+		// 	console.log(element)
+		// });
+
+		// data.securityDefinitions.evesso.scopes.forEach(element => {
+		// 	console.log(element)
+		// });
+
 	})}
 }

@@ -1,9 +1,11 @@
 import { HttpClient, HttpHeaders, HttpInterceptor } from '@angular/common/http';
+import { ThisReceiver } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { switchMap } from 'rxjs';
 
 import * as Swagger from '../interfaces'
+import { EveEsiService } from '../Services/eve-esi.service';
 
 
 
@@ -44,13 +46,17 @@ import * as Swagger from '../interfaces'
 export class SecondComponent implements OnInit {
 
 
+	client_id 	=	"7f45c8124b2640beba3a6902df6832a2";
+	secretKey  =  	"jcVXo0IZFt5YDr8AJ3Z7cKCDfVijNxKhupOKCQ2I"
+
+	token : Swagger.Tokens|undefined;
 
 	userOwn : Swagger.UserInfo | undefined;
 	
 	constructor(
 		private http: HttpClient,
-		private route: ActivatedRoute
-
+		private route: ActivatedRoute,
+		private esi_service : EveEsiService
 		
 	) { }
 
@@ -68,12 +74,22 @@ export class SecondComponent implements OnInit {
 		return( "Basic "+btoa(stringToEncode))
 	}
 
+
+	truc()
+	{
+
+		console.log(this.esi_service.token.access_token)
+
+	}
+
+
+
 	ngOnInit(): void {
-	let secretKey  =  	"jcVXo0IZFt5YDr8AJ3Z7cKCDfVijNxKhupOKCQ2I"
-	let client_id 	=	"7f45c8124b2640beba3a6902df6832a2";
+	
+
 	let authorizationToken  : any ; 
-	this.route.queryParams.  subscribe(e => authorizationToken = e)
-	let something =  client_id+ ":" + secretKey;
+	this.route.queryParams.subscribe(e => authorizationToken = e)
+	let something =  this.client_id+ ":" + this.secretKey;
 	let encodedSomething = btoa(something);
 	let httpHeaders = new HttpHeaders({
 		"Authorization": "Basic " + encodedSomething,
@@ -85,34 +101,23 @@ export class SecondComponent implements OnInit {
 	let access_token : Swagger.Tokens;
 	let paths : Swagger.Paths ;
 
-	this.http.post('http://localhost:4200/postCodes',
-		body,
-		{ headers: httpHeaders }
-		 )
-		.subscribe(data  => {
-			access_token = data as Swagger.Tokens;
-			console.log("DATA  = ",data )
-			let httpHeaders2 = new HttpHeaders({"Authorization":" Bearer " +  access_token.access_token})	
-			this.http.get('http://localhost:4200/verify',{headers  : httpHeaders2})
-				.subscribe(e => {console.log(e)
-			
-				this.userOwn = e as	 Swagger.UserInfo;
-				// this.http.get('http://localhost:4200/latest/characters/'+userOwn.CharacterID+'/standings/',{headers  : httpHeaders2})
-				// .subscribe(e => {console.log("makumbass",e)})
-			})
-		})
-		let truc : Swagger.Welcome;
-		this.http.get('http://localhost:4200/api').subscribe(e =>{ truc = e as Swagger.Welcome
+
+	this.esi_service.init_service(    body , httpHeaders  , 	this.route.queryParams.  subscribe(e => authorizationToken = e)  )
+
+
+	// 	let truc : Swagger.Welcome;
+	// 	this.http.get('http://localhost:4200/api').subscribe(e =>{ truc = e as Swagger.Welcome
 	
-		console.log(truc.paths['/markets/prices/'])
+	// 	console.log(truc.paths['/markets/prices/'])
 	
-	})
+	// 
+	let 	truc = this.esi_service.token as Swagger.Tokens;
 	
 	//this.http.post('http://localhost:4200/xway', body).subscribe(e => console.log("makumbass",e))
 
 //this.http.get('http://localhost:4200/api').subscribe(e => console.log("makumba",e))
 
-
+	console.log( "HELLOOOO" + truc )
 
 	}
 
