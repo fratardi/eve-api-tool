@@ -1,12 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import * as Swagger from '../interfaces'
+import { FormControl } from '@angular/forms';
 
 
-interface scope{
-  scopeName : string
-
-}
 
 @Component({
   selector: 'app-first',
@@ -16,15 +13,29 @@ interface scope{
 
 export class FirstComponent implements OnInit {
   	Swagger : any = null;
-  	scopes: any;
+  	scopes: string[] = [];
 
 	paths!: Swagger.Paths;
 	
+	toppings = new FormControl('');
+	toppingList: string[] = [] ;//= ['Extra cheese', 'Mushroom', 'Onion', 'Pepperoni', 'Sausage', 'Tomato'];
 
 
 	constructor(private http: HttpClient,)
-	{ }
+	{ 
+
 		
+
+	}
+		
+
+	printForm()
+	{
+
+		console.log(this.toppings)
+
+	}
+
 	ngOnInit() {
 		this.getSwagger();
 	}
@@ -54,8 +65,19 @@ export class FirstComponent implements OnInit {
 	for(var i in data.securityDefinitions.evesso.scopes)
    	 	result.push([i, data.securityDefinitions.evesso.scopes[i]]);
 
+
+			
 			console.log(result)
 		
+		result.forEach( element => {
+
+			  this.scopes.push(element[0])
+			console.log(element[0] )
+
+		})
+		console.log(this.scopes)
+		this.toppingList = this.scopes
+	
 		//   data.securityDefinitions.evesso.scopes.forEach(element => {
 		// 	console.log(element)
 		//   });

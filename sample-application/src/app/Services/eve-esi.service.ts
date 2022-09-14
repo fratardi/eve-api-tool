@@ -29,7 +29,6 @@ export class EveEsiService {
     return(this.userOwn);
   }
 
-
 	generateCurlRequest(encodedSomething : string , base64encodedstring : string){
 		let command =	'curl -XPOST -H ';
 		let header = '"Content-Type:application/json" -H "Authorization:Basic '+ encodedSomething +'" -d ';
@@ -40,14 +39,7 @@ export class EveEsiService {
 	}
 
 
-  init_service(
-    
-    callbackCode :any
- 
-     )  
-  {
-
-
+  init_service(callbackCode :any)  {
     let something =  client_id+ ":" + secretKey;
 		let encodedSomething = btoa(something);
 		let httpHeaders = new HttpHeaders({
@@ -56,12 +48,7 @@ export class EveEsiService {
 		});
     let infos =	this.generateCurlRequest(encodedSomething, callbackCode.code.toString());
 		let base64encodedstring : string  =infos.base64encodedstring
-
-
     let body1 = {"grant_type":"authorization_code", "code":""+base64encodedstring+""    }
-		
-
-
     console.log("YOLO")
     this.http.post('http://localhost:4200/postCodes',
 		body1,
