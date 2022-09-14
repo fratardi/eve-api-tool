@@ -19,7 +19,10 @@ export class FirstComponent implements OnInit {
   Swagger : any = null;
 
   scopes: any;
-    constructor(private http: HttpClient) { }
+    constructor(
+      private http: HttpClient
+      
+    ) { }
 
 
   

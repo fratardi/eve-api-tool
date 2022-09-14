@@ -12,7 +12,7 @@ const routes: Routes = [
   // { path: '404', component: NotFoundComponent },
   { path: 'esi_callback', component: SecondComponent},
 
- // { path: '**', redirectTo: '404' }
+  //{ path: '**', redirectTo: '404' },
 
  { path: 'second-component', component: SecondComponent },
 ];
