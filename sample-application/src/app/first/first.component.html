@@ -9,8 +9,10 @@
 	<h4>
 		<mat-form-field appearance="fill">
 			<mat-label>Scope</mat-label>
-			<mat-select [formControl]="toppings" multiple>
-				<mat-option *ngFor="let topping of scopeList" [value]="topping">{{topping}}</mat-option> 
+			<mat-select [formControl]="scopeForm" multiple>
+				<mat-option *ngFor="let scope of scopeList" [value]="scope">
+					{{scope}}
+				</mat-option> 
 			</mat-select>
 		</mat-form-field>
 	</h4>
@@ -24,7 +26,9 @@
 		Api Is Not Available
 </div>
 <h1>
-	<button (click)="printForm()"> hh   </button>
+	<button (click)="printForm()">
+		hh
+	</button>
 </h1>	
 	<!-- <section class="example-section" [formControl]="toppings">
 		<h4>You chose:</h4>
