@@ -8,7 +8,9 @@
 	/>
 	<h4>
 		<mat-form-field appearance="fill">
-			<mat-label>Scope</mat-label>
+			<mat-label>
+				Scope
+			</mat-label>
 			<mat-select [formControl]="scopeForm" multiple>
 				<mat-option *ngFor="let scope of scopeList" [value]="scope">
 					{{scope}}
