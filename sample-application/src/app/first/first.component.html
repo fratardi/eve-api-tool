@@ -6,13 +6,12 @@
 />
 
 </div>
-<div *ngIf="Swagger=== undefined">
+<div *ngIf="Swagger === undefined">
 
     Api Is Not Available
 </div>
 
-<button onclick=""> hh   </button>
-
+<button (click)="printForm()"> hh   </button>
 
 <mat-form-field appearance="fill">
     <mat-label>Scope</mat-label>
@@ -20,3 +19,8 @@
   <mat-option *ngFor="let topping of toppingList" [value]="topping">{{topping}}</mat-option> 
     </mat-select>
   </mat-form-field>
+  <section class="example-section" [formControl]="toppings">
+    <h4>You chose:</h4>
+    {{toppings.value | json}}
+  </section>
+  

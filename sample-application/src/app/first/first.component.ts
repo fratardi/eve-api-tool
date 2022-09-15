@@ -14,17 +14,16 @@ import { FormControl } from '@angular/forms';
 export class FirstComponent implements OnInit {
   	Swagger : any = null;
   	scopes: string[] = [];
-
 	paths!: Swagger.Paths;
 	
 	toppings = new FormControl('');
-	toppingList: string[] = [] ;//= ['Extra cheese', 'Mushroom', 'Onion', 'Pepperoni', 'Sausage', 'Tomato'];
+	toppingList: string[] = [] ;
 
 
 	constructor(private http: HttpClient,)
 	{ 
 
-		
+	//	console.log("construct this first-component")
 
 	}
 		
@@ -32,7 +31,7 @@ export class FirstComponent implements OnInit {
 	printForm()
 	{
 
-		console.log(this.toppings)
+		console.log("tprintform", this.toppings.getRawValue())
 
 	}
 
@@ -72,12 +71,14 @@ export class FirstComponent implements OnInit {
 		result.forEach( element => {
 
 			  this.scopes.push(element[0])
-			console.log(element[0] )
+			console.log(element[0] , element[1])
 
 		})
-		console.log(this.scopes)
+		console.log(this.scopes.values)
 		this.toppingList = this.scopes
 	
+		// 	this.scopes.values
+
 		//   data.securityDefinitions.evesso.scopes.forEach(element => {
 		// 	console.log(element)
 		//   });

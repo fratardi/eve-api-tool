@@ -11,16 +11,18 @@ import { EveEsiService } from '../Services/eve-esi.service';
 
 export class SecondComponent implements OnInit {
 
-	userOwn!  :	 Swagger.UserInfo;
+	userOwn  :	any;
 
 	constructor(
 		private route: ActivatedRoute,
 		private esi_service : EveEsiService
-	) { }
+	) { 
+
+
+	}
 
 	truc(){
-		console.log("!!!!!!")
-		this.esi_service.getUserOwn();
+		this .userOwn = this.esi_service.getUserOwn();
 	}
 
 	ngOnInit(): void {
@@ -29,7 +31,6 @@ export class SecondComponent implements OnInit {
 			callbackCode = e
 			this.esi_service.init_service( callbackCode)
 		})
-	}
 }
 
-
+}

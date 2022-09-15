@@ -13,8 +13,8 @@ const client_id   	=	"7f45c8124b2640beba3a6902df6832a2";
 })
 export class EveEsiService {
 
-	   token!: Swagger.Tokens;
-   userOwn!: Swagger.UserInfo;
+	   token: any;
+   userOwn:any;
   constructor(	private http: HttpClient) {}
 
 	base64encodedstring(client_id :string ,  secret  : string){
@@ -25,7 +25,7 @@ export class EveEsiService {
 
   getUserOwn  ()
   {
-      console.log(this.userOwn)
+      console.log(this.userOwn, "getuserOwn")
     return(this.userOwn);
   }
 
@@ -77,7 +77,6 @@ export class EveEsiService {
   askRefresh(currentToken: string)
   {
     let body = {"grant_type":"authorization_code",    "refresh_token": currentToken};
- 
   }
  
   getToken(): any {
@@ -103,9 +102,4 @@ export class EveEsiService {
   removeRefreshToken(): void {
     localStorage.removeItem(REFRESH_TOKEN);
   }
-
-   
-
-
-
 }
