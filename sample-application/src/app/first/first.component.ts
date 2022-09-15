@@ -39,13 +39,30 @@ export class FirstComponent implements OnInit {
 		this.getSwagger();
 	}
 
-	goToLogin() {
+	goToLogin() {	
+
+		let truc : any=  this.toppings.value;
+
+		// for (const field in this.toppings.getRawValue) { // 'field' is a string
+		// 	console.log(this.myForm.controls[field].value);
+		//   }
+
+	
+		//	console.log(this.toppings.getRawValue.prototype)
+	
 
 
+		//console.log(JSON.stringify(this.toppings.value?.toString).valueOf)
 
+		// JSON.stringify(this.toppings.value).valueOf.forEach(element => {
+			
+		// });
 
-		let  url  = 'https://login.eveonline.com/oauth/authorize?response_type=code&redirect_uri=http://localhost:4200/esi_callback&client_id=7f45c8124b2640beba3a6902df6832a2&scope=esi-characters.read_standings.v1'
-	  	window.location.href = url;
+		let scopes = 'esi-characters.read_standings.v1';
+		let  url  = 'https://login.eveonline.com/oauth/authorize?response_type=code&redirect_uri=http://localhost:4200/esi_callback&client_id=7f45c8124b2640beba3a6902df6832a2&scope='+ scopes 
+	// console.log(,url)
+		
+		 	window.location.href = url;
 	}
 
 	printSwagger() {
