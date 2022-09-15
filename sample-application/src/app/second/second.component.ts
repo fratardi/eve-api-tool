@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute , Router, RouterModule, Routes} from '@angular/router';
 import * as Swagger from '../interfaces'
 import { EveEsiService } from '../Services/eve-esi.service';
 
@@ -14,6 +14,7 @@ export class SecondComponent implements OnInit {
 	userOwn  :	any;
 
 	constructor(
+		private router: Router,
 		private route: ActivatedRoute,
 		private esi_service : EveEsiService
 	) { 
@@ -23,6 +24,8 @@ export class SecondComponent implements OnInit {
 
 	truc(){
 		this .userOwn = this.esi_service.getUserOwn();
+		this.router.navigate(['third-component']);
+		
 	}
 
 	ngOnInit(): void {

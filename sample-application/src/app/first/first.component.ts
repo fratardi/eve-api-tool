@@ -16,7 +16,7 @@ export class FirstComponent implements OnInit {
   	scopes: string[] = [];
 	paths!: Swagger.Paths;
 	
-	toppings = new FormControl('');
+	toppings = new FormControl('', );
 	toppingList: string[] = [] ;
 
 
@@ -40,6 +40,10 @@ export class FirstComponent implements OnInit {
 	}
 
 	goToLogin() {
+
+
+
+
 		let  url  = 'https://login.eveonline.com/oauth/authorize?response_type=code&redirect_uri=http://localhost:4200/esi_callback&client_id=7f45c8124b2640beba3a6902df6832a2&scope=esi-characters.read_standings.v1'
 	  	window.location.href = url;
 	}
@@ -56,40 +60,13 @@ export class FirstComponent implements OnInit {
 	  .subscribe((data : any ) => {
 		  this.Swagger = data
 		  console.log(data.securityDefinitions.evesso.scopes)
-
-		  
 		console.log(Array.from(data.securityDefinitions.evesso))
 		var result = [];
-
 	for(var i in data.securityDefinitions.evesso.scopes)
    	 	result.push([i, data.securityDefinitions.evesso.scopes[i]]);
-
-
-			
-			console.log(result)
-		
 		result.forEach( element => {
-
-			  this.scopes.push(element[0])
-			console.log(element[0] , element[1])
-
+			this.scopes.push(element[0])
 		})
-		console.log(this.scopes.values)
 		this.toppingList = this.scopes
-	
-		// 	this.scopes.values
-
-		//   data.securityDefinitions.evesso.scopes.forEach(element => {
-		// 	console.log(element)
-		//   });
-
-		// data.securityDefinitions.evesso.scopes.forEach((element: any) => {
-		// 	console.log(element)
-		// });
-
-		// data.securityDefinitions.evesso.scopes.forEach(element => {
-		// 	console.log(element)
-		// });
-
 	})}
 }
