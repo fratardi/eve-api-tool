@@ -1,7 +1,6 @@
 {
     "/api": {
       "target": "https://esi.evetech.net/latest/swagger.json?datasource=tranquility",
-      "headers": {"Authorization": "Basic N2Y0NWM4MTI0YjI2NDBiZWJhM2E2OTAyZGY2ODMyYTI6amNWWG8wSVpGdDVZRHI4QUozWjdjS0NEZlZpak54S2h1cE9LQ1EySQ="},
       "secure": false,
       "pathRewrite": {
         "^/api": ""
@@ -27,11 +26,11 @@
       "changeOrigin": true
     }
     ,
-    "/latest": {
-      "target": "https://esi.evetech.net/latest",
+    "/latest/": {
+      "target": "https://esi.evetech.net/latest/",
       "secure": false,
       "pathRewrite": {
-        "^/latest^": ""
+        "^/latest/": ""
       },
       "changeOrigin": true
     }

@@ -13,7 +13,7 @@ const client_id   	=	"7f45c8124b2640beba3a6902df6832a2";
 })
 export class EveEsiService {
 
-	   token: any;
+	  token: any;
    userOwn:any;
   constructor(	private http: HttpClient) {}
 
@@ -22,10 +22,23 @@ export class EveEsiService {
 		return( "Basic "+btoa(stringToEncode))
 	}
 
-
+//
   getUserOwn  ()
   {
-      console.log(this.userOwn, "getuserOwn")
+  //  let character_id = "91493392";
+    // setInterval(this.getUserOwn, 1000)
+    console.log("Passe ICI", this.userOwn.CharacterID)
+
+    this.http.get("https://esi.evetech.net/latest/characters/"+this.userOwn.CharacterID+"/corporationhistory/?datasource=tranquility")
+    .subscribe(data  => {
+
+      console.log("data", data)
+
+    })
+
+
+      console.log(//this.userOwn,
+         this.token)
     return(this.userOwn);
   }
 
@@ -66,12 +79,16 @@ export class EveEsiService {
 				.subscribe(e => {
 				this.userOwn = e as	 Swagger.UserInfo;
 				console.log(e)
+
+        
+
         return(this.userOwn)
 				// this.http.get('http://localhost:4200/latest/characters/'+userOwn.CharacterID+'/standings/',{headers  : httpHeaders2})
 				// .subscribe(e => {console.log("makumbass",e)})
 			})
 		})
     console.log("endof" , this.token)
+    console.log("endof2" , this.token)
   }
 
   askRefresh(currentToken: string)

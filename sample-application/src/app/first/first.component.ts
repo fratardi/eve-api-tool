@@ -41,11 +41,15 @@ export class FirstComponent implements OnInit {
 
 	goToLogin() {	
 
-		let truc : any=  this.toppings.value;
+		let truc : any=  this.toppings.value as string[]|string; 
 
-		// for (const field in this.toppings.getRawValue) { // 'field' is a string
-		// 	console.log(this.myForm.controls[field].value);
-		//   }
+
+		let scopes = ""//'esi-characters.read_standings.v1';
+
+		for (const field in truc) { // 'field' is a string
+			console.log(truc[field]);
+			scopes += truc[field]+" ";
+		  }
 
 	
 		//	console.log(this.toppings.getRawValue.prototype)
@@ -58,9 +62,8 @@ export class FirstComponent implements OnInit {
 			
 		// });
 
-		let scopes = 'esi-characters.read_standings.v1';
 		let  url  = 'https://login.eveonline.com/oauth/authorize?response_type=code&redirect_uri=http://localhost:4200/esi_callback&client_id=7f45c8124b2640beba3a6902df6832a2&scope='+ scopes 
-	// console.log(,url)
+	 console.log(url)
 		
 		 	window.location.href = url;
 	}
