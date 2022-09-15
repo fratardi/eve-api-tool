@@ -27,7 +27,20 @@ export class EveEsiService {
 
 
 
-	
+	getCharacterContacts()
+	{
+		
+		let httpHeaders2 = new HttpHeaders(
+			{"Authorization":" Bearer " +  this.token.access_token}
+		)
+
+		let proxy = this.hostpoint + "/latest"
+		console.log(this.userOwn)
+		this.http.get(proxy +"/characters/" +this.userOwn.CharacterID+"/contacts/?datasource=tranquility", 	{headers: httpHeaders2 })
+		.subscribe(data  => {
+			console.log("data", data)
+		})
+	}
 
 
 	base64encodedstring(client_id :string ,  secret  : string){
