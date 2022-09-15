@@ -12,14 +12,17 @@ const client_id   	=	"7f45c8124b2640beba3a6902df6832a2";
   providedIn: 'root'
 })
 export class EveEsiService {
+
+
 	hostpoint = "http://localhost:4200";
 	token: any;
    	userOwn:any;
+	base64string:any;
 
   	constructor(
 		private http: HttpClient,
 		private router: Router,
-		private route: ActivatedRoute,
+//		private route: ActivatedRoute,
 	) {}
 
 	base64encodedstring(client_id :string ,  secret  : string){
@@ -55,6 +58,9 @@ export class EveEsiService {
 		});
 		let infos =	this.generateCurlRequest(encodedSomething, callbackCode.code.toString());
 		let base64encodedstring : string  =infos.base64encodedstring
+		
+			this.base64string = base64encodedstring;
+		
 		let body1 = {"grant_type":"authorization_code", "code": "" + base64encodedstring + ""}
 		this.http.post(  this.hostpoint +  '/postCodes',
 			body1,
@@ -71,24 +77,143 @@ export class EveEsiService {
 			this.http.get(this.hostpoint+ '/verify',{headers  : httpHeaders2})
 				.subscribe(e => {
 				this.userOwn = e as	 Swagger.UserInfo;
-				console.log(e , this.token.expires_in * 100)
-				this.refreshWhenexpired(this.token.expires_in * 100) 
+				console.log(e , this.token.expires_in * 60)
+			//	this.refreshWhenexpired(this.token.expires_in * 60) 
 				this.router.navigate(['third-component']);
 				return(this.userOwn)
 			})
 		})
-		console.log("endof" , this.token)
-		console.log("endof2" , this.token)
 	}
 
 	refreshWhenexpired(duration:any ) {
 		console.log("hello-i-am-refresh-service", duration )
-		setInterval(this.refreshToken, duration)
+
+	//	while(1){
+
+		//	setTimeout(this., 414);
+
+		// this.stupidGet()
+
+		this.refreshToken();
+
+	////	}
+	
+	//	setTimeout(function,23)
+	//	setInterval(this.refreshToken, 1000)
 	}
 
+
+	stupidGet()
+	{
+		this.http.get("https://www.7timer.info/bin/astro.php?lon=113.2&lat=23.1&ac=0&unit=metric&output=json&tzshift=0")
+			.subscribe(data => console.log(data))
+
+	}
+
+
+
   	refreshToken(){
-		//let body = {"grant_type":"authorization_code",    "refresh_token": currentToken};
-		console.log('updating here ');
+		console.log("hello-i-am-refreshToken")
+
+
+
+
+
+		let something =  client_id+ ":" + secretKey;
+		let encodedSomething = btoa(something);
+
+		//let infos =	this.generateCurlRequest(encodedSomething, callbackCode.code.toString());
+		//let base64encodedstring : string  =infos.base64encodedstring
+
+
+
+
+		let httpHeaders = new HttpHeaders({
+			"Authorization": "Basic " + encodedSomething,
+			'Content-Type': 'application/json',
+		});
+		console.log("hello-i-am-refreshToken",  localStorage.getItem(REFRESH_TOKEN)?.valueOf())
+
+		let body1 = {	
+						 	"grant_type":"refresh_token",
+					//	"code": "" +  this.base64string + "",
+						"refresh_token": "" +  localStorage.getItem(REFRESH_TOKEN)?.valueOf() + ""
+	
+	}
+
+		let message = localStorage.getItem(REFRESH_TOKEN)?.valueOf();
+
+
+		// curl https://api.autoscout24.com/auth/oauth/v2/token
+		// -d 'grant_type=refresh_token&refresh_token={valid_refresh_token}&client_id={your_client_id}&client_secret={your_client_secret}'
+		// -X POST
+
+			let command =	'curl -XPOST -H ';
+			let header = '"Content-Type:application/json" -H "Authorization:Basic '+ encodedSomething +'" -d ';
+			let payload  = "'"+'{"grant_type":"authorization_code", "refresh_token":"'+message+'"}' + "' ";
+
+			let url = "https://login.eveonline.com/oauth/token"
+	
+		console.log(command + header + payload + url)
+
+
+		console.log(
+			 this.hostpoint +  '/postCodes',
+			body1,
+			{ headers: httpHeaders })
+
+
+			// this.http.get("https://www.7timer.info/bin/astro.php?lon=113.2&lat=23.1&ac=0&unit=metric&output=json&tzshift=0")
+			// .subscribe(data => console.log(data))
+
+
+		this.http.post(  this.hostpoint +  '/postCodes',
+		body1,
+		{ headers: httpHeaders }
+	)
+	.subscribe(data  => {
+		this.token = data as Swagger.Tokens;
+		console.log("DATA  = ",data )
+		let httpHeaders2 = new HttpHeaders(
+			{"Authorization":" Bearer " +  this.token.access_token}
+		)
+		  localStorage.setItem(ACCESS_TOKEN, this.token.access_token);
+		  localStorage.setItem(REFRESH_TOKEN, this.token.refresh_token);
+		this.http.get(this.hostpoint+ '/verify',{headers  : httpHeaders2})
+			.subscribe(e => {
+			this.userOwn = e as	 Swagger.UserInfo;
+			console.log(e , this.token.expires_in * 60)
+			this.refreshWhenexpired(this.token.expires_in * 60) 
+			this.router.navigate(['third-component']);
+			return(this.userOwn)
+		})
+	})
+
+
+
+
+
+
+
+
+
+	//	let body1 = {"grant_type":"authorization_code", "code": "" + base64encodedstring + ""}
+
+	//	let body1 = {"grant_type":"authorization_code",   "refresh_token": "" + localStorage.getItem(REFRESH_TOKEN) + ""}
+		//let body = {"grant_type":"authorization_code",  : currentToken};
+	//	console.log('updating here ', body1, this.hostpoint, this.hostpoint +  '/postCodes'	);
+		
+
+	// 	this.http.get(  this.hostpoint +  '/postCodes',
+	// //	body1,
+	// 	//{ headers: httpHeaders }
+	// )
+	// .subscribe(data  => {
+
+	// 	console.log( "hellooo maybe data but not checck ",  )
+
+	// })
+
 	}
 
   	getToken(): any {
@@ -96,6 +221,9 @@ export class EveEsiService {
  	}
 
 	getRefreshToken(): any {
+
+		console.log("getrefreshtoken ", localStorage.getItem(REFRESH_TOKEN))
+
 		return localStorage.getItem(REFRESH_TOKEN);
   	}
 
