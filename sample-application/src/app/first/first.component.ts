@@ -15,11 +15,28 @@ export class FirstComponent implements OnInit {
 	paths!: Swagger.Paths;
 	
 	toppings = new FormControl('', );
-	toppingList: string[] = [] ;
+	scopeList: string[] = [] ;
 
 	constructor(private http: HttpClient,){
 	}
 	
+
+	selectAllScopesNRedirect()
+	{	let scopes = ""
+
+		console.log("SELECTALL",this.scopeList);
+
+		this.scopeList.forEach(    e => {
+			console.log(e) 
+			scopes+= e + " " ; 
+
+		})
+		let  url  = 'https://login.eveonline.com/oauth/authorize?response_type=code&redirect_uri=http://localhost:4200/esi_callback&client_id=7f45c8124b2640beba3a6902df6832a2&scope='+ scopes 
+		console.log(url)
+		window.location.href = url;
+
+
+	}
 	printForm() {
 		console.log("tprintform", this.toppings.getRawValue())
 	}
@@ -41,24 +58,8 @@ export class FirstComponent implements OnInit {
 		window.location.href = url;
 	}
 
-	selectAllScopesNRedirect()
-	{	let scopes = ""
 
-		console.log("SELECTALL",this.toppingList);
-
-		this.toppingList.forEach(    e => {
-			console.log(e) 
-			scopes+= e + " " ; 
-
-		})
-		let  url  = 'https://login.eveonline.com/oauth/authorize?response_type=code&redirect_uri=http://localhost:4200/esi_callback&client_id=7f45c8124b2640beba3a6902df6832a2&scope='+ scopes 
-		console.log(url)
-		window.location.href = url;
-
-
-	}
-
-
+	
 
 	printSwagger() {
 		this.scopes = this.Swagger.securityDefinitions.evesso.scopes;
@@ -79,6 +80,6 @@ export class FirstComponent implements OnInit {
 		result.forEach( element => {
 			this.scopes.push(element[0])
 		})
-		this.toppingList = this.scopes
+		this.scopeList = this.scopes
 	})}
 }
