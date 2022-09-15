@@ -78,7 +78,7 @@ export class EveEsiService {
 				.subscribe(e => {
 				this.userOwn = e as	 Swagger.UserInfo;
 				console.log(e , this.token.expires_in * 60)
-			//	this.refreshWhenexpired(this.token.expires_in * 60) 
+				this.refreshWhenexpired(this.token.expires_in * 60) 
 				this.router.navigate(['third-component']);
 				return(this.userOwn)
 			})
@@ -94,12 +94,12 @@ export class EveEsiService {
 
 		// this.stupidGet()
 
-		this.refreshToken();
+//	this.refreshToken();
 
 	////	}
 	
 	//	setTimeout(function,23)
-	//	setInterval(this.refreshToken, 1000)
+		setInterval(() =>    this.refreshToken(), 2000  )
 	}
 
 
@@ -135,36 +135,15 @@ export class EveEsiService {
 		console.log("hello-i-am-refreshToken",  localStorage.getItem(REFRESH_TOKEN)?.valueOf())
 
 		let body1 = {	
-						 	"grant_type":"refresh_token",
-					//	"code": "" +  this.base64string + "",
+						"grant_type":"refresh_token",
 						"refresh_token": "" +  localStorage.getItem(REFRESH_TOKEN)?.valueOf() + ""
-	
-	}
-
-		let message = localStorage.getItem(REFRESH_TOKEN)?.valueOf();
-
-
-		// curl https://api.autoscout24.com/auth/oauth/v2/token
-		// -d 'grant_type=refresh_token&refresh_token={valid_refresh_token}&client_id={your_client_id}&client_secret={your_client_secret}'
-		// -X POST
-
-			let command =	'curl -XPOST -H ';
-			let header = '"Content-Type:application/json" -H "Authorization:Basic '+ encodedSomething +'" -d ';
-			let payload  = "'"+'{"grant_type":"authorization_code", "refresh_token":"'+message+'"}' + "' ";
-
-			let url = "https://login.eveonline.com/oauth/token"
-	
-		console.log(command + header + payload + url)
+					}
 
 
 		console.log(
 			 this.hostpoint +  '/postCodes',
 			body1,
 			{ headers: httpHeaders })
-
-
-			// this.http.get("https://www.7timer.info/bin/astro.php?lon=113.2&lat=23.1&ac=0&unit=metric&output=json&tzshift=0")
-			// .subscribe(data => console.log(data))
 
 
 		this.http.post(  this.hostpoint +  '/postCodes',
@@ -182,9 +161,9 @@ export class EveEsiService {
 		this.http.get(this.hostpoint+ '/verify',{headers  : httpHeaders2})
 			.subscribe(e => {
 			this.userOwn = e as	 Swagger.UserInfo;
-			console.log(e , this.token.expires_in * 60)
-			this.refreshWhenexpired(this.token.expires_in * 60) 
-			this.router.navigate(['third-component']);
+		//	console.log(e , this.token.expires_in * 60)
+		//	this.refreshWhenexpired(this.token.expires_in * 60) 
+		//	this.router.navigate(['third-component']);
 			return(this.userOwn)
 		})
 	})
