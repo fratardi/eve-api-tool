@@ -16,7 +16,6 @@ export class ThirdComponent implements OnInit {
 	
 	truc(){
 		console.log(this.esi_service.getUserOwn())
-
 	}
 
 	ngOnInit(): void {
