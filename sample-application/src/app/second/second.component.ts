@@ -16,16 +16,12 @@ export class SecondComponent implements OnInit {
 	constructor(
 		private router: Router,
 		private route: ActivatedRoute,
-		private esi_service : EveEsiService
-	) { 
-
-
+		private esi_service : EveEsiService) { 
 	}
 
 	truc(){
 		this .userOwn = this.esi_service.getUserOwn();
-		this.router.navigate(['third-component']);
-		
+		this.router.navigate(['third-component']);	
 	}
 
 	ngOnInit(): void {
@@ -34,6 +30,5 @@ export class SecondComponent implements OnInit {
 			callbackCode = e
 			this.esi_service.init_service( callbackCode)
 		})
-}
-
+	}
 }

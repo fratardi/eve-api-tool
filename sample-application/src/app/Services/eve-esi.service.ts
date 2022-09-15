@@ -81,9 +81,6 @@ export class EveEsiService {
 				.subscribe(e => {
 				this.userOwn = e as	 Swagger.UserInfo;
 				console.log(e)
-
-        
-
         return(this.userOwn)
 				// this.http.get('http://localhost:4200/latest/characters/'+userOwn.CharacterID+'/standings/',{headers  : httpHeaders2})
 				// .subscribe(e => {console.log("makumbass",e)})

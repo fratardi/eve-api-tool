@@ -3,8 +3,6 @@ import { HttpClient } from '@angular/common/http';
 import * as Swagger from '../interfaces'
 import { FormControl } from '@angular/forms';
 
-
-
 @Component({
   selector: 'app-first',
   templateUrl: './first.component.html',
@@ -19,20 +17,11 @@ export class FirstComponent implements OnInit {
 	toppings = new FormControl('', );
 	toppingList: string[] = [] ;
 
-
-	constructor(private http: HttpClient,)
-	{ 
-
-	//	console.log("construct this first-component")
-
+	constructor(private http: HttpClient,){
 	}
-		
-
-	printForm()
-	{
-
+	
+	printForm() {
 		console.log("tprintform", this.toppings.getRawValue())
-
 	}
 
 	ngOnInit() {
@@ -40,32 +29,16 @@ export class FirstComponent implements OnInit {
 	}
 
 	goToLogin() {	
-
 		let truc : any=  this.toppings.value as string[]|string; 
-
-
 		let scopes = ""//'esi-characters.read_standings.v1';
 
 		for (const field in truc) { // 'field' is a string
 			console.log(truc[field]);
 			scopes += truc[field]+" ";
-		  }
-
-	
-		//	console.log(this.toppings.getRawValue.prototype)
-	
-
-
-		//console.log(JSON.stringify(this.toppings.value?.toString).valueOf)
-
-		// JSON.stringify(this.toppings.value).valueOf.forEach(element => {
-			
-		// });
-
+		}
 		let  url  = 'https://login.eveonline.com/oauth/authorize?response_type=code&redirect_uri=http://localhost:4200/esi_callback&client_id=7f45c8124b2640beba3a6902df6832a2&scope='+ scopes 
-	 console.log(url)
-		
-		 	window.location.href = url;
+	 	console.log(url)
+		window.location.href = url;
 	}
 
 	printSwagger() {
