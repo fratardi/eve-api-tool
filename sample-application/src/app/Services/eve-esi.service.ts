@@ -1,5 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import * as Swagger from '../interfaces'
 
 
@@ -15,7 +16,10 @@ export class EveEsiService {
 
 	  token: any;
    userOwn:any;
-  constructor(	private http: HttpClient) {}
+  constructor(	private http: HttpClient,
+	private router: Router,
+		private route: ActivatedRoute,
+	) {}
 
 	base64encodedstring(client_id :string ,  secret  : string){
 		let stringToEncode = client_id+ ":"+secret;
@@ -26,22 +30,22 @@ export class EveEsiService {
   getUserOwn  ()
   {
   //  let character_id = "91493392";
-    // setInterval(this.getUserOwn, 1000)
-    console.log("Passe ICI", this.userOwn.CharacterID)
+	// setInterval(this.getUserOwn, 1000)
+	console.log("Passe ICI", this.userOwn.CharacterID)
 
-    let proxy = "http://localhost:4200/latest"
+	let proxy = "http://localhost:4200/latest"
 
-    this.http.get(proxy +"/characters/" +this.userOwn.CharacterID+"/corporationhistory/?datasource=tranquility")
-    .subscribe(data  => {
+	this.http.get(proxy +"/characters/" +this.userOwn.CharacterID+"/corporationhistory/?datasource=tranquility")
+	.subscribe(data  => {
 
-      console.log("data", data)
+	  console.log("data", data)
 
-    })
+	})
 
 
-      console.log(//this.userOwn,
-         this.token)
-    return(this.userOwn);
+	  console.log(//this.userOwn,
+		 this.token)
+	return(this.userOwn);
   }
 
 	generateCurlRequest(encodedSomething : string , base64encodedstring : string){
@@ -55,67 +59,68 @@ export class EveEsiService {
 
 
   init_service(callbackCode :any)  {
-    let something =  client_id+ ":" + secretKey;
+	let something =  client_id+ ":" + secretKey;
 		let encodedSomething = btoa(something);
 		let httpHeaders = new HttpHeaders({
 			"Authorization": "Basic " + encodedSomething,
 			'Content-Type': 'application/json',
 		});
-    let infos =	this.generateCurlRequest(encodedSomething, callbackCode.code.toString());
+	let infos =	this.generateCurlRequest(encodedSomething, callbackCode.code.toString());
 		let base64encodedstring : string  =infos.base64encodedstring
-    let body1 = {"grant_type":"authorization_code", "code":""+base64encodedstring+""    }
-    console.log("YOLO")
-    this.http.post('http://localhost:4200/postCodes',
+	let body1 = {"grant_type":"authorization_code", "code":""+base64encodedstring+""    }
+	console.log("YOLO")
+	this.http.post('http://localhost:4200/postCodes',
 		body1,
 		{ headers: httpHeaders }
 		 )
 		.subscribe(data  => {
 			this.token = data as Swagger.Tokens;
 			console.log("DATA  = ",data )
-			let httpHeaders2 = new HttpHeaders({"Authorization":" Bearer " +  this.token.access_token})	
+			let httpHeaders2 = new HttpHeaders({"Authorization":" Bearer " +  this.token.access_token})
 
-      localStorage.setItem(ACCESS_TOKEN, this.token.access_token);
-      localStorage.setItem(REFRESH_TOKEN, this.token.refresh_token);
+	  localStorage.setItem(ACCESS_TOKEN, this.token.access_token);
+	  localStorage.setItem(REFRESH_TOKEN, this.token.refresh_token);
 
 			this.http.get('http://localhost:4200/verify',{headers  : httpHeaders2})
 				.subscribe(e => {
 				this.userOwn = e as	 Swagger.UserInfo;
 				console.log(e)
-        return(this.userOwn)
+		this.router.navigate(['third-component']);
+		return(this.userOwn)
 				// this.http.get('http://localhost:4200/latest/characters/'+userOwn.CharacterID+'/standings/',{headers  : httpHeaders2})
 				// .subscribe(e => {console.log("makumbass",e)})
 			})
 		})
-    console.log("endof" , this.token)
-    console.log("endof2" , this.token)
+	console.log("endof" , this.token)
+	console.log("endof2" , this.token)
   }
 
   askRefresh(currentToken: string)
   {
-    let body = {"grant_type":"authorization_code",    "refresh_token": currentToken};
+	let body = {"grant_type":"authorization_code",    "refresh_token": currentToken};
   }
- 
+
   getToken(): any {
-    return localStorage.getItem(ACCESS_TOKEN);
+	return localStorage.getItem(ACCESS_TOKEN);
   }
 
   getRefreshToken(): any {
-    return localStorage.getItem(REFRESH_TOKEN);
+	return localStorage.getItem(REFRESH_TOKEN);
   }
 
   saveToken(token: any): void {
-    localStorage.setItem(ACCESS_TOKEN, token);
+	localStorage.setItem(ACCESS_TOKEN, token);
   }
 
   saveRefreshToken(refreshToken : any ): void {
-    localStorage.setItem(REFRESH_TOKEN, refreshToken);
+	localStorage.setItem(REFRESH_TOKEN, refreshToken);
   }
 
   removeToken(): void {
-    localStorage.removeItem(ACCESS_TOKEN);
+	localStorage.removeItem(ACCESS_TOKEN);
   }
 
   removeRefreshToken(): void {
-    localStorage.removeItem(REFRESH_TOKEN);
+	localStorage.removeItem(REFRESH_TOKEN);
   }
 }
