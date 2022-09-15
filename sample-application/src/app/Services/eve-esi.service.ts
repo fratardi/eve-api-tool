@@ -29,7 +29,9 @@ export class EveEsiService {
     // setInterval(this.getUserOwn, 1000)
     console.log("Passe ICI", this.userOwn.CharacterID)
 
-    this.http.get("https://esi.evetech.net/latest/characters/"+this.userOwn.CharacterID+"/corporationhistory/?datasource=tranquility")
+    let proxy = "http://localhost:4200/latest"
+
+    this.http.get(proxy +"/characters/" +this.userOwn.CharacterID+"/corporationhistory/?datasource=tranquility")
     .subscribe(data  => {
 
       console.log("data", data)
