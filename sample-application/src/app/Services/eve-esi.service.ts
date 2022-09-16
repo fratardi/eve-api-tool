@@ -20,7 +20,7 @@ export class EveEsiService {
    	userOwn:any;
 	base64string:any;
 
-	characterContacts: any;
+	characterContacts :any[]=[];
 
 
   	constructor(
@@ -30,9 +30,26 @@ export class EveEsiService {
 
 
 
-	getCharacterContacts    () : any 
+	getNamesFromId( tab :string[])
 	{
+
+		console.log("getNamesFromId", "tab=["   ,tab,"]	" )
+		let httpHeaders2 = new HttpHeaders(
+			{"Authorization":" Bearer " +  this.token.access_token}
+		)
+	//	
+		let proxy = this.hostpoint + "/latest"
+
 		
+		let payload = 	"95465499, 30000142"
+		  
+
+		this.http.post("https://esi.evetech.net/latest/universe/names/?datasource=tranquility"  ,tab, 	{headers: httpHeaders2 }).subscribe(data=> {console.log("data ======" , data )})
+
+	}
+
+	getCharacterContacts    () : any {
+		console.log("this.characterContacts",this.characterContacts)
 		let httpHeaders2 = new HttpHeaders(
 			{"Authorization":" Bearer " +  this.token.access_token}
 		)
@@ -40,10 +57,21 @@ export class EveEsiService {
 		let proxy = this.hostpoint + "/latest"
 		console.log(this.userOwn)
 		this.http.get(proxy +"/characters/" +this.userOwn.CharacterID+"/contacts/?datasource=tranquility", 	{headers: httpHeaders2 })
-		.subscribe(data  => {
+		.subscribe((data :any )   => {
+		
+		
 			console.log("data", data)
-			this.characterContacts = data;
-			return(data)
+			if(!this.characterContacts.length)
+			{
+			data.forEach((element : any)=>{
+				console.log(element.contact_id);
+
+
+				this.characterContacts.push(element.contact_id)
+			})
+			}	
+
+			return(this.characterContacts)
 		})
 	}
 
@@ -107,7 +135,7 @@ export class EveEsiService {
 	}
 
 	refreshWhenexpired( ) {
-		setInterval(() =>  this.refreshToken(), 19 * 1000 * 60  )
+		setInterval(() =>  this.refreshToken(), 1000 * 60 * 1 )
 	}
 
   	refreshToken(){

@@ -18,17 +18,22 @@ export class ThirdComponent implements OnInit {
 	userId : any;
 	constructor(
 		private esi_service : EveEsiService,
-		private http: HttpClient
 	) { }
 	
 	truc(){
-		console.log(this.currentUser.CharacterID)
+		console.log("hello<truc-" , this.characterContacts , this );
+
+		this.characterContacts =	this.esi_service.getCharacterContacts();
+		this.characterContacts =this.esi_service.characterContacts;
+		this.esi_service.getNamesFromId(this.characterContacts)
+
 	//	console.log("YOLOO",this.characterContacts.CharacterID)	
+	
 	}
 
 	ngOnInit(): void {
 		// this.truc();
-		this.esi_service.getCharacterContacts();
+		this.characterContacts =	this.esi_service.getCharacterContacts();
 		this.characterContacts = this.esi_service.characterContacts;
 		this.currentUser = this.esi_service.userOwn;
 		this.userId = this.currentUser.CharacterID
