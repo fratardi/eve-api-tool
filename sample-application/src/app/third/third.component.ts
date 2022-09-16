@@ -4,6 +4,10 @@ import { EveEsiService } from '../Services/eve-esi.service';
 
 import * as Swagger from '../interfaces'
 
+import { CommonModule } from '@angular/common';
+
+
+
 
 @Component({
   selector: 'app-third',
@@ -12,8 +16,8 @@ import * as Swagger from '../interfaces'
 })
 export class ThirdComponent implements OnInit {
 
-	characterContacts: any;
-
+	characterContactsId: any;
+	characterContactWithNames :any ; 
 	currentUser : any;
 	userId : any;
 	constructor(
@@ -21,11 +25,12 @@ export class ThirdComponent implements OnInit {
 	) { }
 	
 	truc(){
-		console.log("hello<truc-" , this.characterContacts , this );
+		console.log("hello<truc-" , this );
 
-		this.characterContacts =	this.esi_service.getCharacterContacts();
-		this.characterContacts =this.esi_service.characterContacts;
-		this.esi_service.getNamesFromId(this.characterContacts)
+	//	this.characterContactsId =	this.esi_service.getCharacterContacts();
+		this.characterContactsId 		= this.esi_service.characterContactsId;
+		this .characterContactWithNames = this.esi_service.characterContactsWithName;
+		this.esi_service.getNamesFromId(this.characterContactsId)
 
 	//	console.log("YOLOO",this.characterContacts.CharacterID)	
 	
@@ -33,8 +38,8 @@ export class ThirdComponent implements OnInit {
 
 	ngOnInit(): void {
 		// this.truc();
-		this.characterContacts =	this.esi_service.getCharacterContacts();
-		this.characterContacts = this.esi_service.characterContacts;
+		this.characterContactsId =	this.esi_service.getCharacterContacts();
+		this.characterContactsId = this.esi_service.characterContactsId;
 		this.currentUser = this.esi_service.userOwn;
 		this.userId = this.currentUser.CharacterID
 
