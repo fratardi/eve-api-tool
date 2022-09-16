@@ -20,6 +20,9 @@ export class EveEsiService {
    	userOwn:any;
 	base64string:any;
 
+	characterContacts: any;
+
+
   	constructor(
 		private http	: HttpClient,
 		private router	: Router,
@@ -27,7 +30,7 @@ export class EveEsiService {
 
 
 
-	getCharacterContacts()
+	getCharacterContacts    () : any 
 	{
 		
 		let httpHeaders2 = new HttpHeaders(
@@ -39,6 +42,8 @@ export class EveEsiService {
 		this.http.get(proxy +"/characters/" +this.userOwn.CharacterID+"/contacts/?datasource=tranquility", 	{headers: httpHeaders2 })
 		.subscribe(data  => {
 			console.log("data", data)
+			this.characterContacts = data;
+			return(data)
 		})
 	}
 
@@ -54,6 +59,7 @@ export class EveEsiService {
 		this.http.get(proxy +"/characters/" +this.userOwn.CharacterID+"/corporationhistory/?datasource=tranquility")
 		.subscribe(data  => {
 			console.log("data", data)
+			return(this.userOwn);
 		})
 		console.log(this.token)
 		return(this.userOwn);
@@ -66,6 +72,7 @@ export class EveEsiService {
   	init_service(callbackCode :any)  {
 		let something =  client_id+ ":" + secretKey;
 		let encodedSomething = btoa(something);
+		
 		let httpHeaders = new HttpHeaders({
 			"Authorization": "Basic " + encodedSomething,
 			'Content-Type': 'application/json',
