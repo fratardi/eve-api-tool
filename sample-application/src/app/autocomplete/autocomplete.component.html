@@ -13,8 +13,9 @@
 <li *ngFor="let item of list; index as i;">
 
 
+<img *ngIf="item.type !== 'group'   &&    item.type !== 'region'     &&    item.type !== 'ship'  "   class="avatarimage lazy" src="https://images.evetech.net/{{item.image}}"  height="32" width="32" alt=""> 
 
-<img class="avatarimage lazy" src="https://images.evetech.net/{{item.image}}"  height="32" width="32" alt=""> Corp{{item.name}}
+<!-- //<img *ngIf="item.type !== 'region'"   class="avatarimage lazy" src="https://images.evetech.net/{{item.image}}"  height="32" width="32" alt="">  -->
 {{item.name}}
   
 
