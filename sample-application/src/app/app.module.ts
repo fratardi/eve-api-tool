@@ -19,6 +19,7 @@ import {MatTableModule} from '@angular/material/table';
 import {MatIconModule} from '@angular/material/icon';
 import { MatSelectModule } from '@angular/material/select';
 import { ThirdComponent } from './third/third.component';
+import { AutocompleteComponent } from './autocomplete/autocomplete.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { ThirdComponent } from './third/third.component';
     FirstComponent,
     SecondComponent,
     ThirdComponent,
+    AutocompleteComponent,
     NotFoundComponent,
   ],
   imports: [
@@ -45,8 +47,6 @@ import { ThirdComponent } from './third/third.component';
     MatCardModule,
     MatFormFieldModule,
     MatSelectModule
-    
-    
   ],
   providers: [ ],
   bootstrap: [AppComponent]

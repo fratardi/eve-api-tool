@@ -62,6 +62,9 @@ export class FirstComponent implements OnInit {
 	this.http.get<any>(swaggerUrl )
 	.subscribe((data : any ) => {
 		this.Swagger = data
+
+		console.log(this.Swagger);
+
 		var result = [];
 		for(var i in data.securityDefinitions.evesso.scopes)
    	 		result.push([i, data.securityDefinitions.evesso.scopes[i]]);

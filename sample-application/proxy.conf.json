@@ -34,6 +34,18 @@
       },
       "changeOrigin": true
     }
+    ,
+    "/autocomplete/": {
+      "target": "https://zkillboard.com/autocomplete/",
+      "secure": false,
+      "pathRewrite": {
+        "^/autocoplete/": ""
+      },
+      "changeOrigin": true
+    }
+
+
+
 
 
   }

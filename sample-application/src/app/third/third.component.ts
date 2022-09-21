@@ -23,7 +23,7 @@ export class ThirdComponent implements OnInit {
 		return item.id; 
 	  }
 
-	items = [ 1 ,2 ,3 ];
+	// items = [ 1 ,2 ,3 ];
 
 	characterContactsId: any;
 	characterContactWithNames :any ; 
@@ -33,7 +33,7 @@ export class ThirdComponent implements OnInit {
 		private esi_service : EveEsiService,
 	) { }
 	
-	truc(){
+	getContactlist(){
 		console.log("hello<truc-" , this );
 
 	//	this.characterContactsId =	this.esi_service.getCharacterContacts();

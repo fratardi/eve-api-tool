@@ -1,14 +1,27 @@
 <p>LOGGED IN SUCCeSS</p>
 
 third component . html
-<button (click)="truc()"> hh   </button>
+<button (click)="getContactlist()"> hh   </button>
 
-<img class="avatarimage lazy" src="https://imageserver.eveonline.com/Character/{{currentUser.CharacterID}}_128.jpg" alt="">
+<img class="avatarimage lazy" src="https://imageserver.eveonline.com/Character/{{currentUser.CharacterID}}_32.jpg" alt="">
 
-<!-- <ul>
+<!--
+  <ul>
     <li *ngFor="let person of characterContactWithNames[0]"> (1)
       {{ person?.name }}
     </li>
-</ul> -->
+</ul>
+-->
 
-<li *ngFor="let item of items; index as i; trackBy: trackByFn">...</li>
+<h6 *ngFor="let item of characterContactWithNames; index as i; trackBy: trackByFn">
+
+  <li *ngIf="item.category==='character'" >
+  <img class="avatarimage lazy" src="https://imageserver.eveonline.com/Character/{{item.id}}_32.jpg" alt=""> Char {{item.name}}
+  </li>
+  <li *ngIf="item.category === 'corporation'" >
+  
+
+
+    <img class="avatarimage lazy" src="https://images.evetech.net/corporations/{{item.id}}/logo"  height="32" width="32" alt=""> Corp{{item.name}}
+    </li>
+</h6>
