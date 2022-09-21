@@ -16,6 +16,15 @@ import { CommonModule } from '@angular/common';
 })
 export class ThirdComponent implements OnInit {
 
+
+
+
+	trackByFn(index :any , item: any) { 
+		return item.id; 
+	  }
+
+	items = [ 1 ,2 ,3 ];
+
 	characterContactsId: any;
 	characterContactWithNames :any ; 
 	currentUser : any;
