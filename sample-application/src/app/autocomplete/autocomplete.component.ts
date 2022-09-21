@@ -1,13 +1,14 @@
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { EveEsiService } from '../Services/eve-esi.service';
 
 @Component({
-  selector: 'app-autocomplete',
+  selector: 'app-autocompleter',
   templateUrl: './autocomplete.component.html',
   styleUrls: ['./autocomplete.component.less']
 })
-export class AutocompleteComponent implements OnInit {
+export class AutocompleterComponent implements OnInit {
 
 
 
@@ -23,32 +24,39 @@ onSubmit(form: FormGroup) {
 
 
 onChanges(): void {
-
-  this.myForm.statusChanges.subscribe(data =>{ console.log(data, this ); }
-   
-
-    
-    )
-
-  this.myForm.valueChanges.subscribe(val => {
-    this.formattedMessage =
-    `Hello,
-
-    My name is ${val.name} and my email is ${val.email}.
-
-    I would like to tell you that ${val.message}.`;
-  });
+  this.myForm.statusChanges.subscribe(data =>{ 
+    console.log(data, this.myForm.value ); 
+    this.getSwagger(this.myForm.value); 
+  }
+  )
 }
+
+
+getSwagger( element :any) {
+  let httpHeaders = new HttpHeaders({});
+  console.log(element.valueOf())
+
+
+	let swaggerUrl = "https://zkillboard.com/autocomplete/" + element.name + "/"
+	this.http.get<any>(swaggerUrl ,  
+    
+  {headers: httpHeaders },
+
+    )
+	.subscribe((data : any ) => {
+    console.log("data", data , element)
+	})}
+
+
+
+
 
 myForm!: FormGroup  ;
 formattedMessage: string = "";
 
 
-  constructor(	private formBuilder: FormBuilder ) {console.log('autocomplete construction'); }
-
-
-
-
+  constructor(private http: HttpClient,	private formBuilder: FormBuilder ) {console.log('autocomplete construction'); }
+  
   bidule()
   {
     console.log(  "change value ",   "" , this)
@@ -57,13 +65,13 @@ formattedMessage: string = "";
 
 
   ngOnInit(): void {
+
+
     console.log('hello from autocomplete', this);
 
 
     this.myForm = this.formBuilder.group({
       name: '',
-      email: '',
-      message: ''
     });
 
     this.onChanges();

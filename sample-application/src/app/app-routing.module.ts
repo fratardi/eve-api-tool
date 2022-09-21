@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AutocompleteComponent } from './autocomplete/autocomplete.component';
+import { AutocompleterComponent } from './autocomplete/autocomplete.component';
 import { FirstComponent } from './first/first.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { SecondComponent } from './second/second.component';
@@ -12,7 +12,7 @@ const routes: Routes = [
   { path: 'third-component', component: ThirdComponent },
   { path: '404', component: NotFoundComponent },
   { path: 'esi_callback', component: SecondComponent},
-  { path: 'autocomplete', component: AutocompleteComponent},
+  { path: 'autocompleter', component: AutocompleterComponent},
   //{ path: '**', redirectTo: '404' },
 ];
 
@@ -21,4 +21,3 @@ const routes: Routes = [
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
-9
