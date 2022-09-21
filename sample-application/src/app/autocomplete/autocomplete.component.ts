@@ -3,6 +3,19 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { EveEsiService } from '../Services/eve-esi.service';
 
+
+
+
+
+
+interface dataItem{
+  id: number;
+  image: string;
+  name: string;
+  type: string;
+}
+
+
 @Component({
   selector: 'app-autocompleter',
   templateUrl: './autocomplete.component.html',
@@ -10,16 +23,18 @@ import { EveEsiService } from '../Services/eve-esi.service';
 })
 export class AutocompleterComponent implements OnInit {
 
+ list :dataItem[] = [];
+
+
+
+
 
 
 //https://zkillboard.com/autocomplete/1st%20of/
 
 
 onSubmit(form: FormGroup) {
-  console.log('Valid?', form.valid); // true or false
-  console.log('Name', form.value.name);
-  console.log('Email', form.value.email);
-  console.log('Message', form.value.message);
+
 }
 
 
@@ -33,6 +48,14 @@ onChanges(): void {
 
 
 getSwagger( element :any) {
+
+  if(!!!element.name)
+ {
+  this.list = [];
+  return;
+
+
+ }
   let httpHeaders = new HttpHeaders({});
   console.log(element.valueOf())
 
@@ -40,11 +63,15 @@ getSwagger( element :any) {
 	let swaggerUrl = "https://zkillboard.com/autocomplete/" + element.name + "/"
 	this.http.get<any>(swaggerUrl ,  
     
-  {headers: httpHeaders },
+    {headers: httpHeaders },
 
     )
-	.subscribe((data : any ) => {
-    console.log("data", data , element)
+	.subscribe((data : dataItem[] ) => {
+    this.list = data;
+
+      this.list.forEach((element :dataItem) => {
+          console.log(element)
+      });
 	})}
 
 

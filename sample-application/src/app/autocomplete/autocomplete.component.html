@@ -1,28 +1,21 @@
-<p>autocomplete works!</p>
-
-
-<form class="example-form">
-    <mat-form-field class="example-full-width" appearance="fill">
-      <mat-label>Item to search</mat-label>
-      <input matInput placeholder="" value="Item name" onkeypress ="  console.log( value) "        >
-    </mat-form-field>
-  
-    <mat-form-field class="example-full-width" appearance="fill">
-      <mat-label>Leave a comment</mat-label>
-      <textarea matInput placeholder="Ex. It makes me feel..."></textarea>
-    </mat-form-field>
-  </form>
-  
-
-  <button (click)="bidule()"> Bidule
-</button>
 
 <form [formGroup]="myForm" (ngSubmit)="onSubmit(myForm)">
     <div>
       <label>
-        Name:
-        <input formControlName="name" placeholder="Your name">
+        <input formControlName="name" placeholder="entity name">
       </label>
     </div>
   
   </form>
+
+
+  content_copy
+<li *ngFor="let item of list; index as i;">
+
+
+
+<img class="avatarimage lazy" src="https://images.evetech.net/{{item.image}}"  height="32" width="32" alt=""> Corp{{item.name}}
+{{item.name}}
+  
+
+</li>
