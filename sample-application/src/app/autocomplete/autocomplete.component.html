@@ -1,7 +1,7 @@
 
 
     <button (click)="printComponent()"> 
-        Add to Watchlist
+      PrintComponent 
     </button>
 
 <form [formGroup]="myForm" (ngSubmit)="onSubmit(myForm)">
@@ -12,8 +12,7 @@
     </div>
 </form>
 
-<h5 *ngFor="let item of list; index as i;">
-
+<h5 *ngFor="let item of autoCompleteSearchResults; index as i;">
 
 <img    *ngIf=" true  "   
         class="avatarimage lazy" src="https://images.evetech.net/{{item.image}}"  height="16" width="16" alt=""> 
@@ -26,7 +25,7 @@
     </button>
 
 </h5>
-<!-- <button (click)="this.yolo()" ></button> -->
+<button (click)="this.yolo()" ></button>
 
 
 

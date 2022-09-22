@@ -21,60 +21,70 @@ interface dataItem{
 })
 export class AutocompleterComponent implements OnInit {
 
- list :dataItem[] = [];
-
+	list :dataItem[] = [];
 	listPerson : any = [];		
-
-addToWatchList(item :any ){
-	console.log("yolo", item)
-
-}
-
-
-printComponent()
-{
-
-	console.log("printcomponent 	" ,this)
-	// this.listPerson.forEach( (element : any[] ) => {console.log(element )})
-
-
-}
-
-onSubmit(form: FormGroup) {
-
-}
-
-
-onChanges(): void {
-  this.myForm.statusChanges.subscribe(data =>{
-	console.log(data, this.myForm.value );
-	this.listPerson =  this.getList(this.myForm.value);
-  }
-  )
-}
-
-
-getList( element :any) {
-	console.log(element , "DASKJD")
-	this.esi_service.getCharactersFromString(element.name);
-	console.log("YOLOOOOOOO")
-}
-
 	myForm!: FormGroup  ;
 	formattedMessage: string = "";
-	constructor(private http: HttpClient,
-			private formBuilder: FormBuilder,
-			
-			private esi_service : EveEsiService
-			
-			
-			) {console.log('autocomplete construction'); }
+	searchResults : any = [];
+
+	autoCompleteSearchResults : any[] = this.esi_service.autoCompleteSearchresults;
+
+	constructor(
+		private formBuilder: FormBuilder,
+		private esi_service : EveEsiService
+	) {console.log('autocomplete construction'); }
+
+updater (){
+
+	this.autoCompleteSearchResults = this.esi_service.autoCompleteSearchresults
+
+
+}
+
+		yolo(){
+			console.log(this.list , this)
+
+		}
+
+	addToWatchList(item :any ){
+		console.log("yolo", item)
+	}
+
+	printComponent(){
+		console.log("printcomponent 	" ,this)
+		// this.listPerson.forEach( (element : any[] ) => {console.log(element )})
+	}
+
+	onSubmit(form: FormGroup) {
+	}
+
+	onChanges(): void {
+		this.autoCompleteSearchResults = this.esi_service.autoCompleteSearchresults
+
+  		this.myForm.statusChanges.subscribe(
+			data => {
+				console.log(data, this.myForm.value );
+			//	this.autoCompleteSearchResults =  this.getList(this.myForm.value);
+
+				this.esi_service.getCharactersFromString( this.myForm.value.name);
+
+				this.autoCompleteSearchResults = this.esi_service.autoCompleteSearchresults
+
+			}
+		)
+	}
+
+
   	bidule(){
 		console.log(  "change value ",   "" , this)
   	}
 
  	ngOnInit(): void {
 		console.log('hello from autocomplete', this);
+
+
+setInterval(   ()=>  this.updater() , 100  )
+
 		this.myForm = this.formBuilder.group({
 		  	name: '',
 		});

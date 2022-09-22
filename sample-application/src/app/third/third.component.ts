@@ -39,7 +39,7 @@ export class ThirdComponent implements OnInit {
 	//	this.characterContactsId =	this.esi_service.getCharacterContacts();
 		this.characterContactsId 		= this.esi_service.characterContactsId;
 		this .characterContactWithNames = this.esi_service.characterContactsWithName;
-		this.esi_service.getNamesFromId(this.characterContactsId)
+		this.esi_service.getItemInfoFromId(this.characterContactsId)
 
 	//	console.log("YOLOO",this.characterContacts.CharacterID)	
 	

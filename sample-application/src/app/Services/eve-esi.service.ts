@@ -8,6 +8,15 @@ const ACCESS_TOKEN  = 	'access_token';
 const secretKey     =  	"jcVXo0IZFt5YDr8AJ3Z7cKCDfVijNxKhupOKCQ2I"
 const client_id   	=	"7f45c8124b2640beba3a6902df6832a2";
 
+
+interface ItemInfo{
+	category: string;
+	id: number;
+	name	: 	string;
+}
+
+
+
 @Injectable({
   providedIn: 'root'
 })
@@ -21,6 +30,9 @@ export class EveEsiService {
 
 	characterContactsId :any[]=[];
 	characterContactsWithName :any[]=[]
+
+	autoCompleteSearchresults :any[]=[]
+
 
   	constructor(
 		private http	: HttpClient,
@@ -41,16 +53,18 @@ export class EveEsiService {
 		)
 		let proxy = this.hostpoint + "/latest"
 		console.log(this.userOwn)
-		this.http.get(proxy +"/characters/" +this.userOwn.CharacterID+"/search/?categories=character&datasource=tranquility&language=en&search="+name+"&strict=false" 
+		this.http.get(proxy + "/characters/" + this.userOwn.CharacterID + "/search/?categories=character&datasource=tranquility&language=en&search="+name+"&strict=false" 
 		, 	{headers: httpHeaders2 })
 		.subscribe((data :any )   => {
 				console.log("data Contact", data.character as string[])
-				return(this.getNamesFromId(data.character));
+				return(this.getItemInfoFromId(data.character));
 		})
 	}
 
 
-	getNamesFromId( tab :string[]) : any
+
+
+	getItemInfoFromId( tab :string[]) : any
 	{
 		console.log("getNamesFromId", "tab=["   ,tab,"]	" )
 		let httpHeaders2 = new HttpHeaders(
@@ -59,9 +73,12 @@ export class EveEsiService {
 		let proxy = this.hostpoint + "/latest"
 		this.http.post(proxy +  "/universe/names/?datasource=tranquility"  ,tab, 	{headers: httpHeaders2 })
 		.subscribe((data :any)=> {
-	//		console.log("DAAAA TAAAA" , data)
+			console.log("DAAAA TAAAA" , data)
 
 			this . characterContactsWithName = [];
+
+
+			this.autoCompleteSearchresults = data;
 
 			if(!this.characterContactsWithName.length){
 			data.forEach(
@@ -87,11 +104,10 @@ export class EveEsiService {
 		this.http.get(proxy +"/characters/" +this.userOwn.CharacterID+"/contacts/?datasource=tranquility", 	{headers: httpHeaders2 })
 		.subscribe((data :any )   => {
 			console.log("data", data)
-			if(!this.characterContactsId.length)
-			{
-			data.forEach((element : any)=>{
-				console.log(element.contact_id);
-				this.characterContactsId.push(element.contact_id)
+			if(!this.characterContactsId.length)	{
+				data.forEach((element : any)=>{
+					console.log(element.contact_id);
+					this.characterContactsId.push(element.contact_id)
 			})}
 			return(this.characterContactsId)
 		})
