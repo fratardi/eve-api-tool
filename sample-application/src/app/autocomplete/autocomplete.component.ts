@@ -55,34 +55,9 @@ onChanges(): void {
 
 
 getList( element :any) {
-
-
 	console.log(element , "DASKJD")
-
 	this.esi_service.getCharactersFromString(element.name);
-
-	// if(!!!element.name){
-  	// 	this.list = [];
-  	// 	return;
-	// }
-	// // let httpHeaders = new HttpHeaders({});
-	// console.log(element.valueOf())
-
-	// let swaggerUrl = "https://zkillboard.com/autocomplete/" + element.name + "/"
-	// this.http.get<any>(swaggerUrl ,
-	// //{headers: httpHeaders },
-	// )
-	// .subscribe((data : dataItem[] ) => {
-	// this.list = data;
-
-	//   this.list.forEach((element :dataItem) => {
-	// 	  console.log(element)
-	//   });
-	// }
-	// )
-
-
-
+	console.log("YOLOOOOOOO")
 }
 
 	myForm!: FormGroup  ;

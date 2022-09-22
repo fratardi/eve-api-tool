@@ -30,6 +30,9 @@ export class EveEsiService {
 
 	getCharactersFromString(name : string) :any
 	{
+
+		console.log("eve esi service getCharactersFromString")
+
 		if(name.length < 3){
 			return;
 		}
@@ -56,7 +59,7 @@ export class EveEsiService {
 		let proxy = this.hostpoint + "/latest"
 		this.http.post(proxy +  "/universe/names/?datasource=tranquility"  ,tab, 	{headers: httpHeaders2 })
 		.subscribe((data :any)=> {
-			console.log("DAAAA TAAAA" , data)
+	//		console.log("DAAAA TAAAA" , data)
 
 			this . characterContactsWithName = [];
 
@@ -66,7 +69,7 @@ export class EveEsiService {
 					this . characterContactsWithName.push(element)	
 				}
 			)
-			console.log(this . characterContactsWithName);
+		//	console.log(this . characterContactsWithName);
 			}	
 			return(data);
 		//	
@@ -75,7 +78,7 @@ export class EveEsiService {
 	}
 
 	getCharacterContacts () : any {
-		console.log("this.characterContacts",this.characterContactsId)
+		console.log("get Character Contacts ",this.characterContactsId)
 		let httpHeaders2 = new HttpHeaders(
 			{"Authorization":" Bearer " +  this.token.access_token}
 		)
@@ -100,7 +103,7 @@ export class EveEsiService {
 	}
 
 	getUserOwn(){
-		console.log("Passe ICI", this.userOwn.CharacterID)
+		console.log("Get user Own ", this.userOwn.CharacterID)
 		let proxy = this.hostpoint + "/latest"
 		this.http.get(proxy +"/characters/" +this.userOwn.CharacterID+"/corporationhistory/?datasource=tranquility")
 		.subscribe(data  => {
