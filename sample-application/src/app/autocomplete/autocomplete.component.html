@@ -4,6 +4,7 @@
       PrintComponent 
     </button>
 
+  
 <form [formGroup]="myForm" (ngSubmit)="onSubmit(myForm)">
     <div>
       <label>
@@ -12,20 +13,15 @@
     </div>
 </form>
 
-<h5 *ngFor="let item of autoCompleteSearchResults; index as i;">
-
-<img    *ngIf=" true  "   
-        class="avatarimage lazy" src="https://images.evetech.net/{{item.image}}"  height="16" width="16" alt=""> 
-<!-- //<img *ngIf="item.type !== 'region'"   class="avatarimage lazy" src="https://images.evetech.net/{{item.image}}"  height="32" width="32" alt="">  -->
+<li *ngFor="let item of autoCompleteSearchResults; index as i;"
+    class = "CharacterWidget "
+>
+<button (click)="addToWatchList(item)"> 
+    +
+</button>
+<img   class="avatarimage lazy" src="https://imageserver.eveonline.com/Character/{{item.id}}_32.jpg"  height="32" width="32" alt=""> 
     {{item.name}}
+    {{item.id}}
     <!-- <button (click)="yolo()" ></button> -->
 
-    <button (click)="addToWatchList(item)"> 
-        +
-    </button>
-
-</h5>
-<button (click)="this.yolo()" ></button>
-
-
-
+</li>

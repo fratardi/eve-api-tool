@@ -56,8 +56,16 @@ export class EveEsiService {
 		this.http.get(proxy + "/characters/" + this.userOwn.CharacterID + "/search/?categories=character&datasource=tranquility&language=en&search="+name+"&strict=false" 
 		, 	{headers: httpHeaders2 })
 		.subscribe((data :any )   => {
-				console.log("data Contact", data.character as string[])
+
+			if(data == undefined)
+			{console.log("data Contact", data.character.length)
+
+		}
+
 				return(this.getItemInfoFromId(data.character));
+
+
+
 		})
 	}
 
@@ -66,7 +74,16 @@ export class EveEsiService {
 
 	getItemInfoFromId( tab :string[]) : any
 	{
-		console.log("getNamesFromId", "tab=["   ,tab,"]	" )
+
+		if(!tab)
+		{
+
+			this.autoCompleteSearchresults = []
+
+			return;
+		}
+
+
 		let httpHeaders2 = new HttpHeaders(
 			{"Authorization":" Bearer " +  this.token.access_token}
 		)
