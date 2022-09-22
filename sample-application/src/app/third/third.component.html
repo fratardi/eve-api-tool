@@ -5,23 +5,14 @@ third component . html
 
 <img class="avatarimage lazy" src="https://imageserver.eveonline.com/Character/{{currentUser.CharacterID}}_32.jpg" alt="">
 
-<!--
-  <ul>
-    <li *ngFor="let person of characterContactWithNames[0]"> (1)
-      {{ person?.name }}
-    </li>
-</ul>
--->
-
 <h6 *ngFor="let item of characterContactWithNames; index as i; trackBy: trackByFn">
 
-  <li *ngIf="item.category==='character'" >
+  <li *ngIf="item.category=== 'character'" >
   <img class="avatarimage lazy" src="https://imageserver.eveonline.com/Character/{{item.id}}_32.jpg" alt=""> Char {{item.name}}
   </li>
   <li *ngIf="item.category === 'corporation'" >
-  
-
-
     <img class="avatarimage lazy" src="https://images.evetech.net/corporations/{{item.id}}/logo"  height="32" width="32" alt=""> Corp{{item.name}}
     </li>
 </h6>
+
+<app-autocompleter></app-autocompleter>

@@ -1,22 +1,32 @@
 
+
+    <button (click)="printComponent()"> 
+        Add to Watchlist
+    </button>
+
 <form [formGroup]="myForm" (ngSubmit)="onSubmit(myForm)">
     <div>
       <label>
         <input formControlName="name" placeholder="entity name">
       </label>
     </div>
-  
-  </form>
+</form>
+
+<h5 *ngFor="let item of list; index as i;">
 
 
-  content_copy
-<li *ngFor="let item of list; index as i;">
-
-
-<img *ngIf="item.type !== 'group'   &&    item.type !== 'region'     &&    item.type !== 'ship'  "   class="avatarimage lazy" src="https://images.evetech.net/{{item.image}}"  height="32" width="32" alt=""> 
-
+<img    *ngIf=" true  "   
+        class="avatarimage lazy" src="https://images.evetech.net/{{item.image}}"  height="16" width="16" alt=""> 
 <!-- //<img *ngIf="item.type !== 'region'"   class="avatarimage lazy" src="https://images.evetech.net/{{item.image}}"  height="32" width="32" alt="">  -->
-{{item.name}}
-  
+    {{item.name}}
+    <!-- <button (click)="yolo()" ></button> -->
 
-</li>
+    <button (click)="addToWatchList(item)"> 
+        Add to Watchlist
+    </button>
+
+</h5>
+<!-- <button (click)="this.yolo()" ></button> -->
+
+
+

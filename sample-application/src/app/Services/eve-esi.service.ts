@@ -14,7 +14,6 @@ const client_id   	=	"7f45c8124b2640beba3a6902df6832a2";
 
 export class EveEsiService {
 
-
 	hostpoint = "http://localhost:4200";
 	token: any;
    	userOwn:any;
@@ -29,8 +28,26 @@ export class EveEsiService {
 	) {}
 
 
+	getCharactersFromString(name : string) :any
+	{
+		if(name.length < 3){
+			return;
+		}
+		let httpHeaders2 = new HttpHeaders(
+			{"Authorization":" Bearer " +  this.token.access_token}
+		)
+		let proxy = this.hostpoint + "/latest"
+		console.log(this.userOwn)
+		this.http.get(proxy +"/characters/" +this.userOwn.CharacterID+"/search/?categories=character&datasource=tranquility&language=en&search="+name+"&strict=false" 
+		, 	{headers: httpHeaders2 })
+		.subscribe((data :any )   => {
+				console.log("data Contact", data.character as string[])
+				return(this.getNamesFromId(data.character));
+		})
+	}
 
-	getNamesFromId( tab :string[])
+
+	getNamesFromId( tab :string[]) : any
 	{
 		console.log("getNamesFromId", "tab=["   ,tab,"]	" )
 		let httpHeaders2 = new HttpHeaders(
@@ -39,53 +56,43 @@ export class EveEsiService {
 		let proxy = this.hostpoint + "/latest"
 		this.http.post(proxy +  "/universe/names/?datasource=tranquility"  ,tab, 	{headers: httpHeaders2 })
 		.subscribe((data :any)=> {
-			//console.log("data ======" , data )
-			if(!this.characterContactsWithName.length)
-			{
+			console.log("DAAAA TAAAA" , data)
 
+			this . characterContactsWithName = [];
+
+			if(!this.characterContactsWithName.length){
 			data.forEach(
 				(element : any)=> {
-					//console.log(element)
-					this . characterContactsWithName.push(element)
-					
+					this . characterContactsWithName.push(element)	
 				}
-
-
 			)
 			console.log(this . characterContactsWithName);
 			}	
+			return(data);
 		//	
 		})
 
 	}
 
-	getCharacterContacts    () : any {
+	getCharacterContacts () : any {
 		console.log("this.characterContacts",this.characterContactsId)
 		let httpHeaders2 = new HttpHeaders(
 			{"Authorization":" Bearer " +  this.token.access_token}
 		)
-
 		let proxy = this.hostpoint + "/latest"
 		console.log(this.userOwn)
 		this.http.get(proxy +"/characters/" +this.userOwn.CharacterID+"/contacts/?datasource=tranquility", 	{headers: httpHeaders2 })
 		.subscribe((data :any )   => {
-		
-		
 			console.log("data", data)
 			if(!this.characterContactsId.length)
 			{
 			data.forEach((element : any)=>{
 				console.log(element.contact_id);
-
-
 				this.characterContactsId.push(element.contact_id)
-			})
-			}	
-
+			})}
 			return(this.characterContactsId)
 		})
 	}
-
 
 	base64encodedstring(client_id :string ,  secret  : string){
 		let stringToEncode = client_id+ ":"+secret;
@@ -137,7 +144,7 @@ export class EveEsiService {
 			this.http.get(this.hostpoint+ '/verify',{headers  : httpHeaders2})
 				.subscribe(e => {
 				this.userOwn = e as	 Swagger.UserInfo;
-				console.log(e , this.token.expires_in * 60)
+				console.log(e , this.token.expires_in )
 				this.refreshWhenexpired() 
 				this.router.navigate(['third-component']);
 				return(this.userOwn)
