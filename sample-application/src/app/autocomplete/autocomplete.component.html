@@ -7,7 +7,7 @@
 <form [formGroup]="myForm" (ngSubmit)="onSubmit(myForm)">
     <div>
       <label>
-        <input formControlName="name" placeholder="entity name">
+        <input formControlName="name" placeholder="entity name"   (keyup)="updater()" >
       </label>
     </div>
 </form>
@@ -21,7 +21,7 @@
     <!-- <button (click)="yolo()" ></button> -->
 
     <button (click)="addToWatchList(item)"> 
-        Add to Watchlist
+        +
     </button>
 
 </h5>

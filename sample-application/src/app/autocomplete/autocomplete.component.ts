@@ -61,15 +61,28 @@ updater (){
 	onChanges(): void {
 		this.autoCompleteSearchResults = this.esi_service.autoCompleteSearchresults
 
+
+
   		this.myForm.statusChanges.subscribe(
 			data => {
+
+				console.log(this.myForm.value.name);
+
+
+				if(this.myForm.value.name .length < 3 )
+				{
+					this.esi_service.autoCompleteSearchresults = [];
+
+					this.autoCompleteSearchResults = [];
+					return
+
+				}
 				console.log(data, this.myForm.value );
 			//	this.autoCompleteSearchResults =  this.getList(this.myForm.value);
 
 				this.esi_service.getCharactersFromString( this.myForm.value.name);
 
-				this.autoCompleteSearchResults = this.esi_service.autoCompleteSearchresults
-
+			
 			}
 		)
 	}
