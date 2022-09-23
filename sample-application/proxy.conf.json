@@ -35,11 +35,11 @@
       "changeOrigin": true
     }
     ,
-    "/autocomplete/": {
-      "target": "https://zkillboard.com/autocomplete/",
+    "/search/": {
+      "target": "https://zkillboard.com/character/",
       "secure": false,
       "pathRewrite": {
-        "^/autocoplete/": ""
+        "^/search/": ""
       },
       "changeOrigin": true
     }

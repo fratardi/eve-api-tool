@@ -18,7 +18,12 @@ export class WatchlistComponent implements OnInit {
   ) { this.watchlist = watchListService.listPerson}
 
 
+  getInfosabout()
+  {
+    this.watchListService.getInfosabout();
 
+
+  }
 
   ngOnInit(): void {
 
