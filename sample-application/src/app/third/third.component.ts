@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { EveEsiService } from '../Services/eve-esi.service';
+import { WatchlistServiceService } from '../Services/watchlist-service.service';
 
 @Component({
   selector: 'app-third',
@@ -15,6 +16,7 @@ export class ThirdComponent implements OnInit {
 
 	constructor(
 		private esi_service : EveEsiService,
+		watchlist : WatchlistServiceService 
 	) { }
 	
 	trackByFn(index :any , item: any) { 

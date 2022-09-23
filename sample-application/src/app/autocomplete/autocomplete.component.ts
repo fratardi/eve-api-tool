@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { EveEsiService } from '../Services/eve-esi.service';
+import { WatchlistServiceService } from '../Services/watchlist-service.service';
 
 
 
@@ -31,7 +32,10 @@ export class AutocompleterComponent implements OnInit {
 
 	constructor(
 		private formBuilder: FormBuilder,
-		private esi_service : EveEsiService
+		private esi_service : EveEsiService,
+
+		private watchlist : WatchlistServiceService 
+
 	) {console.log('autocomplete construction'); }
 
 	updater (){
@@ -48,7 +52,11 @@ export class AutocompleterComponent implements OnInit {
 	}
 
 	addToWatchList(item :any ){
+		
 		console.log("yolo", item)
+
+this.watchlist.updateList(item)
+
 	}
 
 	printComponent(){

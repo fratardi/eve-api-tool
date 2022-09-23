@@ -12,7 +12,7 @@ const routes: Routes = [
   { path: 'third-component', component: ThirdComponent },
   { path: '404', component: NotFoundComponent },
   { path: 'esi_callback', component: SecondComponent},
-  { path: 'autocompleter', component: AutocompleterComponent},
+ // { path: 'autocompleter', component: AutocompleterComponent},
   //{ path: '**', redirectTo: '404' },
 ];
 
