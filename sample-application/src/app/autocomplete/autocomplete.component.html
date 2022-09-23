@@ -15,13 +15,20 @@
 
 <li *ngFor="let item of autoCompleteSearchResults; index as i;"
     class = "CharacterWidget "
+    title="add {{item.name}}to watch list"
+    (click)="addToWatchList(item)"
 >
-<button (click)="addToWatchList(item)"> 
-    +
-</button>
-<img   class="avatarimage lazy" src="https://imageserver.eveonline.com/Character/{{item.id}}_32.jpg"  height="32" width="32" alt=""> 
+
+<img class="image" src="https://images.evetech.net/characters/{{item.id}}/portrait?size=32" 
+  
+
+    onerror='src = "https://api-private.atlassian.com/users/39117c7fd373e0c048e335815d10cb91/avatar" ' />
+
+<!-- 6
+//<img   class="avatarimage lazy" src="https://images.evetech.net/character/{{item.id}}/portrait?size=4"  height="32" width="32" alt="">  -->
+
+<!-- <img   class="avatarimage lazy" src="https://imageserver.eveonline.com/Character/{{item.id}}_32.jpg"  height="32" width="32" alt="">  -->
     {{item.name}}
-    {{item.id}}
     <!-- <button (click)="yolo()" ></button> -->
 
 </li>

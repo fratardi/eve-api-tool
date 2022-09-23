@@ -34,17 +34,16 @@ export class AutocompleterComponent implements OnInit {
 		private esi_service : EveEsiService
 	) {console.log('autocomplete construction'); }
 
-updater (){
+	updater (){
 
 	this.autoCompleteSearchResults = this.esi_service.autoCompleteSearchresults
 
 
-}
+	}
 
-		yolo(){
-			console.log(this.list , this)
-
-		}
+	yolo(){
+		console.log(this.list , this)
+	}
 
 	addToWatchList(item :any ){
 		console.log("yolo", item)
@@ -61,28 +60,17 @@ updater (){
 	onChanges(): void {
 		this.autoCompleteSearchResults = this.esi_service.autoCompleteSearchresults
 
-
-
   		this.myForm.statusChanges.subscribe(
 			data => {
-
 				console.log(this.myForm.value.name);
-
-
 				if(this.myForm.value.name .length < 3 )
 				{
 					this.esi_service.autoCompleteSearchresults = [];
-
 					this.autoCompleteSearchResults = [];
 					return
-
 				}
 				console.log(data, this.myForm.value );
-			//	this.autoCompleteSearchResults =  this.getList(this.myForm.value);
-
 				this.esi_service.getCharactersFromString( this.myForm.value.name);
-
-			
 			}
 		)
 	}
@@ -96,7 +84,7 @@ updater (){
 		console.log('hello from autocomplete', this);
 
 
-setInterval(   ()=>  this.updater() , 100  )
+setInterval(   ()=>  this.updater() , 1000  / 24  )
 
 		this.myForm = this.formBuilder.group({
 		  	name: '',
