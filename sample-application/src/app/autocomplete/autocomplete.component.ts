@@ -36,7 +36,9 @@ export class AutocompleterComponent implements OnInit {
 
 	updater (){
 
+		this.esi_service.autoCompleteSearchresults.sort((a,b) =>  b.name  - a.name  ); 
 	this.autoCompleteSearchResults = this.esi_service.autoCompleteSearchresults
+//	this.autoCompleteSearchResults.sort((a,b) => a.name - b.name); 
 
 
 	}
