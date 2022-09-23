@@ -20,6 +20,7 @@ import {MatIconModule} from '@angular/material/icon';
 import { MatSelectModule } from '@angular/material/select';
 import { ThirdComponent } from './third/third.component';
 import { AutocompleterComponent } from './autocomplete/autocomplete.component';
+import { WatchlistComponent } from './watchlist/watchlist.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { AutocompleterComponent } from './autocomplete/autocomplete.component';
     ThirdComponent,
     AutocompleterComponent,
     NotFoundComponent,
+    WatchlistComponent,
   ],
   imports: [
     BrowserModule,
