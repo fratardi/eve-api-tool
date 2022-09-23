@@ -37,22 +37,18 @@ export class WatchlistServiceService {
 
 
 
-   fetch("http://localhost:4200/search" + "/1363236736/losses/page/2/").then(function (response) {
+   fetch("http://localhost:4200/search" + "/1363236736/losses/page/2/")
+   .then(function (response) {
+    console.log(response)
     // The API call was successful!
-    return response;
+    return response.text();
   }).then(function (data : any) {
 
-    
     // const parser = new DOMParser();
-    // const document = parser.parseFromString(data, "text/html");
-    data.body.read().then(
-      (e : any) => {console.log("read e  = " , e )}
+    // const xmlString =  data.body
+    // const doc1 = parser.parseFromString(xmlString,"text/html");
 
-    )
-
-
-    // This is the JSON from our response
-   console.log( "2SMIIILEEEE"  , data.body, "]]" );
+   console.log( "2SMIIILEEEE"  ,data,  "]]" );
   }).catch(function (err) {
     console.log( err , "1SMIIILEEEE"  ,  );
     // There was an error
@@ -67,19 +63,8 @@ export class WatchlistServiceService {
   //   this.http.get<any>(swaggerUrl )
 	// .subscribe((data : any ) => {
 
-
-
   //   let html : any  = data;
 
-
-
-
-
-
-
-
-  //   const parser = new DOMParser();
-  //   const document = parser.parseFromString(data, "text/html");
 
 	// //	this.Swagger = data
   //   console.log("data" , data  , document)
