@@ -22,6 +22,10 @@ import { ThirdComponent } from './third/third.component';
 import { AutocompleterComponent } from './autocomplete/autocomplete.component';
 import { WatchlistComponent } from './watchlist/watchlist.component';
 
+
+import {MatGridListModule} from '@angular/material/grid-list';
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -48,7 +52,10 @@ import { WatchlistComponent } from './watchlist/watchlist.component';
     MatButtonModule,
     MatCardModule,
     MatFormFieldModule,
-    MatSelectModule
+    MatSelectModule,
+
+
+    MatGridListModule
   ],
   providers: [ ],
   bootstrap: [AppComponent]
