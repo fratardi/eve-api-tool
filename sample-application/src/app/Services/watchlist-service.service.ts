@@ -6,6 +6,8 @@ import { Injectable } from '@angular/core';
 export class WatchlistServiceService {
 
 
+
+
   listPerson : any = []
 
   constructor() { }
@@ -13,8 +15,20 @@ export class WatchlistServiceService {
 
   updateList(item : any ){
 
+    let html : any  = [];
+    const parser = new DOMParser();
+    const document = parser.parseFromString(html, "text/html");
+
     this.listPerson.push(item)
     console.log("from Service",item , this.listPerson)
   }
+
+
+
+
+
+
+
+
 
 }

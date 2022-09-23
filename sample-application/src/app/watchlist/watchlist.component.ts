@@ -18,26 +18,9 @@ export class WatchlistComponent implements OnInit {
   ) { this.watchlist = watchListService.listPerson}
 
 
-  // setInterval(   ()=>  this.updater() , 1000  / 24  )
-
-  updater (){
-    console.log("updater", this.watchlist)
-
-  
-  }
-
-
-
 
 
   ngOnInit(): void {
-
-    this.watchListService.listPerson.subscribe((e: any) =>{console.log( "sub",  e)})
-
-    console.log(this.watchlist)
-  //  setInterval(   ()=>  this.updater() , 1000    )
-
-
 
   }
 
