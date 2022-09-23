@@ -16,7 +16,7 @@ export class ThirdComponent implements OnInit {
 
 	constructor(
 		private esi_service : EveEsiService,
-		watchlist : WatchlistServiceService 
+		private watchlist : WatchlistServiceService 
 	) { }
 	
 	trackByFn(index :any , item: any) { 

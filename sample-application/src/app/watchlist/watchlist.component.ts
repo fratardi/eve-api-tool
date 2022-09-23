@@ -8,13 +8,41 @@ import { WatchlistServiceService } from '../Services/watchlist-service.service';
 })
 export class WatchlistComponent implements OnInit {
 
+
+  watchlist : any = [];
+
   constructor(
 
-   watchlist : WatchlistServiceService 
+   private watchListService : WatchlistServiceService 
 
-  ) { }
+  ) { this.watchlist = watchListService.listPerson}
+
+
+  // setInterval(   ()=>  this.updater() , 1000  / 24  )
+
+  updater (){
+    console.log("updater", this.watchlist)
+
+  
+  }
+
+
+
+
 
   ngOnInit(): void {
+
+    this.watchListService.listPerson.subscribe((e: any) =>{console.log( "sub",  e)})
+
+    console.log(this.watchlist)
+  //  setInterval(   ()=>  this.updater() , 1000    )
+
+
+
   }
 
 }
+
+
+
+

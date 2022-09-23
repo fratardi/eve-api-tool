@@ -14,7 +14,7 @@ export class WatchlistServiceService {
   updateList(item : any ){
 
     this.listPerson.push(item)
-    console.log(item , this.listPerson)
+    console.log("from Service",item , this.listPerson)
   }
 
 }
