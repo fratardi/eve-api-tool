@@ -46,18 +46,17 @@ export class WatchlistServiceService {
     wrapper.getElementsByTagName('li');
 
 
-  console.log();
-data = data as string[];
+    console.log();
+    data = data as string[];
 
 
-data.split("killID=").forEach((element : string) => {
+data.split('<a href="/kill/').forEach((element : string) => {
 
-      console.log( "😢😢😢", element.slice(0, -3))
+
+
+      console.log( "😢😢😢", element.slice(0, 10), "😢😢👌")
 
     })
-
-    
-    console.log( "2SMIIILEEEE"  ,data,  "]]" , wrapper);
 
  //  console.log( "2SMIIILEEEE]]" , wrapper);
   }).catch(function (err) {
@@ -68,20 +67,6 @@ data.split("killID=").forEach((element : string) => {
 
   });
 
-
-
-
-
-
-  //   this.http.get<any>(swaggerUrl )
-	// .subscribe((data : any ) => {
-
-  //   let html : any  = data;
-
-
-	// //	this.Swagger = data
-  //   console.log("data" , data  , document)
-	// })}
 
  
 

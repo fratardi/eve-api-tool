@@ -68,15 +68,10 @@ export class EveEsiService {
 
 	getItemInfoFromId( tab :string[]) : any
 	{
-
-		if(!tab)
-		{
-
+		if(!tab)	{
 			this.autoCompleteSearchresults = []
-
 			return;
 		}
-
 
 		let httpHeaders2 = new HttpHeaders(
 			{"Authorization":" Bearer " +  this.token.access_token}
@@ -85,12 +80,8 @@ export class EveEsiService {
 		this.http.post(proxy +  "/universe/names/?datasource=tranquility"  ,tab, 	{headers: httpHeaders2 })
 		.subscribe((data :any)=> {
 			console.log("DAAAA TAAAA" , data)
-
 			this . characterContactsWithName = [];
-
-
 			this.autoCompleteSearchresults = data;
-
 			if(!this.characterContactsWithName.length){
 			data.forEach(
 				(element : any)=> {
