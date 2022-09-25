@@ -24,7 +24,7 @@ export class ThirdComponent implements OnInit {
 	}
 
 	getContactlist() {
-		console.log("hello<truc-" , this );
+		console.log("getContactList" , this );
 		this.characterContactsId 		= this.esi_service.characterContactsId;
 		this .characterContactWithNames = this.esi_service.characterContactsWithName;
 		this.esi_service.getItemInfoFromId(this.characterContactsId)	

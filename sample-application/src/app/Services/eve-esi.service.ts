@@ -10,12 +10,10 @@ const client_id   	=	"7f45c8124b2640beba3a6902df6832a2";
 
 
 interface ItemInfo{
-	category: string;
-	id: number;
+	category:	string;
+	id		:	number;
 	name	: 	string;
 }
-
-
 
 @Injectable({
   providedIn: 'root'
@@ -53,7 +51,7 @@ export class EveEsiService {
 		)
 		let proxy = this.hostpoint + "/latest"
 		console.log(this.userOwn)
-		this.http.get(proxy + "/characters/" + this.userOwn.CharacterID + "/search/?categories=character&datasource=tranquility&language=en&search="+name+"&strict=false" 
+		this.http.get(proxy + "/characters/" + this.userOwn.CharacterID + "/search/?categories=character&datasource=tranquility&language=en&search=" + name + "&strict=false" 
 		, 	{headers: httpHeaders2 })
 		.subscribe((data :any )   => {
 
@@ -61,11 +59,7 @@ export class EveEsiService {
 			{console.log("data Contact", data.character.length)
 
 		}
-
-				return(this.getItemInfoFromId(data.character));
-
-
-
+		return(this.getItemInfoFromId(data.character));
 		})
 	}
 
