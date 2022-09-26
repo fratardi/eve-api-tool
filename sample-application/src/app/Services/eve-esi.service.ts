@@ -37,12 +37,9 @@ export class EveEsiService {
 		private router	: Router,
 	) {}
 
-
 	getCharactersFromString(name : string) :any
 	{
-
 		console.log("eve esi service getCharactersFromString")
-
 		if(name.length < 3){
 			return;
 		}

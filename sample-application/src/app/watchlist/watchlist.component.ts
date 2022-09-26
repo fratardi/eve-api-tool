@@ -18,12 +18,15 @@ export class WatchlistComponent implements OnInit {
   ) { this.watchlist = watchListService.listPerson}
 
 
-  getInfosabout()
-  {
+  getKillIds() {
     this.watchListService.getInfosabout();
+  }
 
+  removeFromWatchlist(){
+    this.watchListService.removeWatchee();
 
   }
+
 
   ngOnInit(): void {
 

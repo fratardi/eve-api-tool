@@ -1,51 +1,50 @@
 {
-    "/api": {
-      "target": "https://esi.evetech.net/latest/swagger.json?datasource=tranquility",
-      "secure": false,
-      "pathRewrite": {
-        "^/api": ""
-      },
-      "changeOrigin": true
-    }
-    ,
-    "/postCodes": {
-      "target": "https://login.eveonline.com/oauth/token",
-      "secure": false,
-      "pathRewrite": {
-        "^/postCodes": ""
-      },
-      "changeOrigin": true
-    }
-    ,
-    "/verify": {
-      "target": "https://login.eveonline.com/oauth/verify",
-      "secure": false,
-      "pathRewrite": {
-        "^/verify": ""
-      },
-      "changeOrigin": true
-    }
-    ,
-    "/latest/": {
-      "target": "https://esi.evetech.net/latest/",
-      "secure": false,
-      "pathRewrite": {
-        "^/latest/": ""
-      },
-      "changeOrigin": true
-    }
-    ,
-    "/search/": {
-      "target": "https://zkillboard.com/character/",
-      "secure": false,
-      "pathRewrite": {
-        "^/search/": ""
-      },
-      "changeOrigin": true
-    }
-
-
-
-
-
-  }
+	"/api": {
+		"target": "https://esi.evetech.net/latest/swagger.json?datasource=tranquility",
+		"secure": false,
+		"pathRewrite": {
+			"^/api": ""
+		},
+		"changeOrigin": true
+	},
+	"/postCodes": {
+		"target": "https://login.eveonline.com/oauth/token",
+		"secure": false,
+		"pathRewrite": {
+			"^/postCodes": ""
+		},
+		"changeOrigin": true
+	},
+	"/verify": {
+		"target": "https://login.eveonline.com/oauth/verify",
+		"secure": false,
+		"pathRewrite": {
+			"^/verify": ""
+		},
+		"changeOrigin": true
+	},
+	"/latest/": {
+		"target": "https://esi.evetech.net/latest/",
+		"secure": false,
+		"pathRewrite": {
+			"^/latest/": ""
+		},
+		"changeOrigin": true
+	},
+	"/search/": {
+		"target": "https://zkillboard.com/character/",
+		"secure": false,
+		"pathRewrite": {
+			"^/search/": ""
+		},
+		"changeOrigin": true
+	},
+	"/kill/": {
+		"target": "https://zkillboard.com/kill/",
+		"secure": false,
+		"pathRewrite": {
+			"^/kill/": ""
+	 	},
+	 	"changeOrigin": true
+	}
+}
