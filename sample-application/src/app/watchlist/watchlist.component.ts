@@ -22,6 +22,11 @@ export class WatchlistComponent implements OnInit {
   passOverList()
   {
     console.log(this.watchListService.listKillIds);
+    this.watchListService.listKillIds.forEach((element : any) => {
+      console.log("YOLO" , element) 
+      this.watchListService.getkillHash(element)
+
+    })
 
   }
 

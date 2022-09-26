@@ -27,6 +27,32 @@ export class WatchlistServiceService {
  	}
 
 
+	getkillHash(parameter : string )
+	{
+			console.log("Getkillhash " , parameter)
+			let  swaggerUrl =   "http://localhost:4200/kill" + "/" +parameter
+
+
+			fetch( swaggerUrl)
+			.then(function (response) {
+		  console.log("RESPONSE",response)
+		 // The API call was successful!
+			 return response.text();
+		   })
+		   .then( (data : any) => {
+
+
+				
+				data.split('<li><a target="_blank" href="https://esi.evetech.net/latest/killmails/')
+				.forEach((element : string) => {
+						console.log("HASH ??" , element )
+			  
+				})	
+
+		   })
+	}
+
+
 	getInfosabout() {
 		this.listKillIds = [];
    		let  swaggerUrl =   "http://localhost:4200/search" + "/" + this.listPerson[0].id + "/losses/page/1/"
