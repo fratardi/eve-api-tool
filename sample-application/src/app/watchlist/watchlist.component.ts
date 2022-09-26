@@ -18,6 +18,13 @@ export class WatchlistComponent implements OnInit {
   ) { this.watchlist = watchListService.listPerson}
 
 
+
+  passOverList()
+  {
+    console.log(this.watchListService.listKillIds);
+
+  }
+
   getKillIds() {
     this.watchListService.getInfosabout();
   }

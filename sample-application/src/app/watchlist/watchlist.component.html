@@ -1,5 +1,8 @@
 <p>watchlist works!</p>
-<button (click)="getKillIds()">Search</button>
+<button (click)="getKillIds()">Search</button>  
+
+<button (click)="passOverList()">Pass OVer List</button>
+
 <li *ngFor="let item of watchlist ; index as i;"
     class = "CharacterWidget "
     title="add {{item.name}} to watch list"
