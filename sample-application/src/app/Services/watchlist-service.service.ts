@@ -10,7 +10,9 @@ export class WatchlistServiceService {
 
 	listPerson : any = []
 	listKills : any[] =[];
-
+	listLosses : any[] =[];
+	
+	
 	constructor(private http: HttpClient) { }
 
 	updateList(item : any ){
@@ -41,17 +43,21 @@ export class WatchlistServiceService {
 	   })
 	   .then( (data : any) => {
 	 //	JSON.parse(data)
-	 let x   =  	data.split('},')
-	 let list : any[] = JSON.parse(data);
+	// let x   =  	data.split('},')
+	 let list : any = JSON.parse(data);
 	 console.log( "Length Kills" , list.length	)
 
-		if(list.length == 200)
-		{
-		
-		
-			setTimeout( () => { 	this.getKills(page + 1) }, 500 );
+		this.listKills.push(list)
 
+		if(list.length >= 200){	
+			console.log( "during listkills" , this.listKills)
+			setTimeout( () => { 	this.getKills(page + 1) }, 1450 );
 		}	
+		else{	
+			 console.log( "ended listkills" , this.listKills)
+		}
+
+
 	   }).catch(function (err) {
 		 console.log( err , "1SMIIILEEEE"  ,  );
 			 // There was an error
@@ -72,14 +78,23 @@ export class WatchlistServiceService {
 	   })
 	   .then( (data : any) => {
 	 //	JSON.parse(data)
-	 let x   =  	data.split('},')
+	// let x   =  	data.split('},')
 	 let list : any[] = JSON.parse(data);
 	 console.log("SIZE Losses" , list.length	)
 
 
-	 if(list.length == 200){
-		setTimeout( () => { 	this.getLosses(page + 1) }, 500 );
+	 this.listLosses.push(list)
+
+	 if(list.length >= 200){
+		console.log( "during listlosses" , this.listLosses)
+		setTimeout( () => { 	this.getLosses(page + 1) }, 1350 );
 	 }
+	 else{
+		  console.log( "ended listlosses" , this.listLosses)
+	 }
+
+
+
 
 
 	   }).catch(function (err) {
@@ -91,8 +106,11 @@ export class WatchlistServiceService {
 	}
 
 	getInfosabout() {
-		this.getKills(1)
-		this.getLosses(1)
+		setTimeout( () => { 	this.getLosses( 1) }, 1000 );
+		setTimeout( () => { 	this.getKills( 1) }, 3000 );
+	//	this.getKills(1)
+
+		//this.getLosses(1)
 	}
 
 
