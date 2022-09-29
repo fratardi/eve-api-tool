@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { json } from 'express';
+import { delay } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +10,6 @@ export class WatchlistServiceService {
 
 	listPerson : any = []
 	listKills : any[] =[];
-	//killHashes :string[] = [];
 
 	constructor(private http: HttpClient) { }
 
@@ -26,32 +26,13 @@ export class WatchlistServiceService {
  	}
 
 
-	getkillHash(parameter : string )
-	{
-	// 		console.log("Getkillhash " , parameter)
-	// 		let  swaggerUrl =   "http://localhost:4200/kill" + "/" +parameter
-	// 		fetch( swaggerUrl)
-	// 		.then(function (response) {
-	// //	  console.log("RESPONSE",response)
-	// 	 // The API call was successful!
-	// 		 return response.text();
-	// 	   })
-	// 	   .then( (data : any) => {
-	// 		console.log("[[",data  , "]]")
-	// 		let x = 0 ;
-	// 			data.split('<url=killReport:')
-	// 			.forEach((element : string) => {
-	// 				let e = element.slice(0, 60).slice(0 , -15) as string ;
-	// 					console.log("HASH ??" ,e , x)
-	// 					x = x++;
-	// 			})	
-	// 	   })
+	getkillHash(parameter : number )	{
 	}
 
-	getKills(){
+	getKills(page : number){
 
 		this.listKills = [];
-		let  swaggerUrl =   "http://localhost:4200/zapi" + "kills/characterID/"  +  this.listPerson[0].id+ "/page/1/" ; // + + "/losses/page/1/"
+		let  swaggerUrl =   "http://localhost:4200/zapi" + "kills/characterID/"  +  this.listPerson[0].id+ "/page/" + page +"/" ; // + + "/losses/page/1/"
 		fetch( swaggerUrl)
 		.then(function (response) {
 		console.log("RESPONSE",response.body)
@@ -61,8 +42,16 @@ export class WatchlistServiceService {
 	   .then( (data : any) => {
 	 //	JSON.parse(data)
 	 let x   =  	data.split('},')
-	 let list : any[] = [];
-	 console.log(	JSON.parse(data))
+	 let list : any[] = JSON.parse(data);
+	 console.log( "Length Kills" , list.length	)
+
+		if(list.length == 200)
+		{
+		
+		
+			setTimeout( () => { 	this.getKills(page + 1) }, 500 );
+
+		}	
 	   }).catch(function (err) {
 		 console.log( err , "1SMIIILEEEE"  ,  );
 			 // There was an error
@@ -72,10 +61,9 @@ export class WatchlistServiceService {
 	}
 
 
-	getLosses(){
-
+	getLosses(page : number){
 		this.listKills = [];
-		let  swaggerUrl =   "http://localhost:4200/zapi" + "losses/characterID/"  +  this.listPerson[0].id+ "/" ; // + + "/losses/page/1/"
+		let  swaggerUrl =   "http://localhost:4200/zapi" + "losses/characterID/"  +  this.listPerson[0].id+ "/page/" + page +"/" ;
 		fetch( swaggerUrl)
 		.then(function (response) {
 		console.log("RESPONSE Losses",response.body)
@@ -85,8 +73,15 @@ export class WatchlistServiceService {
 	   .then( (data : any) => {
 	 //	JSON.parse(data)
 	 let x   =  	data.split('},')
-	 let list : any[] = [];
-	 console.log(	JSON.parse(data))
+	 let list : any[] = JSON.parse(data);
+	 console.log("SIZE Losses" , list.length	)
+
+
+	 if(list.length == 200){
+		setTimeout( () => { 	this.getLosses(page + 1) }, 500 );
+	 }
+
+
 	   }).catch(function (err) {
 		 console.log( err , "1SMIIILEEEE"  ,  );
 			 // There was an error
@@ -95,13 +90,9 @@ export class WatchlistServiceService {
 
 	}
 
-
-
-
-
 	getInfosabout() {
-		this.getKills()
-		this.getLosses()
+		this.getKills(1)
+		this.getLosses(1)
 	}
 
 
