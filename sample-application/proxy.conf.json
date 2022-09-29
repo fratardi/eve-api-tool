@@ -46,5 +46,13 @@
 			"^/kill/": ""
 	 	},
 	 	"changeOrigin": true
+	},
+	"/zapi": {
+		"target": "https://zkillboard.com/api/",
+		"secure": false,
+		"pathRewrite": {
+			"^/zapi": ""
+		},
+		"changeOrigin": true
 	}
 }

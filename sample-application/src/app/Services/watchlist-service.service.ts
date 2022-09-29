@@ -9,7 +9,6 @@ export class WatchlistServiceService {
 
 	listPerson : any = []
 	listKillIds : string[] =[];
-
 	killHashes :string[] = [];
 
 	constructor(private http: HttpClient) { }
@@ -31,55 +30,47 @@ export class WatchlistServiceService {
 	{
 			console.log("Getkillhash " , parameter)
 			let  swaggerUrl =   "http://localhost:4200/kill" + "/" +parameter
-
-
 			fetch( swaggerUrl)
 			.then(function (response) {
-		  console.log("RESPONSE",response)
+	//	  console.log("RESPONSE",response)
 		 // The API call was successful!
 			 return response.text();
 		   })
 		   .then( (data : any) => {
-
-
-				
-				data.split('<li><a target="_blank" href="https://esi.evetech.net/latest/killmails/')
+			console.log("[[",data  , "]]")
+			let x = 0 ;
+				data.split('<url=killReport:')
 				.forEach((element : string) => {
-						console.log("HASH ??" , element )
-			  
+					let e = element.slice(0, 60).slice(0 , -15) as string ;
+						console.log("HASH ??" ,e , x)
+						x = x++;
 				})	
-
 		   })
 	}
 
 
 	getInfosabout() {
+	//	kills/characterID/268946627/
 		this.listKillIds = [];
-   		let  swaggerUrl =   "http://localhost:4200/search" + "/" + this.listPerson[0].id + "/losses/page/1/"
+   		let  swaggerUrl =   "http://localhost:4200/zapi" + "kills/characterID/"  +  this.listPerson[0].id+ "/" ; // + + "/losses/page/1/"
    		fetch( swaggerUrl)
    		.then(function (response) {
-		//   console.log("RESPONSE",response)
+		   console.log("RESPONSE",response.body)
 		// The API call was successful!
 			return response.text();
   		})
   		.then( (data : any) => {
-			let x = 0 ;
-			data = data as string[];
-			data.split('<a href="/kill/')
-				.forEach((element : string) => {
-					if( x % 2 )  {
-			  			let e = element.slice(0, 10).slice(0 , -2) as string ;
-			  			this.listKillIds.push(e);
-					}
-					x++;
-				})	
-				console.log(this.listKillIds)
-				 //  console.log( "2SMIIILEEEE]]" , wrapper);
+		//	JSON.parse(data)
+	    let x   =  	data.split('},')
+		let list : any[] = [];
+		console.log(	JSON.parse(data))
   		}).catch(function (err) {
 			console.log( err , "1SMIIILEEEE"  ,  );
 				// There was an error
 			console.warn('Something went wrong.', err);
  		 });
+
+
 	}
 
 
