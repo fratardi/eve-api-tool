@@ -9,6 +9,7 @@ import { EveEsiService } from './eve-esi.service';
 })
 export class WatchlistServiceService {
 
+	stats :any;
 	listPerson	: any[]	   = []
 	listKills	: any[] = [];
 	listLosses	: any[] = [];
@@ -47,6 +48,7 @@ export class WatchlistServiceService {
 		.then( (data : any) => {
 	 		let list : any = JSON.parse(data);
 			console.log("Stats" , list)
+			this.stats = list;
 		})
 		.catch(function (err) {
 		console.warn('Something went wrong.', err);
