@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { EveEsiService } from '../Services/eve-esi.service';
 import { WatchlistServiceService } from '../Services/watchlist-service.service';
 
 @Component({
@@ -13,21 +14,23 @@ export class WatchlistComponent implements OnInit {
 
   constructor(
 
+
+
    private watchListService : WatchlistServiceService 
+
 
   ) { this.watchlist = watchListService.listPerson}
 
 
-  getUserStats(){
-
-    console.log("GetUserStats ", this)
+  getUserStats()
+  
+  {
+    
   }
 
-  passOverList()
-  {
+  passOverList(){
     console.log(this.watchListService.listKills);
     this.watchListService.listKills.forEach((element : any) => {
-      console.log("YOLO" , element) 
       this.watchListService.getkillHash(element)
     })
   }
@@ -38,6 +41,7 @@ export class WatchlistComponent implements OnInit {
 
   removeFromWatchlist(){
     this.watchListService.removeWatchee();
+
   }
 
 

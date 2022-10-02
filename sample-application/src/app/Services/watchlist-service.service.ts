@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { json } from 'express';
 import { delay } from 'rxjs';
+import { EveEsiService } from './eve-esi.service';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,13 @@ export class WatchlistServiceService {
 	listLosses : any[] =[];
 	list: any;
 
-	constructor(private http: HttpClient) { }
+	constructor(private http: HttpClient
+		,
+		
+		private esi_service : EveEsiService,	
+		
+		
+		) { }
 
 	updateList(item : any ){
 		this.listPerson.pop();
@@ -29,7 +36,10 @@ export class WatchlistServiceService {
 		console.log("from Service pop" , this.listPerson)
  	}
 
-	getkillHash(parameter : number )	{
+	getkillHash(parameter : any )	{
+
+ 		console.log(  "getkillhash", parameter)
+
 	}
 
 
@@ -41,23 +51,7 @@ export class WatchlistServiceService {
 	   	})
 		.then( (data : any) => {
 	 		let list : any = JSON.parse(data);
-
-
-			// //this.listKills.push(list)
-
-			// list.forEach( (element  : any) =>{
-			//	this.listKills.push(element)
 			console.log("Stats" , list)
-		// })
-
-
-			// if(list.length >= 200){	
-			// 	console.log( "during listkills" , this.listKills)
-			// 	setTimeout( () => { 	this.getKills(page + 1) }, 1450 );
-			// }	
-			// else{	
-			// 	 console.log( "ended listkills" , this.listKills)
-			// }
 		})
 		.catch(function (err) {
 		console.warn('Something went wrong.', err);
@@ -75,16 +69,10 @@ export class WatchlistServiceService {
 	   	})
 		.then( (data : any) => {
 	 		let list : any = JSON.parse(data);
-
-
-			//this.listKills.push(list)
-
 			list.forEach( (element  : any) =>{
 				this.listKills.push(element)
 			console.log("ELEMENT kill" , element)
 		})
-
-
 			if(list.length >= 200){	
 				console.log( "during listkills" , this.listKills)
 				setTimeout( () => { 	this.getKills(page + 1) }, 1450 );
@@ -113,9 +101,6 @@ export class WatchlistServiceService {
 					this.listLosses.push(element)
 				console.log("ELEMENT LOSS" , element)
 			})
-
-
-			//this.listLosses.push(list)
 	 		if(list.length >= 200){
 				console.log( "during listlosses" , this.listLosses)
 				setTimeout( () => { 	this.getLosses(page + 1) }, 1350 );

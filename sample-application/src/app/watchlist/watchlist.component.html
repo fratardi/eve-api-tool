@@ -1,7 +1,7 @@
 <p>watchlist works!</p>
-<button (click)="getKillIds()">Search</button>  
-
-<button (click)="passOverList()">Pass OVer List</button>
+<button (click)="getKillIds()">getKillIds</button>  
+<button (click)="getUserStats()" > getUserStats</button>
+<button (click)="passOverList()">passOverList</button>
 
 <li *ngFor="let item of watchlist;"
     class = "CharacterWidget "
@@ -18,4 +18,3 @@
 </li>
 
 
-<button (click)="getUserStats()" > BLAAAH</button>
