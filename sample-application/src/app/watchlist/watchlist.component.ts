@@ -18,6 +18,10 @@ export class WatchlistComponent implements OnInit {
   ) { this.watchlist = watchListService.listPerson}
 
 
+  getUserStats(){
+
+    console.log("GetUserStats ", this)
+  }
 
   passOverList()
   {
@@ -25,9 +29,7 @@ export class WatchlistComponent implements OnInit {
     this.watchListService.listKills.forEach((element : any) => {
       console.log("YOLO" , element) 
       this.watchListService.getkillHash(element)
-
     })
-
   }
 
   getKillIds() {
@@ -36,7 +38,6 @@ export class WatchlistComponent implements OnInit {
 
   removeFromWatchlist(){
     this.watchListService.removeWatchee();
-
   }
 
 
