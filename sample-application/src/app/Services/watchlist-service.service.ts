@@ -18,7 +18,8 @@ export class WatchlistServiceService {
 	updateList(item : any ){
 		this.listPerson.pop();
 		this.listPerson.push(item)
-		console.log("from Service",item , this.listPerson)
+		console.log("from Service",item , this.listPerson , "https://zkillboard.com/api/stats/characterID/844646062/")
+		this.getStats();
 	}
 
 	removeWatchee(){
@@ -30,6 +31,41 @@ export class WatchlistServiceService {
 
 	getkillHash(parameter : number )	{
 	}
+
+
+	getStats(){
+		let  swaggerUrl =   "http://localhost:4200/zapi" + "stats/characterID/"  +  this.listPerson[0].id+ "/"  ; // + + "/losses/page/1/"
+		fetch( swaggerUrl)
+		.then(function (response) {
+			return response.text();
+	   	})
+		.then( (data : any) => {
+	 		let list : any = JSON.parse(data);
+
+
+			// //this.listKills.push(list)
+
+			// list.forEach( (element  : any) =>{
+			//	this.listKills.push(element)
+			console.log("Stats" , list)
+		// })
+
+
+			// if(list.length >= 200){	
+			// 	console.log( "during listkills" , this.listKills)
+			// 	setTimeout( () => { 	this.getKills(page + 1) }, 1450 );
+			// }	
+			// else{	
+			// 	 console.log( "ended listkills" , this.listKills)
+			// }
+		})
+		.catch(function (err) {
+		console.warn('Something went wrong.', err);
+		});
+	}
+
+
+
 
 	getKills(page : number){
 		let  swaggerUrl =   "http://localhost:4200/zapi" + "kills/characterID/"  +  this.listPerson[0].id+ "/page/" + page +"/" ; // + + "/losses/page/1/"
