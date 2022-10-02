@@ -9,23 +9,21 @@ import { EveEsiService } from './eve-esi.service';
 })
 export class WatchlistServiceService {
 
-	listPerson : any = []
-	listKills : any[] =[];
-	listLosses : any[] =[];
+	listPerson	: any[]	   = []
+	listKills	: any[] = [];
+	listLosses	: any[] = [];
 	list: any;
+	zApi : string = "http://localhost:4200/zapi"
 
-	constructor(private http: HttpClient
-		,
-		
-		private esi_service : EveEsiService,	
-		
-		
-		) { }
+	constructor(
+		private http		:	HttpClient,
+		private esi_service : 	EveEsiService,	
+	) { }
 
 	updateList(item : any ){
 		this.listPerson.pop();
 		this.listPerson.push(item)
-		console.log("from Service",item , this.listPerson , "https://zkillboard.com/api/stats/characterID/844646062/")
+	//	console.log("from Service",item , this.listPerson , "https://zkillboard.com/api/stats/characterID/844646062/")
 		this.getStats();
 	}
 
@@ -33,18 +31,15 @@ export class WatchlistServiceService {
 		this.listPerson.pop();
 		this.listKills = [];
 		this.listLosses = [];
-		console.log("from Service pop" , this.listPerson)
+	//	console.log("from Service pop" , this.listPerson)
  	}
 
 	getkillHash(parameter : any )	{
-
  		console.log(  "getkillhash", parameter)
-
 	}
 
-
 	getStats(){
-		let  swaggerUrl =   "http://localhost:4200/zapi" + "stats/characterID/"  +  this.listPerson[0].id+ "/"  ; // + + "/losses/page/1/"
+		let  swaggerUrl =  this.zApi + "stats/characterID/"  +  this.listPerson[0].id+ "/";
 		fetch( swaggerUrl)
 		.then(function (response) {
 			return response.text();
@@ -58,11 +53,8 @@ export class WatchlistServiceService {
 		});
 	}
 
-
-
-
 	getKills(page : number){
-		let  swaggerUrl =   "http://localhost:4200/zapi" + "kills/characterID/"  +  this.listPerson[0].id+ "/page/" + page +"/" ; // + + "/losses/page/1/"
+		let  swaggerUrl =   this.zApi + "kills/characterID/"  +  this.listPerson[0].id+ "/page/" + page +"/";
 		fetch( swaggerUrl)
 		.then(function (response) {
 			return response.text();
@@ -71,13 +63,13 @@ export class WatchlistServiceService {
 	 		let list : any = JSON.parse(data);
 			list.forEach( (element  : any) =>{
 				this.listKills.push(element)
-			console.log("ELEMENT kill" , element)
-		})
-			if(list.length >= 200){	
+				console.log("ELEMENT kill" , element)
+			})
+			if(list.length >= 200)	{	
 				console.log( "during listkills" , this.listKills)
 				setTimeout( () => { 	this.getKills(page + 1) }, 1450 );
 			}	
-			else{	
+			else	{	
 				 console.log( "ended listkills" , this.listKills)
 			}
 		})
@@ -88,7 +80,7 @@ export class WatchlistServiceService {
 
 
 	getLosses(page : number){
-		let  swaggerUrl =   "http://localhost:4200/zapi" + "losses/characterID/"  +  this.listPerson[0].id+ "/page/" + page +"/" ;
+		let  swaggerUrl =   this.zApi + "losses/characterID/"  +  this.listPerson[0].id+ "/page/" + page +"/" ;
 		fetch( swaggerUrl)
 		.then(function (response) {
 				return response.text();
@@ -96,9 +88,8 @@ export class WatchlistServiceService {
 	   	.then( (data : any) => {
 	 		let list : any = JSON.parse(data);
 	 		console.log("SIZE Losses" , list.length	)
-
 			list.forEach( (element  : any) =>{
-					this.listLosses.push(element)
+				this.listLosses.push(element)
 				console.log("ELEMENT LOSS" , element)
 			})
 	 		if(list.length >= 200){
@@ -116,11 +107,10 @@ export class WatchlistServiceService {
 	}
 
 	getInfosabout() {
-		this.listKills = [];
-		this.listLosses = [];
-
-		setTimeout( () => { 	this.getLosses( 1) }, 1000 );
-		setTimeout( () => { 	this.getKills( 1) }, 3000 );
+		this.listKills	= [];
+		this.listLosses	= [];
+		setTimeout( () => {	this.getLosses( 1) }, 1000 );
+		setTimeout( () => {	this.getKills( 1) }, 3000 );
 	}
 
 
