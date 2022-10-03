@@ -4,6 +4,19 @@ import { WebsocketChatService } from './websocketchat.service';
 import { ChatService } from './chatservice.service';
 
 
+export interface Report {
+
+  alliance_id: string,
+  character_id: string,
+  corporation_id: string,
+  damage_done: string,
+  final_blow: string,
+  security_status: string,
+  ship_type_id: string,
+  weapon_type_id: string,
+  }
+
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -16,7 +29,18 @@ export class AppComponent {
   title = 'sample-application';
   constructor(private chatService: ChatService) {
     chatService.messages.subscribe((msg) => {
-      console.log('Response recieved from websocket: ' + JSON.stringify(msg));
+      
+
+//      console.log("-------------------------------------", JSON.parse(truc as any),"------------------------------");
+
+
+    
+    //  console.log("--------------------8-----------------", JSON.parse(msg as any),"-----------------8-------------");
+
+      console.log('Response recieved from websocket: ' ,msg);
+
+
+
     });
   }
 

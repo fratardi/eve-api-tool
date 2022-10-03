@@ -29,17 +29,12 @@ export class ChatService {
 
   constructor(wscService: WebsocketChatService) {
     this.messages = <Subject<Message>>(
-      wscService.connect(CHAT_URL).pipe(map((response: MessageEvent): Message => {
-        let content = JSON.stringify(response.data as Report );
-
+      wscService.connect(CHAT_URL).pipe(map((response: MessageEvent): any => {
         let truc : Report[] = response.data
-
-        
        console.log("-------------------------------------", JSON.parse(truc as any),"------------------------------");
 
         return {
-          action: "",
-          channel: "content.messageContent",
+        truc
         };
       }))
     );
