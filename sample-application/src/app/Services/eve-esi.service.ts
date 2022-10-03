@@ -25,12 +25,9 @@ export class EveEsiService {
 	token: any;
    	userOwn:any;
 	base64string:any;
-
 	characterContactsId :any[]=[];
 	characterContactsWithName :any[]=[]
-
 	autoCompleteSearchresults :any[]=[]
-
 
   	constructor(
 		private http	: HttpClient,
@@ -45,35 +42,30 @@ export class EveEsiService {
 		}
 		let httpHeaders2 = new HttpHeaders(
 			{"Authorization":" Bearer " +  this.token.access_token}
-		)
-		let proxy = this.hostpoint + "/latest"
-		console.log(this.userOwn)
+		);
+		let proxy = this.hostpoint + "/latest";
+		console.log(this.userOwn);
 		this.http.get(proxy + "/characters/" + this.userOwn.CharacterID + "/search/?categories=character&datasource=tranquility&language=en&search=" + name + "&strict=false" 
 		, 	{headers: httpHeaders2 })
 		.subscribe((data :any )   => {
-
-			if(data == undefined)
-			{console.log("data Contact", data.character.length)
-
-		}
-		return(this.getItemInfoFromId(data.character));
+			if(data == undefined){
+				console.log("data Contact", data.character.length);
+			}
+			return(this.getItemInfoFromId(data.character));
 		})
 	}
-
-
-
 
 	getItemInfoFromId( tab :string[]) : any
 	{
 		if(!tab)	{
-			this.autoCompleteSearchresults = []
+			this.autoCompleteSearchresults = [];
 			return;
 		}
 
 		let httpHeaders2 = new HttpHeaders(
 			{"Authorization":" Bearer " +  this.token.access_token}
 		)
-		let proxy = this.hostpoint + "/latest"
+		let proxy = this.hostpoint + "/latest";
 		this.http.post(proxy +  "/universe/names/?datasource=tranquility"  ,tab, 	{headers: httpHeaders2 })
 		.subscribe((data :any)=> {
 			console.log("DAAAA TAAAA" , data)
@@ -83,14 +75,11 @@ export class EveEsiService {
 			data.forEach(
 				(element : any)=> {
 					this . characterContactsWithName.push(element)	
-				}
-			)
-		//	console.log(this . characterContactsWithName);
+			})
 			}	
 			return(data);
 		//	
 		})
-
 	}
 
 	getCharacterContacts () : any {
@@ -192,7 +181,8 @@ export class EveEsiService {
 			this.token = data as Swagger.Tokens;
 			console.log("DATA  = ",data )
 			let httpHeaders2 = new HttpHeaders(
-				{"Authorization":" Bearer " +  this.token.access_token}
+				{
+					"Authorization":" Bearer " +  this.token.access_token}
 			)
 		  	localStorage.setItem(ACCESS_TOKEN, this.token.access_token);
 		  	localStorage.setItem(REFRESH_TOKEN, this.token.refresh_token);

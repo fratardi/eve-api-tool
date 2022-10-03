@@ -10,21 +10,20 @@ import { EveEsiService } from './eve-esi.service';
 export class WatchlistServiceService {
 
 	stats :any;
-	listPerson	: any[]	   = []
-	listKills	: any[] = [];
-	listLosses	: any[] = [];
-	list: any;
-	zApi : string = "http://localhost:4200/zapi"
+	listPerson	: any[]	  	= []
+	listKills	: any[] 	= [];
+	listLosses	: any[] 	= [];
+	list		: any;
+	zApi 		: string = "http://localhost:4200/zapi"
 
 	constructor(
 		private http		:	HttpClient,
-		private esi_service : 	EveEsiService,	
+		private esi_service : 	EveEsiService,
 	) { }
 
-	updateList(item : any ){
+	updateList(item : any)	{
 		this.listPerson.pop();
 		this.listPerson.push(item)
-	//	console.log("from Service",item , this.listPerson , "https://zkillboard.com/api/stats/characterID/844646062/")
 		this.getStats();
 	}
 
@@ -32,10 +31,9 @@ export class WatchlistServiceService {
 		this.listPerson.pop();
 		this.listKills = [];
 		this.listLosses = [];
-	//	console.log("from Service pop" , this.listPerson)
  	}
 
-	getkillHash(parameter : any )	{
+	getkillHash(parameter : any)	{
  		console.log(  "getkillhash", parameter)
 	}
 
@@ -67,11 +65,11 @@ export class WatchlistServiceService {
 				this.listKills.push(element)
 				console.log("ELEMENT kill" , element)
 			})
-			if(list.length >= 200)	{	
+			if(list.length >= 200)	{
 				console.log( "during listkills" , this.listKills)
-				setTimeout( () => { 	this.getKills(page + 1) }, 1450 );
-			}	
-			else	{	
+				setTimeout( () => {	this.getKills(page + 1) }, 1450 );
+			}
+			else	{
 				 console.log( "ended listkills" , this.listKills)
 			}
 		})
@@ -82,8 +80,8 @@ export class WatchlistServiceService {
 
 
 	getLosses(page : number){
-		let  swaggerUrl =   this.zApi + "losses/characterID/"  +  this.listPerson[0].id+ "/page/" + page +"/" ;
-		fetch( swaggerUrl)
+		let  swaggerUrl = this.zApi + "losses/characterID/" + this.listPerson[0].id+ "/page/" + page +"/" ;
+		fetch(swaggerUrl)
 		.then(function (response) {
 				return response.text();
 	   	})
@@ -102,8 +100,7 @@ export class WatchlistServiceService {
 			console.log( "ended listlosses" , this.listLosses)
 			}})
 			.catch(function (err) {
-			console.log( err , "1SMIIILEEEE"  ,  );
-		 // There was an error
+				console.log(err, "1SMIIILEEEE");
 				console.warn('Something went wrong.', err);
 	   	});
 	}
@@ -111,9 +108,8 @@ export class WatchlistServiceService {
 	getInfosabout() {
 		this.listKills	= [];
 		this.listLosses	= [];
-		setTimeout( () => {	this.getLosses( 1) }, 1000 );
-		setTimeout( () => {	this.getKills( 1) }, 3000 );
+		setTimeout( () => {	this.getLosses(1)}, 1000 );
+		setTimeout( () => {	this.getKills(1)}, 3000 );
 	}
-
 
 }

@@ -94,8 +94,7 @@ this.watchlist.updateList(item)
 		console.log('hello from autocomplete', this);
 
 
-setInterval(   ()=>  this.updater() , 1000  / 24  )
-
+	setInterval(   ()=>  this.updater() , 1000  / 24  )
 		this.myForm = this.formBuilder.group({
 		  	name: '',
 		});
