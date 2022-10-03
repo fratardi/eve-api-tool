@@ -21,10 +21,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { ThirdComponent } from './third/third.component';
 import { AutocompleterComponent } from './autocomplete/autocomplete.component';
 import { WatchlistComponent } from './watchlist/watchlist.component';
-
-
 import {MatGridListModule} from '@angular/material/grid-list';
-
 
 @NgModule({
   declarations: [
@@ -53,8 +50,6 @@ import {MatGridListModule} from '@angular/material/grid-list';
     MatCardModule,
     MatFormFieldModule,
     MatSelectModule,
-
-
     MatGridListModule
   ],
   providers: [ ],

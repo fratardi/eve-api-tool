@@ -18,7 +18,10 @@ export class ChatService {
   constructor(wscService: WebsocketChatService) {
     this.messages = <Subject<Message>>(
       wscService.connect(CHAT_URL).pipe(map((response: MessageEvent): Message => {
-       // let content = JSON.parse(response.data);
+      //  let content = JSON.parse(response as any );
+
+        console.log(response);
+
         return {
           user: "content.user",
           messageContent: "content.messageContent",
