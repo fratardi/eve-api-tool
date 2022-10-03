@@ -4,11 +4,23 @@ import { map } from 'rxjs/operators';
 
 import { WebsocketChatService } from './websocketchat.service';
 
-const CHAT_URL = 'wss://demo.piesocket.com/v3/channel_1?api_key=VCXCEuvhGcBDP7XhiJJUDvR1e1D3eiVjgZ9VRiaV&notify_self';
+const CHAT_URL = 'wss://zkillboard.com/websocket/';
 
 export interface Message {
-  user: string;
-  messageContent: string;
+  action: string;
+  channel: string;
+}
+
+export interface Report {
+
+alliance_id: string,
+character_id: string,
+corporation_id: string,
+damage_done: string,
+final_blow: string,
+security_status: string,
+ship_type_id: string,
+weapon_type_id: string,
 }
 
 @Injectable()
@@ -18,13 +30,16 @@ export class ChatService {
   constructor(wscService: WebsocketChatService) {
     this.messages = <Subject<Message>>(
       wscService.connect(CHAT_URL).pipe(map((response: MessageEvent): Message => {
-      //  let content = JSON.parse(response as any );
+        let content = JSON.stringify(response.data as Report );
 
-        console.log(response);
+        let truc : Report[] = response.data
+
+        
+       console.log("-------------------------------------", JSON.parse(truc as any),"------------------------------");
 
         return {
-          user: "content.user",
-          messageContent: "content.messageContent",
+          action: "",
+          channel: "content.messageContent",
         };
       }))
     );

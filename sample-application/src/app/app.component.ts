@@ -23,14 +23,15 @@ export class AppComponent {
 
 
   private message = {
-    user: 'Husnain',
-    messageContent: 'Hellooooooooo',
+    action: 'sub',
+   channel: 'killstream',
   };
 
   sendMessage() {
     console.log('new message from the client: ', this.message);
     this.chatService.messages.next(this.message);
-    this.message.messageContent = 'helloooooo';
+
+    this.message.channel= "region:10000002";
   }
 
 
