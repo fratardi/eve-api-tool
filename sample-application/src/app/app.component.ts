@@ -31,8 +31,6 @@ export class AppComponent {
   title = 'sample-application';
 
   constructor(
-    ) {
-
-  }
+    ) {  }
 
 }
