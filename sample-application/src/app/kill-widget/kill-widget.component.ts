@@ -9,10 +9,7 @@ import { Component, Input, OnInit } from '@angular/core';
 export class KillWidgetComponent implements OnInit {
 
 
-  @Input() data: string[] | undefined;
-
- item: any ;
- book : any ;
+  @Input() data: any[] | undefined;
 
   constructor() { }
 
