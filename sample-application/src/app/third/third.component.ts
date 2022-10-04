@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { EveEsiService } from '../Services/eve-esi.service';
 import { WatchlistServiceService } from '../Services/watchlist-service.service';
 
+
 @Component({
   selector: 'app-third',
   templateUrl: './third.component.html',
@@ -13,6 +14,7 @@ export class ThirdComponent implements OnInit {
 	characterContactWithNames :any ; 
 	currentUser : any;
 	userId : any;
+	stats : any  ; 
 
 	constructor(
 		private esi_service : EveEsiService,
@@ -31,6 +33,8 @@ export class ThirdComponent implements OnInit {
 	}
 
 	ngOnInit(): void {
+
+//		this.watchlist.stats.subscribe( (  e : any  ) => { console.log("hello")  }   )
 		this.characterContactsId =	this.esi_service.getCharacterContacts();
 		this.characterContactsId = this.esi_service.characterContactsId;
 		this.currentUser = this.esi_service.userOwn;

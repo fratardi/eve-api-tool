@@ -27,7 +27,6 @@ export class AutocompleterComponent implements OnInit {
 	myForm!: FormGroup  ;
 	formattedMessage: string = "";
 	searchResults : any = [];
-
 	autoCompleteSearchResults : any[] = this.esi_service.autoCompleteSearchresults;
 
 	constructor(
@@ -39,12 +38,8 @@ export class AutocompleterComponent implements OnInit {
 	) {console.log('autocomplete construction'); }
 
 	updater (){
-
 		this.esi_service.autoCompleteSearchresults.sort((a,b) =>  b.name  - a.name  ); 
-	this.autoCompleteSearchResults = this.esi_service.autoCompleteSearchresults
-//	this.autoCompleteSearchResults.sort((a,b) => a.name - b.name); 
-
-
+		this.autoCompleteSearchResults = this.esi_service.autoCompleteSearchresults
 	}
 
 	yolo(){
@@ -52,11 +47,8 @@ export class AutocompleterComponent implements OnInit {
 	}
 
 	addToWatchList(item :any ){
-		
 		console.log("yolo", item)
-
-this.watchlist.updateList(item)
-
+		this.watchlist.updateList(item)
 	}
 
 	printComponent(){
@@ -73,8 +65,7 @@ this.watchlist.updateList(item)
   		this.myForm.statusChanges.subscribe(
 			data => {
 				console.log(this.myForm.value.name);
-				if(this.myForm.value.name .length < 3 )
-				{
+				if(this.myForm.value.name .length < 3 ) {
 					this.esi_service.autoCompleteSearchresults = [];
 					this.autoCompleteSearchResults = [];
 					return
@@ -85,7 +76,6 @@ this.watchlist.updateList(item)
 		)
 	}
 
-
   	bidule(){
 		console.log(  "change value ",   "" , this)
   	}
@@ -93,8 +83,7 @@ this.watchlist.updateList(item)
  	ngOnInit(): void {
 		console.log('hello from autocomplete', this);
 
-
-	setInterval(   ()=>  this.updater() , 1000  / 24  )
+	setInterval(()=>  this.updater() , 1000  / 24  )
 		this.myForm = this.formBuilder.group({
 		  	name: '',
 		});
