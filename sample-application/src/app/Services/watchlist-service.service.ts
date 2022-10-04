@@ -13,13 +13,13 @@ export class WatchlistServiceService {
 	listPerson	: any[]	  	= []
 	listKills	: any[] 	= [];
 	listLosses	: any[] 	= [];
-	list		: any;
-	zApi 		: string = "http://localhost:4200/zapi"
+	list		: any			;
+	zApi 		: string 	= "http://localhost:4200/zapi"
 
 	constructor(
-		private http		:	HttpClient,
-		private esi_service : 	EveEsiService,
-	) { }
+		// private http		:	HttpClient,
+		// private esi_service : 	EveEsiService
+	) {}
 
 	updateList(item : any)	{
 		this.listPerson.pop();

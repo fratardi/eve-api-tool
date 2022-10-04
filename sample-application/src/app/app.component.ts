@@ -1,20 +1,6 @@
 import { Component } from '@angular/core';
-
 import { WebsocketChatService } from './Services/websocketchat.service';
 import { ChatService } from './Services/chatservice.service';
-
-
-export interface Report {
-
-  alliance_id: string,
-  character_id: string,
-  corporation_id: string,
-  damage_done: string,
-  final_blow: string,
-  security_status: string,
-  ship_type_id: string,
-  weapon_type_id: string,
-}
 
 @Component({
   selector: 'app-root',

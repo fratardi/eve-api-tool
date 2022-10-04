@@ -29,7 +29,7 @@ export class WebsocketChatService {
     let observer = {
       next: (data: Object) => {
         if (wsc.readyState === WebSocket.OPEN) {
-          console.log(data, "asdasd")
+          console.log(data, "")
           wsc.send(JSON.stringify(data));
         }
       },
