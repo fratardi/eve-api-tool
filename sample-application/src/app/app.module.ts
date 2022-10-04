@@ -22,6 +22,7 @@ import { ThirdComponent } from './third/third.component';
 import { AutocompleterComponent } from './autocomplete/autocomplete.component';
 import { WatchlistComponent } from './watchlist/watchlist.component';
 import {MatGridListModule} from '@angular/material/grid-list';
+import { EntityListenerComponent } from './entity-listener/entity-listener.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import {MatGridListModule} from '@angular/material/grid-list';
     AutocompleterComponent,
     NotFoundComponent,
     WatchlistComponent,
+    EntityListenerComponent,
   ],
   imports: [
     BrowserModule,

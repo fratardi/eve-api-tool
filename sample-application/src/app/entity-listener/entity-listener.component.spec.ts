@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { RegionWatcherComponent } from './region-watcher.component';
+import { EntityListenerComponent } from './entity-listener.component';
 
-describe('RegionWatcherComponent', () => {
-  let component: RegionWatcherComponent;
-  let fixture: ComponentFixture<RegionWatcherComponent>;
+describe('EntityListenerComponent', () => {
+  let component: EntityListenerComponent;
+  let fixture: ComponentFixture<EntityListenerComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ RegionWatcherComponent ]
+      declarations: [ EntityListenerComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(RegionWatcherComponent);
+    fixture = TestBed.createComponent(EntityListenerComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

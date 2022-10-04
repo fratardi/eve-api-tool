@@ -13,19 +13,11 @@ export class WatchlistComponent implements OnInit {
   watchlist : any = [];
 
   constructor(
-
-
-
    private watchListService : WatchlistServiceService 
-
 
   ) { this.watchlist = watchListService.listPerson}
 
-
-  getUserStats()
-  
-  {
-    
+  getUserStats(){
   }
 
   passOverList(){
@@ -44,9 +36,7 @@ export class WatchlistComponent implements OnInit {
 
   }
 
-
   ngOnInit(): void {
-
   }
 
 }
