@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ChatService } from '../chatservice.service';
+import { ChatService } from '../Services/chatservice.service';
 
 @Component({
   selector: 'app-entity-listener',
@@ -10,9 +10,9 @@ export class EntityListenerComponent implements OnInit {
 
   constructor(private chatService: ChatService) {
 
-    chatService.messages.subscribe((msg) => {
+    chatService.messages.subscribe((msg : any) => {
 
-      console.log('Response recieved from websocket: ' ,msg);
+      console.log('Response recieved from websocket: ' ,JSON.parse(msg.truc));
     });
 
    }

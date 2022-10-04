@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
-import { WebsocketChatService } from './websocketchat.service';
-import { ChatService } from './chatservice.service';
+import { WebsocketChatService } from './Services/websocketchat.service';
+import { ChatService } from './Services/chatservice.service';
 
 
 export interface Report {
