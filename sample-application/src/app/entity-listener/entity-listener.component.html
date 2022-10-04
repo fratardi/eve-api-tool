@@ -1,17 +1,12 @@
 <p>entity-listener works!</p>
 <button (click)="sendMessage()">Send</button> 
 
-<!-- <app-portfolio *ngFor = "let site of this.sites" [name] = "site.name" [img] = "site.img" [description] = "site.description" [link] = "site.link">
+<!-- <app-portfolio *ngFor = "let site of this.sites" [name] = "site.name">
 
 </app-portfolio> -->
 
 <ul>
-    <li *ngFor="let book of killList; let index = index; let isFirst = first; let isOdd = odd;">
-        <span>{{ index }}</span>
-        <span> {{book.victim.position.x}}</span>
-        <span> {{book.victim.position.y}}</span>
-        <span> {{book.victim.position.z}}</span>
-        <span></span>
-        <span></span>
+    <li *ngFor="let item of killList; let index = index; let isFirst = first; let isOdd = odd;">
+        <app-kill-widget [data]="item"></app-kill-widget>
     </li>
 </ul>

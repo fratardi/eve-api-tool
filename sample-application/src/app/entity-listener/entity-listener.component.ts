@@ -12,9 +12,6 @@ export class EntityListenerComponent implements OnInit {
 
   killList : any[] = [] ;
 
-
-
-
   constructor(
     private chatService: ChatService,
     private esi :EveEsiService
@@ -23,7 +20,6 @@ export class EntityListenerComponent implements OnInit {
       console.log('Response recieved from websocket: ' ,JSON.parse(msg.truc));
       this.killList.push(JSON.parse(msg.truc)) 
       console.log(this.killList)
-  
     });
 
    }
