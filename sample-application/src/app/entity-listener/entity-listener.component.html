@@ -1,12 +1,11 @@
 <p>entity-listener works!</p>
+
+
+
 <button (click)="sendMessage()">Send</button> 
 
-<!-- <app-portfolio *ngFor = "let site of this.sites" [name] = "site.name">
 
-</app-portfolio> -->
-
-<ul>
-    <li *ngFor="let item of killList; let index = index; let isFirst = first; let isOdd = odd;">
-        <app-kill-widget [data]="item"></app-kill-widget>
-    </li>
-</ul>
+<details *ngFor="let item of killList;">
+   <app-kill-widget [data]="item">
+   </app-kill-widget>
+</details>
