@@ -1,28 +1,28 @@
 
 
 
-<details>
+<details  style="background-color: darkslategrey;  color: lightgray; ">
     <summary>
         TinycombarteportPLaceholder
-
+        {{valeur?.killmail_time}}
+        {{valeur?.solar_system_id}}
     </summary>
-       Victim infos
-
+   Solar System Infos
     {{valeur?.solar_system_id}}
+    <details style="background-color: darkred;">
+        <summary>
+            Attackers {{valeur?.attackers.length}}
+        </summary>
+            AttackInfoss
+    </details>
 
-
-    <details>
+    <details style="background-color: darkgreen;">
          <summary>
-            Defense
+            Defense  {{valeur?.victim.damage_taken}}
         </summary>
         Defense Infos
     </details>
-    <details>
-    <summary>
-        Attack
-    </summary>
-        AttackInfoss
-    </details>
+
 
         
     <button (click)="lol()">Set Destination</button>

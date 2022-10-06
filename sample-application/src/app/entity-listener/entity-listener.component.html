@@ -1,6 +1,15 @@
 <p>entity-listener works!</p>
+
+
+
 <button (click)="sendMessage()">Send</button> 
-   <div  *ngFor="let item of killList;">
+
+<div  style="  overflow-y: scroll;
+width: 25em;
+  height: 12em
+" >
+   <div  *ngFor="let item of killList;" >
    <app-kill-widget [data]="item">
    </app-kill-widget>
+</div>
 </div>

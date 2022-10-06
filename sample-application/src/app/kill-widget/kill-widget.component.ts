@@ -31,29 +31,30 @@ export class KillWidgetComponent implements OnInit {
 
 
   constructor() {
-    this.valeur     = this.data as unknown as truc;
+   
 
    }
 
   ngOnInit(): void {
     console.log( "MICHaEL" ,this.data)
-    this.lol();
+
+    this.valeur     = this.data as unknown as truc;
   }
 
   lol()
   {
     this.valeur     = this.data as unknown as truc;
+  }
 
+
+  setDestination()
+  {
+   
    // this.valeur = this.data as truc;
 
-    console.log(this);
+    console.log(this.valeur?.solar_system_id);
 
   }
-  MediaStreamAudioDestinationNode(){
-
-  }
-
-
 
 
 }
