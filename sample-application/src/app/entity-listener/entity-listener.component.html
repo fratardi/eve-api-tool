@@ -4,10 +4,7 @@
 
 <button (click)="sendMessage()">Send</button> 
 
-<div  style="  overflow-y: scroll;
-width: 25em;
-  height: 12em
-" >
+<div  class="scroller"  >
    <div  *ngFor="let item of killList;" >
    <app-kill-widget [data]="item">
    </app-kill-widget>

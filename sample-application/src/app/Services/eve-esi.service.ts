@@ -78,7 +78,6 @@ export class EveEsiService {
 			})
 			}	
 			return(data);
-		//	
 		})
 	}
 
@@ -117,6 +116,25 @@ export class EveEsiService {
 		console.log(this.token)
 		return(this.userOwn);
 	}
+
+
+
+	getCCPKillReport(  id :any , hash :any){
+
+
+
+		console.log("Get killReport ", this.userOwn.CharacterID)
+		let proxy = this.hostpoint + "/latest"
+		this.http.get(proxy +"/killmails/"+id+"/"+hash+"/"
+		)
+		.subscribe(data  => {
+			console.log("data", data)
+			return(this.userOwn);
+		})
+		console.log(this.token)
+		return(this.userOwn);
+	}
+
 
 	generateCurlRequest(encodedSomething : string , base64encodedstring : string){
 		return ({ encodedSomething: encodedSomething , base64encodedstring : base64encodedstring     })  ;

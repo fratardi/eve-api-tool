@@ -4,26 +4,23 @@
 <details  style="background-color: darkslategrey;  color: lightgray; ">
     <summary>
         TinycombarteportPLaceholder
-        {{valeur?.killmail_time}}
-        {{valeur?.solar_system_id}}
+        {{zKillReport?.killmail_time}}
+        {{zKillReport?.solar_system_id}}
     </summary>
    Solar System Infos
-    {{valeur?.solar_system_id}}
+    {{zKillReport?.solar_system_id}}
     <details style="background-color: darkred;">
         <summary>
-            Attackers {{valeur?.attackers.length}}
+            Attackers {{zKillReport?.attackers.length}}
         </summary>
             AttackInfoss
     </details>
 
     <details style="background-color: darkgreen;">
          <summary>
-            Defense  {{valeur?.victim.damage_taken}}
+            Defense  {{zKillReport?.victim.damage_taken}}
         </summary>
         Defense Infos
     </details>
-
-
-        
     <button (click)="lol()">Set Destination</button>
 </details>

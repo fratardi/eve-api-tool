@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { EveEsiService } from '../Services/eve-esi.service';
 
 
 
@@ -27,32 +28,40 @@ export class KillWidgetComponent implements OnInit {
 
   @Input() data: any[] | undefined;
 
-  valeur :truc | undefined;
+  zKillReport :truc | undefined;
+  eveKillReport: any;
 
-
-  constructor() {
-   
-
-   }
+  constructor(
+   private  eveEsiService : EveEsiService
+  ) {}
 
   ngOnInit(): void {
-    console.log( "MICHaEL" ,this.data)
+    console.log( "init widget " ,this.data)
 
-    this.valeur     = this.data as unknown as truc;
+
+
+    this.zKillReport     = this.data as unknown as truc;
+
+    this.getKillReport(   );
+
   }
 
   lol()
   {
-    this.valeur     = this.data as unknown as truc;
+    this.zKillReport     = this.data as unknown as truc;
+    console.log(this);
+  }
+
+  getKillReport(){
+      this.eveKillReport =  this.eveEsiService.getCCPKillReport(this.zKillReport?.killmail_id , this.zKillReport?.zkb.hash );
   }
 
 
   setDestination()
   {
    
-   // this.valeur = this.data as truc;
 
-    console.log(this.valeur?.solar_system_id);
+    console.log(this);
 
   }
 
