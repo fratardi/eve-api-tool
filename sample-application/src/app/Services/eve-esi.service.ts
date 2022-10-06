@@ -123,16 +123,13 @@ export class EveEsiService {
 
 
 
-		console.log("Get killReport ", this.userOwn.CharacterID)
 		let proxy = this.hostpoint + "/latest"
 		this.http.get(proxy +"/killmails/"+id+"/"+hash+"/"
 		)
 		.subscribe(data  => {
 			console.log("data", data)
-			return(this.userOwn);
+			return(data);
 		})
-		console.log(this.token)
-		return(this.userOwn);
 	}
 
 

@@ -49,6 +49,7 @@ export class KillWidgetComponent implements OnInit {
   lol()
   {
     this.zKillReport     = this.data as unknown as truc;
+    this.getKillReport();
     console.log(this);
   }
 
