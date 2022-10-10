@@ -31,6 +31,8 @@ export class KillWidgetComponent implements OnInit {
   zKillReport :truc | undefined;
   eveKillReport: any;
 
+  hasInit : boolean = false;
+
   constructor(
    private  eveEsiService : EveEsiService
   ) {}
@@ -54,6 +56,7 @@ export class KillWidgetComponent implements OnInit {
   }
 
   getKillReport(){
+    this.hasInit = true;
       this.eveKillReport =  this.eveEsiService.getCCPKillReport(this.zKillReport?.killmail_id , this.zKillReport?.zkb.hash );
   }
 
