@@ -18,13 +18,16 @@ export class MarketBuyNSellComponent implements OnInit {
 	//autoCompleteSearchResults : any[] = this.esi_service.autoCompleteSearchresults;
 
   item = new FormControl('');
+  region = new FormControl('');
 	
+
+
   constructor() { }
 
   ngOnInit(): void {
     this.item.statusChanges.subscribe(
 			data => {
-			  console.log(this.item.value);
+			  console.log("change",this.item.value);
         console.log(data, this.item.value );
       })
   }
