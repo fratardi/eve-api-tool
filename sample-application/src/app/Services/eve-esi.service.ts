@@ -29,10 +29,41 @@ export class EveEsiService {
 	characterContactsWithName :any[]=[]
 	autoCompleteSearchresults :any[]=[]
 
+	regionsIds 			: any[] = [];
+	regionsNames		: any[] = [];
+	regionsIdsAndNames	: any[] = [];
+
+
   	constructor(
 		private http	: HttpClient,
 		private router	: Router,
 	) {}
+
+
+	getNamesFromIds(  data : any   )
+	{
+			let proxy = this.hostpoint + "/latest"
+			this.http.post(proxy +  "/universe/names/?datasource=tranquility"  ,data, )
+			.subscribe((data :any)=> {
+				console.log(data)
+			})
+	}
+
+	getRegionsIds()
+	{
+
+			let proxy = this.hostpoint + "/latest"
+			this.http.get(proxy +"/universe/regions"
+			)
+			.subscribe((data : any) => {
+				console.log("regionsId", data)
+				data.forEach((element : any ) => {
+					console.log(element)
+				});
+				this.getNamesFromIds(data);
+				return(data);
+			})
+	}
 
 	getCharactersFromString(name : string) :any
 	{
@@ -190,8 +221,8 @@ export class EveEsiService {
 			console.log("DATA  = ",data )
 			let httpHeaders2 = new HttpHeaders(
 				{
-					"Authorization":" Bearer " +  this.token.access_token}
-			)
+					"Authorization":" Bearer " +  this.token.access_token
+			})
 		  	localStorage.setItem(ACCESS_TOKEN, this.token.access_token);
 		  	localStorage.setItem(REFRESH_TOKEN, this.token.refresh_token);
 			this.http.get(this.hostpoint+ '/verify',{headers  : httpHeaders2})

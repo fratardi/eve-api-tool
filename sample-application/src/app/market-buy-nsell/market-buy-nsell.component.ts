@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { EveEsiService } from '../Services/eve-esi.service';
 
 @Component({
   selector: 'app-market-buy-nsell',
@@ -8,44 +9,31 @@ import { FormControl, FormGroup } from '@angular/forms';
 })
 export class MarketBuyNSellComponent implements OnInit {
 
+	item 	= new FormControl('');
+	region 	= new FormControl('');
 
+	itemListSelect :any[] | undefined;
 
-	//list :dataItem[] = [];
-	// listPerson : any = [];		
-	// myForm!: FormGroup  ;
-	// formattedMessage: string = "";
-	// searchResults : any = [];
-	//autoCompleteSearchResults : any[] = this.esi_service.autoCompleteSearchresults;
+	constructor(
+		private esi_service : 	EveEsiService
+	){}
 
-  item = new FormControl('');
-  region = new FormControl('');
-	
-
-
-  constructor() { }
-
-  ngOnInit(): void {
-    this.item.statusChanges.subscribe(
+	initForms()
+	{
+		this.item.statusChanges.subscribe(
 			data => {
-			  console.log("change",this.item.value);
-        console.log(data, this.item.value );
-      })
-  }
-
-  clickme(username:string) {
-    console.log('it does nothing');
-  }
-
-	onSubmit(form: FormGroup) {
-
-    console.log( "MARKET WATCHER  ")
-
+				console.log("change item",this.item.value);
+				console.log(data, this.item.value );
+		})
+		this.region.statusChanges.subscribe(
+			data => {
+				console.log("change region",this.region.value);
+				console.log(data, this.esi_service.getRegionsIds() );
+		})
 	}
 
-	updater (){
-    console.log("updater" , this)
-	//	this.esi_service.autoCompleteSearchresults.sort((a,b) =>  b.name  - a.name  ); 
-//		this.autoCompleteSearchResults = this.esi_service.autoCompleteSearchresults
+	ngOnInit(): void {
+		this.initForms();
+		this.esi_service.getRegionsIds()
 	}
-
 }
