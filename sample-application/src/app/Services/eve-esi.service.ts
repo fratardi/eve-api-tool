@@ -9,11 +9,11 @@ const secretKey     =  	"jcVXo0IZFt5YDr8AJ3Z7cKCDfVijNxKhupOKCQ2I"
 const client_id   	=	"7f45c8124b2640beba3a6902df6832a2";
 
 
-interface ItemInfo{
-	category:	string;
-	id		:	number;
-	name	: 	string;
-}
+// interface ItemInfo{
+// 	category:	string;
+// 	id		:	number;
+// 	name	: 	string;
+// }
 
 @Injectable({
   providedIn: 'root'
@@ -61,7 +61,6 @@ export class EveEsiService {
 			this.autoCompleteSearchresults = [];
 			return;
 		}
-
 		let httpHeaders2 = new HttpHeaders(
 			{"Authorization":" Bearer " +  this.token.access_token}
 		)
@@ -117,21 +116,15 @@ export class EveEsiService {
 		return(this.userOwn);
 	}
 
-
-
 	getCCPKillReport(  id :any , hash :any){
-
-
-
 		let proxy = this.hostpoint + "/latest"
 		this.http.get(proxy +"/killmails/"+id+"/"+hash+"/"
 		)
 		.subscribe(data  => {
-			console.log("data", data)
+			console.log("dataKillReport", data)
 			return(data);
 		})
 	}
-
 
 	generateCurlRequest(encodedSomething : string , base64encodedstring : string){
 		return ({ encodedSomething: encodedSomething , base64encodedstring : base64encodedstring     })  ;

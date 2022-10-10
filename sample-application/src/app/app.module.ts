@@ -24,6 +24,7 @@ import { WatchlistComponent } from './watchlist/watchlist.component';
 import {MatGridListModule} from '@angular/material/grid-list';
 import { EntityListenerComponent } from './entity-listener/entity-listener.component';
 import { KillWidgetComponent } from './kill-widget/kill-widget.component';
+import { MarketBuyNSellComponent } from './market-buy-nsell/market-buy-nsell.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import { KillWidgetComponent } from './kill-widget/kill-widget.component';
     WatchlistComponent,
     EntityListenerComponent,
     KillWidgetComponent,
+    MarketBuyNSellComponent,
   ],
   imports: [
     BrowserModule,
