@@ -21,37 +21,34 @@ const client_id   	=	"7f45c8124b2640beba3a6902df6832a2";
 
 export class EveEsiService {
 
-	hostpoint = "http://localhost:4200";
-	token: any;
-   	userOwn:any;
-	base64string:any;
-	characterContactsId :any[]=[];
-	characterContactsWithName :any[]=[]
-	autoCompleteSearchresults :any[]=[]
+	hostpoint					:	string = "http://localhost:4200";
+	token						:	any;
+   	userOwn						:	any;
+	base64string				:	any;
+	characterContactsId 		:	any[] = [];
+	characterContactsWithName 	:	any[] = [];
+	autoCompleteSearchresults 	:	any[] = [];
 
-	regionsIds 			: any[] = [];
-	regionsNames		: any[] = [];
-	regionsIdsAndNames	: any[] = [];
-
+	regionsIds 					: 	any[] = [];
+	regionsNames				: 	any[] = [];
+	regionsIdsAndNames			: 	any[] = [];
 
   	constructor(
 		private http	: HttpClient,
 		private router	: Router,
-	) {}
-
+	){ }
 
 	getNamesFromIds(  data : any   )
 	{
-			let proxy = this.hostpoint + "/latest"
-			this.http.post(proxy +  "/universe/names/?datasource=tranquility"  ,data, )
-			.subscribe((data :any)=> {
-				console.log(data)
-			})
+		let proxy = this.hostpoint + "/latest"
+		this.http.post(proxy +  "/universe/names/?datasource=tranquility", data)
+		.subscribe((data :any) => {
+			console.log(data)
+		})
 	}
 
 	getRegionsIds()
 	{
-
 			let proxy = this.hostpoint + "/latest"
 			this.http.get(proxy +"/universe/regions"
 			)

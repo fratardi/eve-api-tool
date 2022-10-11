@@ -1,21 +1,96 @@
+<style>
+body{
+  background: #242424 !important;
+}
+button{
+  background: #4b39af;
+    padding: 10px;
+    color: white;
+    border: none;
+    border-radius: 14px !important;
+    margin-left: 15px !important;
+    margin-bottom: 15px !important;
+    margin-top: 15px !important;
+}
+.mat-grid-tile{
+background: #1a1a1a;
+border-radius: 16px;
+transform: scale(0.95);
+border: 1px solid #383838;
+color: white;
+}
+.bloc-title{
+  font-size: 21px;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    margin-bottom: 0px;
+    display: block;
+}
+.bloc{
+  display: inline-block;
+    padding: 20px;
+    background: #1a1a1a;
+    margin: 15px;
+    border-radius: 14px;
+    border: solid 1px #2c2c2c;
+    color: white;
+    vertical-align: top;
+    height: 30vh;
+    overflow: hidden;
+    width: 24%;
+    min-width: 274px;
+}
 
+.container{
+  text-align: center;
+}
+
+</style>
 <h1>LOGGED IN SUCCeSS as   {{currentUser.CharacterName}}
   <img class="avatarimage lazy" src="https://imageserver.eveonline.com/Character/{{currentUser.CharacterID}}_32.jpg" alt="">
 </h1>
 
-<button (click)="getContactlist()"> hh   </button>
-  <mat-grid-list cols="3" rowHeight="3:2">
-  <mat-grid-tile>
-target name 
-<app-watchlist>
 
+<button (click)="getContactlist()"> hh   </button>
+
+
+<div class="container">
+  <div class="bloc">
+    <span class="bloc-title">
+      target name 
+    </span><br>
+    <app-watchlist>
+    </app-watchlist>
+  </div>
+
+  <div class="bloc">
+    <span class="bloc-title">
+      target name 
+    </span><br>
+    <app-entity-listener></app-entity-listener>
+  </div>
+
+  <div class="bloc">
+    <span class="bloc-title">
+      target name 
+    </span><br>
+    <app-autocompleter>
+    </app-autocompleter>
+  </div>
+
+</div>
+
+<mat-grid-list cols="3" rowHeight="3:5">
+  <mat-grid-tile>
+target name
+<app-watchlist>
 </app-watchlist>
   </mat-grid-tile>
 
 
   <mat-grid-tile>
-
-<app-entity-listener></app-entity-listener>
+Blah<!-- <app-entity-listener></app-entity-listener> -->
   </mat-grid-tile>
 
 
@@ -61,6 +136,9 @@ ZkillRatios
   </mat-grid-tile>
 
 </mat-grid-list>9
+
+
+
 
 <app-autocompleter>
 </app-autocompleter>
