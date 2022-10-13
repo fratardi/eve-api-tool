@@ -8,16 +8,8 @@
 <input id="region" type="text" [formControl]="region">
 <select name="" id=""></select>
 ]
-<!-- 
-<h4>
-    <mat-form-field appearance="fill">
-        <mat-label>
-            Scope
-        </mat-label>
-        <mat-select [formControl]="scopeForm" multiple>
-            <mat-option *ngFor="let scope of scopeList" [value]="scope">
-                {{scope}}
-            </mat-option> 
-        </mat-select>
-    </mat-form-field>
-</h4> -->
+
+
+<li *ngFor="let region of regionListSelect; index as i; first as isFirst">
+    {{regionListSelect}}{{i}}{{region}} <span *ngIf="isFirst">default</span>
+  </li>

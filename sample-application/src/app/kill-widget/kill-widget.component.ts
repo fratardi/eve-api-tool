@@ -57,13 +57,13 @@ export class KillWidgetComponent implements OnInit {
 
   getKillReport(){
     this.hasInit = true;
-      this.eveKillReport =  this.eveEsiService.getCCPKillReport(this.zKillReport?.killmail_id , this.zKillReport?.zkb.hash );
+    //  this.eveKillReport =  this.eveEsiService.getCCPKillReport(this.zKillReport?.killmail_id , this.zKillReport?.zkb.hash );
   }
 
 
   setDestination()
   {
-   
+    this.eveEsiService.setDestination(this.data)
 
     console.log(this);
 

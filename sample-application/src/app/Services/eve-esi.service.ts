@@ -9,11 +9,11 @@ const secretKey     =  	"jcVXo0IZFt5YDr8AJ3Z7cKCDfVijNxKhupOKCQ2I"
 const client_id   	=	"7f45c8124b2640beba3a6902df6832a2";
 
 
-// interface ItemInfo{
-// 	category:	string;
-// 	id		:	number;
-// 	name	: 	string;
-// }
+interface ItemInfo{
+	category:	string;
+	id		:	number;
+	name	: 	string;
+}
 
 @Injectable({
   providedIn: 'root'
@@ -21,46 +21,102 @@ const client_id   	=	"7f45c8124b2640beba3a6902df6832a2";
 
 export class EveEsiService {
 
-	hostpoint					:	string = "http://localhost:4200";
-	token						:	any;
-   	userOwn						:	any;
-	base64string				:	any;
-	characterContactsId 		:	any[] = [];
-	characterContactsWithName 	:	any[] = [];
-	autoCompleteSearchresults 	:	any[] = [];
+	hostpoint = "http://localhost:4200";
+	token: any;
+   	userOwn:any;
+	base64string:any;
+	
+	regions:any;
 
-	regionsIds 					: 	any[] = [];
-	regionsNames				: 	any[] = [];
-	regionsIdsAndNames			: 	any[] = [];
+
+	characterContactsId :any[]=[];
+	characterContactsWithName :any[]=[]
+
+	autoCompleteSearchresults :any[]=[]
+
 
   	constructor(
 		private http	: HttpClient,
 		private router	: Router,
-	){ }
+	) {}
 
-	getNamesFromIds(  data : any   )
-	{
+
+	getRegionsIds(){
+
 		let proxy = this.hostpoint + "/latest"
-		this.http.post(proxy +  "/universe/names/?datasource=tranquility", data)
-		.subscribe((data :any) => {
-			console.log(data)
-		})
-	}
 
-	getRegionsIds()
-	{
+			this.http.get(proxy + "/universe/regions/")
+			.subscribe((data :any )   => {
+					console.log("data Contact", data)
+
+	this.regions=			this.getNamesInfoFromId(data);
+
+			})
+
+				console.log("regions = ," ,this.regions)
+		}
+
+
+
+		getNamesInfoFromId( tab :string[]) : any
+		{
+			if(!tab)	{
+				this.autoCompleteSearchresults = []
+				return;
+			}
+	
+			// let httpHeaders2 = new HttpHeaders(
+			// 	{"Authorization":" Bearer " +  this.token.access_token}
+			// )
 			let proxy = this.hostpoint + "/latest"
-			this.http.get(proxy +"/universe/regions"
+			this.http.post(proxy +  "/universe/names/?datasource=tranquility"  ,tab)
+			.subscribe((data :any)=> {
+				console.log("DAAAA TAAAA" , data)
+				// this . characterContactsWithName = [];
+				// this.autoCompleteSearchresults = data;
+				// if(!this.characterContactsWithName.length){
+				// data.forEach(
+				// 	(element : any)=> {
+				// 		this . characterContactsWithName.push(element)	
+				// 	}
+			//	)
+			//	console.log(this . characterContactsWithName);
+			//	}	
+				return(data);
+			//	
+			})
+	
+		}
+
+
+
+
+		setDestination(params : any)
+		{
+			console.log("Set Dest " , params.solar_system_id , this.userOwn.CharacterID)
+			let payload : any = {
+				add_to_beginning: "true",
+				clear_other_waypoints: "true",
+				datasource: "tranquility",
+				destination_id: params.solar_system_id,
+			}
+
+			let httpHeaders2 = new HttpHeaders(
+				{"Authorization":" Bearer " +  this.token.access_token}
 			)
-			.subscribe((data : any) => {
-				console.log("regionsId", data)
-				data.forEach((element : any ) => {
-					console.log(element)
-				});
-				this.getNamesFromIds(data);
+			let proxy = this.hostpoint + "/latest"
+
+			this.http.post(proxy +  "/ui/autopilot/waypoint/?add_to_beginning=true&clear_other_waypoints=true&datasource=tranquility&destination_id=" + params.solar_system_id  ,payload, 	{headers: httpHeaders2 })
+			.subscribe((data :any)=> {
+				console.log("DAAAA TAAAA" , data)
 				return(data);
 			})
-	}
+
+
+
+		}
+
+
 
 	getCharactersFromString(name : string) :any
 	{
@@ -70,29 +126,33 @@ export class EveEsiService {
 		}
 		let httpHeaders2 = new HttpHeaders(
 			{"Authorization":" Bearer " +  this.token.access_token}
-		);
-		let proxy = this.hostpoint + "/latest";
-		console.log(this.userOwn);
+		)
+		let proxy = this.hostpoint + "/latest"
+		console.log(this.userOwn)
 		this.http.get(proxy + "/characters/" + this.userOwn.CharacterID + "/search/?categories=character&datasource=tranquility&language=en&search=" + name + "&strict=false" 
 		, 	{headers: httpHeaders2 })
 		.subscribe((data :any )   => {
-			if(data == undefined){
-				console.log("data Contact", data.character.length);
-			}
-			return(this.getItemInfoFromId(data.character));
+			if(data == undefined)
+			{console.log("data Contact", data.character.length)
+		}
+		return(this.getItemInfoFromId(data.character));
 		})
 	}
+
+
+
 
 	getItemInfoFromId( tab :string[]) : any
 	{
 		if(!tab)	{
-			this.autoCompleteSearchresults = [];
+			this.autoCompleteSearchresults = []
 			return;
 		}
+
 		let httpHeaders2 = new HttpHeaders(
 			{"Authorization":" Bearer " +  this.token.access_token}
 		)
-		let proxy = this.hostpoint + "/latest";
+		let proxy = this.hostpoint + "/latest"
 		this.http.post(proxy +  "/universe/names/?datasource=tranquility"  ,tab, 	{headers: httpHeaders2 })
 		.subscribe((data :any)=> {
 			console.log("DAAAA TAAAA" , data)
@@ -102,10 +162,14 @@ export class EveEsiService {
 			data.forEach(
 				(element : any)=> {
 					this . characterContactsWithName.push(element)	
-			})
+				}
+			)
+		//	console.log(this . characterContactsWithName);
 			}	
 			return(data);
+		//	
 		})
+
 	}
 
 	getCharacterContacts () : any {
@@ -142,16 +206,6 @@ export class EveEsiService {
 		})
 		console.log(this.token)
 		return(this.userOwn);
-	}
-
-	getCCPKillReport(  id :any , hash :any){
-		let proxy = this.hostpoint + "/latest"
-		this.http.get(proxy +"/killmails/"+id+"/"+hash+"/"
-		)
-		.subscribe(data  => {
-			console.log("dataKillReport", data)
-			return(data);
-		})
 	}
 
 	generateCurlRequest(encodedSomething : string , base64encodedstring : string){
@@ -217,9 +271,8 @@ export class EveEsiService {
 			this.token = data as Swagger.Tokens;
 			console.log("DATA  = ",data )
 			let httpHeaders2 = new HttpHeaders(
-				{
-					"Authorization":" Bearer " +  this.token.access_token
-			})
+				{"Authorization":" Bearer " +  this.token.access_token}
+			)
 		  	localStorage.setItem(ACCESS_TOKEN, this.token.access_token);
 		  	localStorage.setItem(REFRESH_TOKEN, this.token.refresh_token);
 			this.http.get(this.hostpoint+ '/verify',{headers  : httpHeaders2})
