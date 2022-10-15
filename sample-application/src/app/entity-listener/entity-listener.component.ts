@@ -24,6 +24,14 @@ export class EntityListenerComponent implements OnInit {
 
    }
 
+
+   clearList()
+   {
+    this.killList = [];
+
+   }
+
+
   ngOnInit(): void {
   }
 
@@ -36,7 +44,7 @@ export class EntityListenerComponent implements OnInit {
   sendMessage() {
     console.log('new message from the client: ', this.message);
     this.chatService.messages.next(this.message);
-    this.message.channel= "region:10000002";
+    this.message.channel= "region:10000027";
   }
 
 

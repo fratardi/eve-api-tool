@@ -4,6 +4,7 @@
 
 <button (click)="sendMessage()">Send</button> 
 
+<button (click)="clearList()">ClearList</button> 
 <div  class="scroller"  >
    <div  *ngFor="let item of killList;" >
    <app-kill-widget [data]="item">
