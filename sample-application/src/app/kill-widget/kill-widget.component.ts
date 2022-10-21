@@ -30,6 +30,7 @@ export class KillWidgetComponent implements OnInit {
 
   zKillReport :truc | undefined;
   eveKillReport: any;
+  systemName : any ;
 
   hasInit : boolean = false;
 
@@ -55,9 +56,18 @@ export class KillWidgetComponent implements OnInit {
     console.log(this);
   }
 
+
+
   getKillReport(){
     this.hasInit = true;
       this.eveKillReport =  this.eveEsiService.getCCPKillReport(this.zKillReport?.killmail_id , this.zKillReport?.zkb.hash );
+
+   this.systemName =  this.eveEsiService.getNamesFromIds([this.zKillReport?.solar_system_id, 0])
+
+    console.log("😋" , this.zKillReport?.zkb.url)
+
+
+
   }
 
 
@@ -65,7 +75,7 @@ export class KillWidgetComponent implements OnInit {
   {
    
 
-    console.log(this);
+    console.log(this.eveKillReport);
 
   }
 

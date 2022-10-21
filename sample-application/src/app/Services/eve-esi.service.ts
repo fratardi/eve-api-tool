@@ -8,19 +8,11 @@ const ACCESS_TOKEN  = 	'access_token';
 const secretKey     =  	"jcVXo0IZFt5YDr8AJ3Z7cKCDfVijNxKhupOKCQ2I"
 const client_id   	=	"7f45c8124b2640beba3a6902df6832a2";
 
-
-// interface ItemInfo{
-// 	category:	string;
-// 	id		:	number;
-// 	name	: 	string;
-// }
-
 @Injectable({
   providedIn: 'root'
 })
 
 export class EveEsiService {
-
 	hostpoint					:	string = "http://localhost:4200";
 	token						:	any;
    	userOwn						:	any;
@@ -38,28 +30,27 @@ export class EveEsiService {
 		private router	: Router,
 	){ }
 
-	getNamesFromIds(  data : any   )
-	{
+	getNamesFromIds( data : any ){
 		let proxy = this.hostpoint + "/latest"
 		this.http.post(proxy +  "/universe/names/?datasource=tranquility", data)
 		.subscribe((data :any) => {
 			console.log(data)
+			return(data)
 		})
 	}
 
 	getRegionsIds()
 	{
-			let proxy = this.hostpoint + "/latest"
-			this.http.get(proxy +"/universe/regions"
-			)
-			.subscribe((data : any) => {
-				console.log("regionsId", data)
-				data.forEach((element : any ) => {
-					console.log(element)
-				});
-				this.getNamesFromIds(data);
-				return(data);
-			})
+		let proxy = this.hostpoint + "/latest"
+		this.http.get(proxy +"/universe/regions")
+		.subscribe((data : any) => {
+			console.log("regionsId", data);
+			data.forEach((element : any ) => {
+				console.log(element);
+			});
+			this.getNamesFromIds(data);
+			return(data);
+		})
 	}
 
 	getCharactersFromString(name : string) :any

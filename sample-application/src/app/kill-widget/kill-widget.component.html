@@ -3,24 +3,30 @@
 
 <details  style="background-color: darkslategrey;  color: lightgray; ">
     <summary>
-        TinycombarteportPLaceholder
         {{zKillReport?.killmail_time}}
         {{zKillReport?.solar_system_id}}
+
+    
+        {{systemName}}
+
     </summary>
    Solar System Infos
+   <a href="{{this.zKillReport?.zkb.url}}">link text</a>
+
     {{zKillReport?.solar_system_id}}
     <details style="background-color: darkred;">
+       | |
         <summary>
-            Attackers {{zKillReport?.attackers.length}}
+           Number of Attackers {{zKillReport?.attackers.length}}
         </summary>
             AttackInfoss
     </details>
 
     <details style="background-color: darkgreen;">
          <summary>
-            Defense  {{zKillReport?.victim.damage_taken}}
+            DamageTaken  {{zKillReport?.victim.damage_taken}}
         </summary>
         Defense Infos
     </details>
-    <button (click)="lol()">Set Destination</button>
+    <button (click)="lol() ">Set Destination</button>
 </details>
