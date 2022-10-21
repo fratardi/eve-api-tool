@@ -11,7 +11,8 @@
 
     </summary>
    Solar System Infos
-   <a href="{{this.zKillReport?.zkb.url}}">link text</a>
+   <!-- <a href="{{this.zKillReport?.zkb.url}}">link text</a> -->
+   <button (click)="goToLink(this.zKillReport?.zkb.url)">zkillLink</button>
 
     {{zKillReport?.solar_system_id}}
     <details style="background-color: darkred;">
@@ -28,5 +29,9 @@
         </summary>
         Defense Infos
     </details>
-    <button (click)="lol() ">Set Destination</button>
+    <button (click)="lol() ">
+        Set Destination
+    </button>
+    {{eveKillReport}}
+
 </details>

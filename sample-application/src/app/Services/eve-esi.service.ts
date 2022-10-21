@@ -34,7 +34,7 @@ export class EveEsiService {
 		let proxy = this.hostpoint + "/latest"
 		this.http.post(proxy +  "/universe/names/?datasource=tranquility", data)
 		.subscribe((data :any) => {
-			console.log(data)
+		//	console.log(data)
 			return(data)
 		})
 	}
