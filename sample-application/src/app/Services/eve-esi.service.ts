@@ -139,10 +139,10 @@ export class EveEsiService {
 
 	getCCPKillReport(  id :any , hash :any){
 		let proxy = this.hostpoint + "/latest"
-		this.http.get(proxy +"/killmails/"+id+"/"+hash+"/"
+		this.http.get(proxy + "/killmails/" + id + "/" +hash+"/"
 		)
 		.subscribe(data  => {
-			console.log("dataKillReport", data)
+			console.log("CCPKillReport", data)
 			return(data);
 		})
 	}

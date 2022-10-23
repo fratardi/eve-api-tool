@@ -1,8 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { EveEsiService } from '../Services/eve-esi.service';
 
-
-
 interface truc
 {
   attackers: any,
@@ -41,32 +39,25 @@ export class KillWidgetComponent implements OnInit {
 
   lol() {
     this.zKillReport     = this.data as unknown as truc;
+    console.log("YOLOORORORO", this.getKillReport())
     this.getKillReport();
     console.log(this);
   }
 
   getKillReport() {
     this.hasInit = true;
-    this.eveKillReport =  this.eveEsiService.getCCPKillReport(this.zKillReport?.killmail_id , this.zKillReport?.zkb.hash );
+   let hello =  this.eveKillReport =  this.eveEsiService.getCCPKillReport(this.zKillReport?.killmail_id , this.zKillReport?.zkb.hash );
     this.systemName =  this.eveEsiService.getNamesFromIds([this.zKillReport?.solar_system_id, 0])
-    console.log("😋" , this.zKillReport?.zkb.url)
+    console.log("😋" , this.zKillReport?.zkb.url , hello)
   }
 
   setDestination() {
-
-    let report :any[]  = this.eveKillReport 
-
-    console.log("HEHEHE")
-    report.forEach((element : any) => { 
-
-      console.log( "Element == "  , element)
-
-    })
-
-
+    console.log("HEHEHE", this.eveKillReport);
+    // report.forEach((element : any) => { 
+    //   console.log( "Element == "  , element)
+    // })
    // console.log(this.eveKillReport);
   }
-
 
   goToLink(url: string){
     console.log("YOLO" ,this )
