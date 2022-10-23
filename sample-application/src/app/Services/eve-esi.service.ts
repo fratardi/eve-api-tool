@@ -8,6 +8,8 @@ const ACCESS_TOKEN  = 	'access_token';
 const secretKey     =  	"jcVXo0IZFt5YDr8AJ3Z7cKCDfVijNxKhupOKCQ2I"
 const client_id   	=	"7f45c8124b2640beba3a6902df6832a2";
 
+
+
 @Injectable({
   providedIn: 'root'
 })
@@ -102,7 +104,7 @@ export class EveEsiService {
 	getCharacterContacts () : any {
 		console.log("get Character Contacts ",this.characterContactsId)
 		let httpHeaders2 = new HttpHeaders(
-			{"Authorization":" Bearer " +  this.token.access_token}
+			{"Authorization":" Bearer " +  this.getToken()}
 		)
 		let proxy = this.hostpoint + "/latest"
 		console.log(this.userOwn)
@@ -186,6 +188,12 @@ export class EveEsiService {
 		})
 	}
 
+
+
+
+
+
+
 	refreshWhenexpired( ) {
 		setInterval(() =>  this.refreshToken(), 1000 * 60 * 1 )
 	}
@@ -215,6 +223,9 @@ export class EveEsiService {
 		  	localStorage.setItem(REFRESH_TOKEN, this.token.refresh_token);
 			this.http.get(this.hostpoint+ '/verify',{headers  : httpHeaders2})
 				.subscribe(e => {
+
+					console.log("NOTICE")
+
 					this.userOwn = e as	 Swagger.UserInfo;
 					return;
 				})
