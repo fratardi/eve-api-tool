@@ -177,12 +177,12 @@ export class EveEsiService {
 			)
 	  		localStorage.setItem(ACCESS_TOKEN, this.token.access_token);
 	  		localStorage.setItem(REFRESH_TOKEN, this.token.refresh_token);
-			this.http.get(this.hostpoint+ '/verify',{headers  : httpHeaders2})
+			this.http.get	(this.hostpoint+ '/verify',{headers  : httpHeaders2})
 				.subscribe(e => {
 				this.userOwn = e as	 Swagger.UserInfo;
 				console.log(e , this.token.expires_in )
-				this.refreshWhenexpired() 
-				this.router.navigate(['third-component']);
+				this.refreshWhenexpired()
+				this.router.navigate(['third-component']);	
 				return(this.userOwn)
 			})
 		})

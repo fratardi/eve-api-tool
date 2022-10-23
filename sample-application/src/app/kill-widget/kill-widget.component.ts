@@ -53,14 +53,23 @@ export class KillWidgetComponent implements OnInit {
   }
 
   setDestination() {
-    console.log(this.eveKillReport);
+
+    let report :any[]  = this.eveKillReport 
+
+    console.log("HEHEHE")
+    report.forEach((element : any) => { 
+
+      console.log( "Element == "  , element)
+
+    })
+
+
+   // console.log(this.eveKillReport);
   }
 
 
   goToLink(url: string){
-
     console.log("YOLO" ,this )
-
     window.open(url, "_blank");
 }
 

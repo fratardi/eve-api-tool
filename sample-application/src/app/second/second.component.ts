@@ -29,6 +29,10 @@ export class SecondComponent implements OnInit {
 		this.route.queryParams.subscribe(e => {
 			callbackCode = e
 			this.esi_service.init_service( callbackCode)
+
+		
 		})
+		this .userOwn = this.esi_service.getUserOwn();
+		this.router.navigate(['third-component']);	
 	}
 }

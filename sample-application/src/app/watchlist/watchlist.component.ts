@@ -18,6 +18,8 @@ export class WatchlistComponent implements OnInit {
   ) { this.watchlist = watchListService.listPerson}
 
   getUserStats(){
+
+    
   }
 
   passOverList(){
