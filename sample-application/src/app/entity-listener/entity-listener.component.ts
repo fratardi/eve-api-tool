@@ -29,12 +29,16 @@ export class EntityListenerComponent implements OnInit {
 	this.killList = [];
   }
 
-
-
   private message = {
 	action  : 'sub',
 	channel : 'killstream',
   };
+
+
+  fetchEntityType	(){}
+  fetchEntityExactMatch(){}
+  fetchEntityName(){}
+  
 
   sendMessage() {
 //	console.log('new message from the client: ', this.message , this );
@@ -42,9 +46,9 @@ export class EntityListenerComponent implements OnInit {
 	this.message.channel= "region:10000002";
   }
 
-  getEntityToListen(){
+  getEntityToListen(param: any){
+	console.log("this = ", this, param)
 
-	
 
   }
 

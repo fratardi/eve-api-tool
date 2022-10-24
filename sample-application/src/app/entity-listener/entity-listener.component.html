@@ -1,15 +1,27 @@
 
+<button (click)="clearStream()">ClearStream</button>
+<button (click)="sendMessage()">Send</button>
+<button (click)="getEntityToListen('hello')">Get</button>
 <div>
-   <input type="checkbox" id="exact" name="exact" checked>
+   <input type="checkbox" id="exact" name="exact">
    <label for="exact">Exact Type Match</label>
 </div>
 <p>
 	<select name="entity" id="entity-select">
-		<option value="">
-			-- Select Entity Type To listen
+		<option value=""(click)="getEntityToListen('')">
+			Select Entity Type To listen
+		</option>
+		<option value="All">
+			All
 		</option>
 		<option value="Character">
 			Character
+		</option>
+		<option value="Corporation">
+			Corporation
+		</option>
+		<option value="Alliance">
+			Alliance
 		</option>
 		<option value="System">
 			System
@@ -21,23 +33,8 @@
 			Region
 		</option>
 	</select>
-
-
-
-
-<!--
-
-	  <input>
-   <input>
- -->
-
-
-
-
+	<input>
 </p>
-
-
-<button (click)="sendMessage()">Send</button>
 
 <div  class="scroller"  >
    <div  *ngFor="let item of killList;" >
