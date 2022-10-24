@@ -3,18 +3,18 @@ import { EveEsiService } from '../Services/eve-esi.service';
 
 interface truc
 {
-  attackers: any,
-  killmail_id :  any,
-  killmail_time : any,
-  solar_system_id :any,
-  victim : any,
-  zkb :any,
+  solar_system_id : any,
+  killmail_time   : any,
+  killmail_id     : any,
+  attackers       : any,
+  victim          : any,
+  zkb             : any,
 }
 
 @Component({
-  selector: 'app-kill-widget',
-  templateUrl: './kill-widget.component.html',
-  styleUrls: ['./kill-widget.component.less']
+  selector    : 'app-kill-widget',
+  templateUrl : './kill-widget.component.html',
+  styleUrls   : ['./kill-widget.component.less']
 })
 
 export class KillWidgetComponent implements OnInit {
@@ -22,10 +22,10 @@ export class KillWidgetComponent implements OnInit {
 
   @Input() data: any[] | undefined;
 
-  zKillReport :truc | undefined;
-  eveKillReport: any;
-  systemName : any ;
-  hasInit : boolean = false;
+  eveKillReport : any;
+  zKillReport   : truc | undefined;
+  systemName    : any;
+  hasInit       : boolean = false;
 
   constructor(
    private  eveEsiService : EveEsiService
@@ -34,7 +34,7 @@ export class KillWidgetComponent implements OnInit {
   ngOnInit(): void {
 //    console.log( "init widget " ,this.data)
     this.zKillReport     = this.data as unknown as truc;
-    this.getKillReport(   );
+    this.getKillReport();
   }
 
   lol() {
