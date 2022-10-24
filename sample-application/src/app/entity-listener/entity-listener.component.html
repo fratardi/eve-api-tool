@@ -3,15 +3,13 @@
       Select Region PLaceHolders
    <input>
    <input>
-   
 </p>
-
 
 <button (click)="sendMessage()">Send</button> 
 
 <div  class="scroller"  >
    <div  *ngFor="let item of killList;" >
-   <app-kill-widget [data]="item">
-   </app-kill-widget>
-</div>
+      <app-kill-widget [data]="item">
+      </app-kill-widget>
+   </div>
 </div>

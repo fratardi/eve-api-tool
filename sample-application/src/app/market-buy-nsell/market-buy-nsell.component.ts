@@ -9,9 +9,9 @@ import { EveEsiService } from '../Services/eve-esi.service';
 })
 export class MarketBuyNSellComponent implements OnInit {
 
-	item 	= new FormControl('');
-	region 	= new FormControl('');
-	itemListSelect :any[] | undefined;
+	itemListSelect	:any[] | undefined;
+	item 			:FormControl		= new FormControl('');
+	region			:FormControl		= new FormControl('');
 
 	constructor(
 		private esi_service : 	EveEsiService

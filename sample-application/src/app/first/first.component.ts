@@ -9,10 +9,10 @@ import { FormControl } from '@angular/forms';
 })
 
 export class FirstComponent implements OnInit {
-  	Swagger : any = null;
-  	scopes: string[] = [];
-	scopeForm = new FormControl('', );
-	scopeList: string[] = [] ;
+  	Swagger 	:	any 		= null;
+  	scopes		:	string[] 	= [];
+	scopeForm 	:	FormControl	= new FormControl('', );
+	scopeList	: 	string[] 	= [];
 
 	constructor(private http: HttpClient,){
 	}
