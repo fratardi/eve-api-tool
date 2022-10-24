@@ -22,7 +22,6 @@ export class EveEsiService {
 	characterContactsId 		:	any[] = [];
 	characterContactsWithName 	:	any[] = [];
 	autoCompleteSearchresults 	:	any[] = [];
-
 	regionsIds 					: 	any[] = [];
 	regionsNames				: 	any[] = [];
 	regionsIdsAndNames			: 	any[] = [];
@@ -36,7 +35,6 @@ export class EveEsiService {
 		let proxy = this.hostpoint + "/latest"
 		this.http.post(proxy +  "/universe/names/?datasource=tranquility", data)
 		.subscribe((data :any) => {
-		//	console.log(data)
 			return(data)
 		})
 	}
@@ -67,9 +65,9 @@ export class EveEsiService {
 		let proxy = this.hostpoint + "/latest";
 		console.log(this.userOwn);
 		this.http.get(proxy + "/characters/" + this.userOwn.CharacterID + "/search/?categories=character&datasource=tranquility&language=en&search=" + name + "&strict=false" 
-		, 	{headers: httpHeaders2 })
+		,{headers: httpHeaders2 })
 		.subscribe((data :any )   => {
-			if(data == undefined){
+			if(data == undefined) {
 				console.log("data Contact", data.character.length);
 			}
 			return(this.getItemInfoFromId(data.character));
@@ -78,7 +76,7 @@ export class EveEsiService {
 
 	getItemInfoFromId( tab :string[]) : any
 	{
-		if(!tab)	{
+		if (!tab) {
 			this.autoCompleteSearchresults = [];
 			return;
 		}
@@ -92,10 +90,9 @@ export class EveEsiService {
 			this . characterContactsWithName = [];
 			this.autoCompleteSearchresults = data;
 			if(!this.characterContactsWithName.length){
-			data.forEach(
-				(element : any)=> {
-					this . characterContactsWithName.push(element)	
-			})
+			data.forEach((element : any)=> {
+					this.characterContactsWithName.push(element);
+				})
 			}	
 			return(data);
 		})
@@ -137,10 +134,9 @@ export class EveEsiService {
 		return(this.userOwn);
 	}
 
-	getCCPKillReport(  id :any , hash :any){
+	getCCPKillReport(id :any , hash :any) {
 		let proxy = this.hostpoint + "/latest"
-		this.http.get(proxy + "/killmails/" + id + "/" +hash+"/"
-		)
+		this.http.get(proxy + "/killmails/" + id + "/" + hash + "/")
 		.subscribe(data  => {
 			console.log("CCPKillReport", data)
 			return(data);
@@ -148,13 +144,15 @@ export class EveEsiService {
 	}
 
 	generateCurlRequest(encodedSomething : string , base64encodedstring : string){
-		return ({ encodedSomething: encodedSomething , base64encodedstring : base64encodedstring     })  ;
+		return ({ 
+				encodedSomething: encodedSomething,
+				base64encodedstring : base64encodedstring
+		})  ;
 	}
 
   	init_service(callbackCode :any)  {
 		let something =  client_id+ ":" + secretKey;
 		let encodedSomething = btoa(something);
-		
 		let httpHeaders = new HttpHeaders({
 			"Authorization": "Basic " + encodedSomething,
 			'Content-Type': 'application/json',

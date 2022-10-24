@@ -12,29 +12,27 @@ export interface Message {
 }
 
 export interface Report {
-
-alliance_id: string,
-character_id: string,
-corporation_id: string,
-damage_done: string,
-final_blow: string,
-security_status: string,
-ship_type_id: string,
-weapon_type_id: string,
+  alliance_id: string,
+  character_id: string,
+  corporation_id: string,
+  damage_done: string,
+  final_blow: string,
+  security_status: string,
+  ship_type_id: string,
+  weapon_type_id: string,
 }
 
 @Injectable()
 export class ChatService {
-  public messages: Subject<Message>;
 
+  public messages: Subject<Message>;
   constructor(wscService: WebsocketChatService) {
     this.messages = <Subject<Message>>(
       wscService.connect(CHAT_URL).pipe(map((response: MessageEvent): any => {
         let truc : Report[] = response.data
-       console.log("-------------------------------------", JSON.parse(truc as any),"------------------------------");
-
+        console.log("-------------------------------------", JSON.parse(truc as any),"------------------------------");
         return {
-        truc
+          truc
         };
       }))
     );

@@ -20,19 +20,19 @@ interface dataItem{
   templateUrl: './autocomplete.component.html',
   styleUrls: ['./autocomplete.component.less']
 })
+
 export class AutocompleterComponent implements OnInit {
 
-	list :dataItem[] = [];
-	listPerson : any = [];		
-	myForm!: FormGroup  ;
-	formattedMessage: string = "";
-	searchResults : any = [];
-	autoCompleteSearchResults : any[] = this.esi_service.autoCompleteSearchresults;
+	autoCompleteSearchResults	:	any[] 		= this.esi_service.autoCompleteSearchresults;
+	formattedMessage			:	string 		= "";
+	searchResults				:	any 		= [];
+	listPerson 					:	any 		= [];		
+	myForm!						:	FormGroup  		;
+	list 						:	dataItem[] 	= [];
 
 	constructor(
 		private formBuilder: FormBuilder,
 		private esi_service : EveEsiService,
-
 		private watchlist : WatchlistServiceService 
 
 	) {console.log('autocomplete construction'); }

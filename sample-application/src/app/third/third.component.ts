@@ -19,12 +19,9 @@ export class ThirdComponent implements OnInit {
 	constructor(
 		private esi_service : EveEsiService,
 		private watchlist : WatchlistServiceService 
-	
-		) { 
-			this.esi_service.refreshToken()
-
+	) { 
+		this.esi_service.refreshToken()
 		this.esi_service.refreshWhenexpired()
-
 	}
 	
 	trackByFn(index :any , item: any) { 
@@ -39,10 +36,7 @@ export class ThirdComponent implements OnInit {
 	}
 
 	ngOnInit(): void {
-
 		console.log("token ====" ,this.esi_service.getToken())
-
-
 		this.characterContactsId =	this.esi_service.getCharacterContacts();
 		this.characterContactsId = this.esi_service.characterContactsId;
 		this.currentUser = this.esi_service.userOwn;

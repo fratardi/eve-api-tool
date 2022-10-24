@@ -11,7 +11,6 @@ export class MarketBuyNSellComponent implements OnInit {
 
 	item 	= new FormControl('');
 	region 	= new FormControl('');
-
 	itemListSelect :any[] | undefined;
 
 	constructor(
@@ -24,12 +23,13 @@ export class MarketBuyNSellComponent implements OnInit {
 			data => {
 				console.log("change item",this.item.value);
 				console.log(data, this.item.value );
-		})
-		this.region.statusChanges.subscribe(
-			data => {
-				console.log("change region",this.region.value);
-				console.log(data, this.esi_service.getRegionsIds() );
-		})
+			})
+			this.region.statusChanges.subscribe(
+				data => {
+					console.log("change region",this.region.value);
+					console.log(data, this.esi_service.getRegionsIds() );
+			}
+		)
 	}
 
 	ngOnInit(): void {
