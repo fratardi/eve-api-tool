@@ -1,25 +1,20 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { json } from 'express';
-import { delay } from 'rxjs';
-import { EveEsiService } from './eve-esi.service';
 
 @Injectable({
   providedIn: 'root'
 })
+
 export class WatchlistServiceService {
 
-	stats :any;
-	listPerson	: any[]	  	= []
-	listKills	: any[] 	= [];
-	listLosses	: any[] 	= [];
-	list		: any			;
-	zApi 		: string 	= "http://localhost:4200/zapi"
+	stats 		:	any;
+	listPerson	:	any[]	= [];
+	listKills	:	any[] 	= [];
+	listLosses	:	any[] 	= [];
+	zApi 		:	string 	= "http://localhost:4200/zapi";
+	list		:	any;
 
-	constructor(
-		// private http		:	HttpClient,
-		// private esi_service : 	EveEsiService
-	) {}
+	constructor() 
+	{}
 
 	updateList(item : any)	{
 		this.listPerson.pop();
@@ -29,12 +24,12 @@ export class WatchlistServiceService {
 
 	removeWatchee(){
 		this.listPerson.pop();
-		this.listKills = [];
+		this.listKills	= [];
 		this.listLosses = [];
  	}
 
 	getkillHash(parameter : any)	{
- 		console.log(  "getkillhash", parameter)
+// 		console.log(  "getkillhash", parameter)
 	}
 
 	getStats(){
@@ -45,11 +40,11 @@ export class WatchlistServiceService {
 	   	})
 		.then( (data : any) => {
 	 		let list : any = JSON.parse(data);
-			console.log("Stats" , list)
+//			console.log("Stats" , list)
 			this.stats = list;
 		})
 		.catch(function (err) {
-		console.warn('Something went wrong.', err);
+//		console.warn('Something went wrong.', err);
 		});
 	}
 
@@ -63,18 +58,18 @@ export class WatchlistServiceService {
 	 		let list : any = JSON.parse(data);
 			list.forEach( (element  : any) =>{
 				this.listKills.push(element)
-				console.log("ELEMENT kill" , element)
+//				console.log("ELEMENT kill" , element)
 			})
 			if(list.length >= 200)	{
-				console.log( "during listkills" , this.listKills)
+//				console.log( "during listkills" , this.listKills)
 				setTimeout( () => {	this.getKills(page + 1) }, 1450 );
 			}
 			else	{
-				 console.log( "ended listkills" , this.listKills)
+//				 console.log( "ended listkills" , this.listKills)
 			}
 		})
 		.catch(function (err) {
-		console.warn('Something went wrong.', err);
+//		console.warn('Something went wrong.', err);
 		});
 	}
 
@@ -87,21 +82,21 @@ export class WatchlistServiceService {
 	   	})
 	   	.then( (data : any) => {
 	 		let list : any = JSON.parse(data);
-	 		console.log("SIZE Losses" , list.length	)
+//	 		console.log("SIZE Losses" , list.length	)
 			list.forEach( (element  : any) =>{
 				this.listLosses.push(element)
-				console.log("ELEMENT LOSS" , element)
+//				console.log("ELEMENT LOSS" , element)
 			})
 	 		if(list.length >= 200){
-				console.log( "during listlosses" , this.listLosses)
+//				console.log( "during listlosses" , this.listLosses)
 				setTimeout( () => { 	this.getLosses(page + 1) }, 1350 );
 	 		}
 	 		else{
-			console.log( "ended listlosses" , this.listLosses)
+//				console.log( "ended listlosses" , this.listLosses)
 			}})
 			.catch(function (err) {
-				console.log(err, "1SMIIILEEEE");
-				console.warn('Something went wrong.', err);
+//				console.log(err, "1SMIIILEEEE");
+//				console.warn('Something went wrong.', err);
 	   	});
 	}
 

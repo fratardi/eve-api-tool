@@ -32,27 +32,27 @@ export class KillWidgetComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    console.log( "init widget " ,this.data)
+//    console.log( "init widget " ,this.data)
     this.zKillReport     = this.data as unknown as truc;
     this.getKillReport(   );
   }
 
   lol() {
     this.zKillReport     = this.data as unknown as truc;
-    console.log("YOLOORORORO", this.getKillReport())
+//    console.log("YOLOORORORO", this.getKillReport())
     this.getKillReport();
-    console.log(this);
+//    console.log(this);
   }
 
   getKillReport() {
-    this.hasInit = true;
-   let hello =  this.eveKillReport =  this.eveEsiService.getCCPKillReport(this.zKillReport?.killmail_id , this.zKillReport?.zkb.hash );
-    this.systemName =  this.eveEsiService.getNamesFromIds([this.zKillReport?.solar_system_id, 0])
-    console.log("😋" , this.zKillReport?.zkb.url , hello)
+    this.hasInit    = true;
+    let hello       = this.eveKillReport =  this.eveEsiService.getCCPKillReport(this.zKillReport?.killmail_id , this.zKillReport?.zkb.hash );
+    this.systemName = this.eveEsiService.getNamesFromIds([this.zKillReport?.solar_system_id, 0])
+//  console.log("😋" , this.zKillReport?.zkb.url , hello)
   }
 
   setDestination() {
-    console.log("HEHEHE", this.eveKillReport);
+//    console.log("HEHEHE", this.eveKillReport);
     // report.forEach((element : any) => { 
     //   console.log( "Element == "  , element)
     // })
@@ -60,8 +60,8 @@ export class KillWidgetComponent implements OnInit {
   }
 
   goToLink(url: string){
-    console.log("YOLO" ,this )
+//  console.log("YOLO" ,this )
     window.open(url, "_blank");
-}
+  }
 
 }

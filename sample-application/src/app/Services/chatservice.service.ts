@@ -30,7 +30,7 @@ export class ChatService {
     this.messages = <Subject<Message>>(
       wscService.connect(CHAT_URL).pipe(map((response: MessageEvent): any => {
         let truc : Report[] = response.data
-        console.log("-------------------------------------", JSON.parse(truc as any),"------------------------------");
+//        console.log("-------------------------------------", JSON.parse(truc as any),"------------------------------");
         return {
           truc
         };

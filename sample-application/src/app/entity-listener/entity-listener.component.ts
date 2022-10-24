@@ -9,32 +9,31 @@ import { EveEsiService } from '../Services/eve-esi.service';
 })
 export class EntityListenerComponent implements OnInit {
 
-
   killList : any[] = [] ;
 
   constructor(
-    private chatService : ChatService,
-    private esi         : EveEsiService
-    ) {
-    chatService.messages.subscribe((msg : any) => {
-      console.log('Response recieved from websocket: ' ,JSON.parse(msg.truc));
-      this.killList.push(JSON.parse(msg.truc)) 
-      console.log(this.killList)
-    });
+		private chatService : ChatService,
+		private esi         : EveEsiService
+	) {
+		chatService.messages.subscribe((msg : any) => {
+//	  	console.log('Response recieved from websocket: ' ,JSON.parse(msg.truc));
+		this.killList.push(JSON.parse(msg.truc))
+//	  	console.log(this.killList)
+	});
    }
 
   ngOnInit(): void {
   }
 
   private message = {
-    action  : 'sub',
-    channel : 'killstream',
+	action  : 'sub',
+	channel : 'killstream',
   };
 
   sendMessage() {
-    console.log('new message from the client: ', this.message , this );
-    this.chatService.messages.next(this.message);
-    this.message.channel= "region:10000002";
+//	console.log('new message from the client: ', this.message , this );
+	this.chatService.messages.next(this.message);
+	this.message.channel= "region:10000002";
   }
 
 }

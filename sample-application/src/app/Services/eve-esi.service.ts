@@ -8,8 +8,6 @@ const ACCESS_TOKEN  = 	'access_token';
 const secretKey     =  	"jcVXo0IZFt5YDr8AJ3Z7cKCDfVijNxKhupOKCQ2I"
 const client_id   	=	"7f45c8124b2640beba3a6902df6832a2";
 
-
-
 @Injectable({
   providedIn: 'root'
 })
@@ -44,9 +42,9 @@ export class EveEsiService {
 		let proxy = this.hostpoint + "/latest"
 		this.http.get(proxy +"/universe/regions")
 		.subscribe((data : any) => {
-			console.log("regionsId", data);
+//			console.log("regionsId", data);
 			data.forEach((element : any ) => {
-				console.log(element);
+//				console.log(element);
 			});
 			this.getNamesFromIds(data);
 			return(data);
@@ -55,7 +53,7 @@ export class EveEsiService {
 
 	getCharactersFromString(name : string) :any
 	{
-		console.log("eve esi service getCharactersFromString")
+//		console.log("eve esi service getCharactersFromString")
 		if(name.length < 3){
 			return;
 		}
@@ -63,12 +61,12 @@ export class EveEsiService {
 			{"Authorization":" Bearer " +  this.token.access_token}
 		);
 		let proxy = this.hostpoint + "/latest";
-		console.log(this.userOwn);
+//		console.log(this.userOwn);
 		this.http.get(proxy + "/characters/" + this.userOwn.CharacterID + "/search/?categories=character&datasource=tranquility&language=en&search=" + name + "&strict=false" 
 		,{headers: httpHeaders2 })
 		.subscribe((data :any )   => {
 			if(data == undefined) {
-				console.log("data Contact", data.character.length);
+//				console.log("data Contact", data.character.length);
 			}
 			return(this.getItemInfoFromId(data.character));
 		})
@@ -82,35 +80,35 @@ export class EveEsiService {
 		}
 		let httpHeaders2 = new HttpHeaders(
 			{"Authorization":" Bearer " +  this.token.access_token}
-		)
+		);
 		let proxy = this.hostpoint + "/latest";
 		this.http.post(proxy +  "/universe/names/?datasource=tranquility"  ,tab, 	{headers: httpHeaders2 })
 		.subscribe((data :any)=> {
-			console.log("DAAAA TAAAA" , data)
-			this . characterContactsWithName = [];
+//			console.log("DAAAA TAAAA" , data)
+			this.characterContactsWithName = [];
 			this.autoCompleteSearchresults = data;
 			if(!this.characterContactsWithName.length){
 			data.forEach((element : any)=> {
 					this.characterContactsWithName.push(element);
-				})
-			}	
+				}
+			)}	
 			return(data);
 		})
 	}
 
 	getCharacterContacts () : any {
-		console.log("get Character Contacts ",this.characterContactsId)
+//		console.log("get Character Contacts ",this.characterContactsId)
 		let httpHeaders2 = new HttpHeaders(
 			{"Authorization":" Bearer " +  this.getToken()}
 		)
 		let proxy = this.hostpoint + "/latest"
-		console.log(this.userOwn)
+//		console.log(this.userOwn)
 		this.http.get(proxy +"/characters/" +this.userOwn.CharacterID+"/contacts/?datasource=tranquility", 	{headers: httpHeaders2 })
 		.subscribe((data :any )   => {
-			console.log("data", data)
+//			console.log("data", data)
 			if(!this.characterContactsId.length)	{
 				data.forEach((element : any)=>{
-					console.log(element.contact_id);
+//					console.log(element.contact_id);
 					this.characterContactsId.push(element.contact_id)
 			})}
 			return(this.characterContactsId)
@@ -123,14 +121,14 @@ export class EveEsiService {
 	}
 
 	getUserOwn(){
-		console.log("Get user Own ", this.userOwn.CharacterID)
+//		console.log("Get user Own ", this.userOwn.CharacterID)
 		let proxy = this.hostpoint + "/latest"
 		this.http.get(proxy +"/characters/" +this.userOwn.CharacterID+"/corporationhistory/?datasource=tranquility")
 		.subscribe(data  => {
-			console.log("data", data)
+//			console.log("data", data)
 			return(this.userOwn);
 		})
-		console.log(this.token)
+//		console.log(this.token)
 		return(this.userOwn);
 	}
 
@@ -138,7 +136,7 @@ export class EveEsiService {
 		let proxy = this.hostpoint + "/latest"
 		this.http.get(proxy + "/killmails/" + id + "/" + hash + "/")
 		.subscribe(data  => {
-			console.log("CCPKillReport", data)
+//			console.log("CCPKillReport", data)
 			return(data);
 		})
 	}
@@ -169,7 +167,7 @@ export class EveEsiService {
 		)
 		.subscribe(data  => {
 			this.token = data as Swagger.Tokens;
-			console.log("DATA  = ",data )
+//			console.log("DATA  = ",data )
 			let httpHeaders2 = new HttpHeaders(
 				{"Authorization":" Bearer " +  this.token.access_token}
 			)
@@ -178,19 +176,13 @@ export class EveEsiService {
 			this.http.get	(this.hostpoint+ '/verify',{headers  : httpHeaders2})
 				.subscribe(e => {
 				this.userOwn = e as	 Swagger.UserInfo;
-				console.log(e , this.token.expires_in )
+//				console.log(e , this.token.expires_in )
 				this.refreshWhenexpired()
 				this.router.navigate(['third-component']);	
 				return(this.userOwn)
 			})
 		})
 	}
-
-
-
-
-
-
 
 	refreshWhenexpired( ) {
 		setInterval(() =>  this.refreshToken(), 1000 * 60 * 1 )
@@ -212,7 +204,7 @@ export class EveEsiService {
 		)
 		.subscribe(data  => {
 			this.token = data as Swagger.Tokens;
-			console.log("DATA  = ",data )
+//			console.log("DATA  = ",data )
 			let httpHeaders2 = new HttpHeaders(
 				{
 					"Authorization":" Bearer " +  this.token.access_token
@@ -221,9 +213,7 @@ export class EveEsiService {
 		  	localStorage.setItem(REFRESH_TOKEN, this.token.refresh_token);
 			this.http.get(this.hostpoint+ '/verify',{headers  : httpHeaders2})
 				.subscribe(e => {
-
-					console.log("NOTICE")
-
+//					console.log("NOTICE")
 					this.userOwn = e as	 Swagger.UserInfo;
 					return;
 				})

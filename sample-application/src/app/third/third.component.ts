@@ -10,15 +10,15 @@ import { WatchlistServiceService } from '../Services/watchlist-service.service';
 })
 export class ThirdComponent implements OnInit {
 
-	characterContactsId: any;
-	characterContactWithNames :any ; 
-	currentUser : any;
-	userId : any;
-	stats : any  ; 
+	characterContactWithNames	:	any; 
+	characterContactsId			:	any;
+	currentUser					:	any;
+	userId						:	any;
+	stats						:	any; 
 
 	constructor(
 		private esi_service : EveEsiService,
-		private watchlist : WatchlistServiceService 
+		private watchlist	: WatchlistServiceService 
 	) { 
 		this.esi_service.refreshToken()
 		this.esi_service.refreshWhenexpired()
@@ -36,10 +36,10 @@ export class ThirdComponent implements OnInit {
 	}
 
 	ngOnInit(): void {
-		console.log("token ====" ,this.esi_service.getToken())
-		this.characterContactsId =	this.esi_service.getCharacterContacts();
-		this.characterContactsId = this.esi_service.characterContactsId;
-		this.currentUser = this.esi_service.userOwn;
-		this.userId = this.currentUser.CharacterID
+		console.log("token ====" ,this.esi_service.getToken());
+		this.characterContactsId	=	this.esi_service.getCharacterContacts();
+		this.characterContactsId	=	this.esi_service.characterContactsId;
+		this.currentUser			=	this.esi_service.userOwn;
+		this.userId 				=	this.currentUser.CharacterID;
   	}
 }
