@@ -11,7 +11,7 @@ export class EntityListenerComponent implements OnInit {
 
   killList : any[] = [] ;
 
-  constructor(
+	constructor(
 		private chatService : ChatService,
 		private esi         : EveEsiService
 	) {
@@ -25,6 +25,12 @@ export class EntityListenerComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  clearStream(){
+	this.killList = [];
+  }
+
+
+
   private message = {
 	action  : 'sub',
 	channel : 'killstream',
@@ -34,6 +40,12 @@ export class EntityListenerComponent implements OnInit {
 //	console.log('new message from the client: ', this.message , this );
 	this.chatService.messages.next(this.message);
 	this.message.channel= "region:10000002";
+  }
+
+  getEntityToListen(){
+
+	
+
   }
 
 }

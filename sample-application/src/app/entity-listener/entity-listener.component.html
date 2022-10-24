@@ -1,15 +1,47 @@
-<p>entity-listener works!</p>
+
+<div>
+   <input type="checkbox" id="exact" name="exact" checked>
+   <label for="exact">Exact Type Match</label>
+</div>
 <p>
-      Select Region PLaceHolders
+	<select name="entity" id="entity-select">
+		<option value="">
+			-- Select Entity Type To listen
+		</option>
+		<option value="Character">
+			Character
+		</option>
+		<option value="System">
+			System
+		</option>
+		<option value="Constellation">
+			Constellation
+		</option>
+		<option value="Region">
+			Region
+		</option>
+	</select>
+
+
+
+
+<!--
+
+	  <input>
    <input>
-   <input>
+ -->
+
+
+
+
 </p>
 
-<button (click)="sendMessage()">Send</button> 
+
+<button (click)="sendMessage()">Send</button>
 
 <div  class="scroller"  >
    <div  *ngFor="let item of killList;" >
-      <app-kill-widget [data]="item">
-      </app-kill-widget>
+	  <app-kill-widget [data]="item">
+	  </app-kill-widget>
    </div>
 </div>
