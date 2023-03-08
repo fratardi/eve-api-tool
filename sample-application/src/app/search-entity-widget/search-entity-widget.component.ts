@@ -13,7 +13,7 @@ export class SearchEntityWidgetComponent implements OnInit {
 
 	searchEntityForm!: FormGroup;
 
-  selected = 'option2';
+  selected = 'Character';
   constructor(
 		private esi_service : EveEsiService,
     private formBuilder: FormBuilder,
@@ -28,7 +28,8 @@ export class SearchEntityWidgetComponent implements OnInit {
 		console.log('hello from autocomplete', this);
 
 		this.searchEntityForm = this.formBuilder.group({
-		  	name: ''
+		  	name: '',
+        something : "Character"
 		});
 
     
@@ -45,22 +46,17 @@ export class SearchEntityWidgetComponent implements OnInit {
 
   updater()
   {
-
     console.log('updater', this.searchEntityForm.value.name, this.searchEntityForm.value.entityType);
-
     this.esi_service.getIdFromNameAndEntityType(this.searchEntityForm.value.name ,this.selected )
-
   }
 
 	onChanges(): void {
+ 
 
   		this.searchEntityForm.statusChanges.subscribe(
-			data => {
-   //     this.esi_service.
-				// console.log(this.searchEntityForm.value.name);
-
-			//	console.log(this.selected);
-      }
+        data => {
+          console.log("EVENT HAPPENED")
+        }
       )
 	}
 

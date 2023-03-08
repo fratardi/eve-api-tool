@@ -49,11 +49,10 @@ export class EveEsiService {
 			.subscribe((data :any )   => {
 					console.log("data Contact", data)
 
-	this.regions=			this.getNamesInfoFromId(data);
+			this.regions	=	this.getNamesInfoFromId(data);
 
 			})
-
-				console.log("regions = ," ,this.regions)
+		//	console.log("regions = ," ,this.regions)
 		}
 
 
@@ -64,14 +63,13 @@ export class EveEsiService {
 				this.autoCompleteSearchresults = []
 				return;
 			}
-	
 			// let httpHeaders2 = new HttpHeaders(
 			// 	{"Authorization":" Bearer " +  this.token.access_token}
 			// )
 			let proxy = this.hostpoint + "/latest"
 			this.http.post(proxy +  "/universe/names/?datasource=tranquility"  ,tab)
 			.subscribe((data :any)=> {
-				console.log("DAAAA TAAAA" , data)
+			//	console.log("DAAAA TAAAA" , data)
 				// this . characterContactsWithName = [];
 				// this.autoCompleteSearchresults = data;
 				// if(!this.characterContactsWithName.length){
@@ -91,14 +89,26 @@ export class EveEsiService {
 
 		getIdFromNameAndEntityType(entityName : string,  entityType : string ,   )
 		{
-			if(entityName == undefined)
+			if(entityName == undefined || entityName.length < 3)
 				return;
-			if(entityName == undefined)
+			if(entityType == undefined)
 				return;
-		console.log( entityName, entityType);
-		}
+				let proxy = this.hostpoint + "/latest"
+				let httpHeaders2 = new HttpHeaders(
+					{"Authorization":" Bearer " +  this.token.access_token}
+				)
+			console.log("getIdFromEntityNAme", entityName, entityType);
 
+			this.http.get(proxy + "/characters/" + this.userOwn.CharacterID + "/search/?categories="+ entityType.toLowerCase()+"&datasource=tranquility&language=en&search=" + entityName + "&strict=false" 
+			, 	{headers: httpHeaders2 })
+			.subscribe((data :any )   => {
+				if(data == undefined){
+					console.log("data Contact", data.character.length)
+				}
+				console.log("data Contact", data)
 
+					})
+				}
 
 
 		setDestination(params : any)
@@ -115,10 +125,9 @@ export class EveEsiService {
 				{"Authorization":" Bearer " +  this.token.access_token}
 			)
 			let proxy = this.hostpoint + "/latest"
-
 			this.http.post(proxy +  "/ui/autopilot/waypoint/?add_to_beginning=true&clear_other_waypoints=true&datasource=tranquility&destination_id=" + params.solar_system_id  ,payload, 	{headers: httpHeaders2 })
 			.subscribe((data :any)=> {
-				console.log("DAAAA TAAAA" , data)
+//				console.log("DAAAA TAAAA" , data)
 				return(data);
 			})
 
@@ -128,7 +137,7 @@ export class EveEsiService {
 
 
 
-	getCharactersFromString(name : string) :any
+	getCharactersFromString(name : string) : any
 	{
 		console.log("eve esi service getCharactersFromString")
 		if(name.length < 3){
@@ -142,15 +151,12 @@ export class EveEsiService {
 		this.http.get(proxy + "/characters/" + this.userOwn.CharacterID + "/search/?categories=character&datasource=tranquility&language=en&search=" + name + "&strict=false" 
 		, 	{headers: httpHeaders2 })
 		.subscribe((data :any )   => {
-			if(data == undefined)
-			{console.log("data Contact", data.character.length)
-		}
+			if(data == undefined){
+			//	console.log("data Contact", data.character.length)
+			}
 		return(this.getItemInfoFromId(data.character));
 		})
 	}
-
-
-
 
 	getItemInfoFromId( tab :string[]) : any
 	{
