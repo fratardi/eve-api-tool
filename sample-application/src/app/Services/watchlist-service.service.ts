@@ -17,8 +17,6 @@ export class WatchlistServiceService {
 	zApi 		: string 	= "http://localhost:4200/zapi"
 
 	constructor(
-		// private http		:	HttpClient,
-		// private esi_service : 	EveEsiService
 	) {}
 
 	updateList(item : any)	{

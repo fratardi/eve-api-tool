@@ -25,6 +25,7 @@ import {MatGridListModule} from '@angular/material/grid-list';
 import { EntityListenerComponent } from './entity-listener/entity-listener.component';
 import { KillWidgetComponent } from './kill-widget/kill-widget.component';
 import { MarketBuyNSellComponent } from './market-buy-nsell/market-buy-nsell.component';
+import { SearchEntityWidgetComponent } from './search-entity-widget/search-entity-widget.component';
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import { MarketBuyNSellComponent } from './market-buy-nsell/market-buy-nsell.com
     EntityListenerComponent,
     KillWidgetComponent,
     MarketBuyNSellComponent,
+    SearchEntityWidgetComponent,
   ],
   imports: [
     BrowserModule,

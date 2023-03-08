@@ -89,6 +89,16 @@ export class EveEsiService {
 		}
 
 
+		getIdFromNameAndEntityType(entityName : string,  entityType : string ,   )
+		{
+			if(entityName == undefined)
+				return;
+			if(entityName == undefined)
+				return;
+		console.log( entityName, entityType);
+		}
+
+
 
 
 		setDestination(params : any)
