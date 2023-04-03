@@ -48,16 +48,22 @@ export class KillWidgetComponent implements OnInit {
     this.collectIds(this.zKillReport, this.itemIds); // Collect IDs and store them in itemIds array
   }
 
-  lol()
-  {
-    this.zKillReport     = this.data as unknown as truc;
+  lol() {
+    this.zKillReport = this.data as unknown as truc;
     this.getKillReport();
-    console.log(this);
-  }
 
+    // Update the solvedTabs array (example)
+
+
+    console.log(this.solvedTabs[0]);
+  }
   getKillReport(){
     this.hasInit = true;
-    //  this.eveKillReport =  this.eveEsiService.getCCPKillReport(this.zKillReport?.killmail_id , this.zKillReport?.zkb.hash );
+      // this.eveKillReport =  this.eveEsiService.getCCPKillReport(this.zKillReport?.killmail_id , this.zKillReport?.zkb.hash );
+
+
+
+
   }
 
 

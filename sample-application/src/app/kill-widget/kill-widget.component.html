@@ -1,4 +1,26 @@
-
+<details style="background-color: darkblue; color: lightgray;">
+  <summary>Solved Tabs</summary>
+  <div *ngFor="let tab of solvedTabs; index as i">
+    <h3>Tab {{i + 1}}</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Category</th>
+          <th>ID</th>
+          <th>Name</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let detail of tab">
+          <td>{{detail.category}}</td>
+          <td>{{detail.id}}</td>
+          <td>{{detail.name}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</details>
+<button (click)="lol()">lol</button>
 <details style="background-color: darkslategrey; color: lightgray;">
     <summary>Killmail Details</summary>
     <div>
