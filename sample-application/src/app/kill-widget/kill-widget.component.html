@@ -1,51 +1,44 @@
 
-<!-- 
-<details  style="background-color: darkslategrey;  color: lightgray; ">
-    <summary>
-        TinycombarteportPLaceholder
-        {{zKillReport?.killmail_time}}
-        {{zKillReport?.solar_system_id}}
-    </summary>
-   Solar System Infos
-    {{zKillReport?.solar_system_id}}
-    <details style="background-color: darkred;">
-        <summary>
-            Attackers {{zKillReport?.attackers.length}}
-        </summary>
-            AttackInfoss
-    </details>
-
-    <details style="background-color: darkgreen;">
-         <summary>
-            Defense  {{zKillReport?.victim.damage_taken}}
-        </summary>
-        Defense Infos
-    </details>
-    <button (click)="setDestination()">Set Destination</button>
-</details>  -->
-
 <details style="background-color: darkslategrey; color: lightgray;">
     <summary>Killmail Details</summary>
     <div>
       <h2>Killmail ID: {{zKillReport?.killmail_id}}</h2>
       <p>Killmail Time: {{zKillReport?.killmail_time}}</p>
-      <p>Solar System ID: {{zKillReport?.solar_system_id}}</p>
+      <p>Solar System ID: {{zKillReport?.solar_system_id}}
+        <button (click)="setDestination()">Set Destination</button></p>
+
     </div>
     <details style="background-color: darkred;">
       <summary>Attackers ({{zKillReport?.attackers.length}})</summary>
       <div>
-        <ul>
-          <li *ngFor="let attacker of zKillReport?.attackers">
-            <p>Alliance ID: {{attacker.alliance_id}}</p>
-            <p>Character ID: {{attacker.character_id}}</p>
-            <p>Corporation ID: {{attacker.corporation_id}}</p>
-            <p>Damage Done: {{attacker.damage_done}}</p>
-            <p>Final Blow: {{attacker.final_blow}}</p>
-            <p>Security Status: {{attacker.security_status}}</p>
-            <p>Ship Type ID: {{attacker.ship_type_id}}</p>
-            <p>Weapon Type ID: {{attacker.weapon_type_id}}</p>
-          </li>
-        </ul>
+        <table>
+          <thead>
+            <tr>
+              <th>Alliance ID</th>
+              <th>Character ID</th>
+              <th>Corporation ID</th>
+              <th>Damage Done</th>
+              <th>Final Blow</th>
+              <th>Security Status</th>
+              <th>Ship Type ID</th>
+              <th>Weapon Type ID</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let attacker of zKillReport?.attackers">
+              <td>{{attacker.alliance_id}}</td>
+              <td>{{attacker.character_id}}</td>
+              <td>{{attacker.corporation_id}}</td>
+              <td>{{attacker.damage_done}}</td>
+              <td>{{attacker.final_blow}}</td>
+              <td>{{attacker.security_status}}</td>
+              <td>{{attacker.ship_type_id}}</td>
+              <img class="image" src="https://images.evetech.net/types/{{attacker.ship_type_id}}/icon" width="40" height="40"  />
+<!--   
+              <td>{{attacker.weapon_type_id}}</td> -->
+            </tr>
+          </tbody>
+        </table>
       </div>
     </details>
     <details style="background-color: darkgreen;">
@@ -56,14 +49,33 @@
         <p>Corporation ID: {{zKillReport?.victim.corporation_id}}</p>
         <p>Damage Taken: {{zKillReport?.victim.damage_taken}}</p>
         <p>Ship Type ID: {{zKillReport?.victim.ship_type_id}}</p>
+        <img class="image" src="https://images.evetech.net/types/{{zKillReport?.victim.ship_type_id}}/icon" width="32" height="32"  />
         <p>Position:</p>
         <ul>
           <li>X: {{zKillReport?.victim.position.x}}</li>
           <li>Y: {{zKillReport?.victim.position.y}}</li>
           <li>Z: {{zKillReport?.victim.position.z}}</li>
         </ul>
-      </div>
-    </details>
-    <button (click)="setDestination()">Set Destination</button>
-    <!-- <button onclick="setDestination()">Set Destination</button> -->
-  </details>
+        <details>
+          <summary>Items ({{zKillReport?.victim.items.length}})</summary>
+          <div>
+            <table>
+              <thead>
+                <tr>
+                  <th>Flag</th>
+                  <th>Item Type ID</th>
+                  <th>Quantity Dropped</th>
+                  <th>Quantity Destroyed</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of zKillReport?.victim.items">
+                  <td>{{item.flag}}</td>
+                  <td>{{item.item_type_id}}</td>
+                  <td>{{item.quantity_dropped}}</td>
+                  <td>{{item.quantity_destroyed}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </details>

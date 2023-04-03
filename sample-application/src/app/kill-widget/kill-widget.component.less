@@ -65,3 +65,22 @@ button {
     background-color: darken(@button-background-color, 10%);
   }
 }
+
+// Table styles
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: @margin-large;
+  font-size: @font-size-small;
+  line-height: @line-height-small;
+}
+
+th, td {
+  padding: @margin-small;
+  text-align: left;
+  border-bottom: 1px solid @details-text-color;
+}
+
+th {
+  font-weight: bold;
+}

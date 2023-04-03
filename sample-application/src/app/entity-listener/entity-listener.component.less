@@ -1,47 +1,49 @@
-details {
-    border: 1px solid #aaa;
-    border-radius: 4px;
-    padding: .5em .5em 0;
+@primary-color: #4a90e2;
+@secondary-color: #f5f5f5;
+@text-color: #333;
+
+body {
+  font-family: "Segoe UI", Arial, sans-serif;
+  color: @text-color;
 }
 
-summary {
-    font-weight: bold;
-    margin: -.5em -.5em 0;
-    padding: .5em;
+p {
+  font-size: 1.2em;
 }
 
-details[open] {
-    padding: .5em;
-}
+button {
+  background-color: @primary-color;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 8px 16px;
+  font-size: 1em;
+  cursor: pointer;
+  margin: 0 8px 16px 0;
 
-details[open] summary {
-    border-bottom: 1px solid #aaa;
-    margin-bottom: .5em;
-}
-
-
-.vertical-menu {
-    width: 200px; /* Set a width if you like */
+  &:hover {
+    background-color: darken(@primary-color, 10%);
   }
-  
-  .vertical-menu a {
-    background-color: #eee; /* Grey background color */
-    color: black; /* Black text color */
-    display: block; /* Make the links appear below each other */
-    padding: 12px; /* Add some padding */
-    text-decoration: none; /* Remove underline from links */
-  }
-  
-  .vertical-menu a:hover {
-    background-color: #ccc; /* Dark grey background on mouse-over */
-  }
-  
-  .vertical-menu a.active {
-    background-color: #04AA6D; /* Add a green color to the "active/current" link */
-    color: white;}
+}
 
-.scroller{
-    overflow-y: scroll;
-width: 25em;
-  height: 12em;
+.scroller {
+  //max-height: 300px;
+  overflow-y: auto;
+  border: 1px solid @secondary-color;
+  padding: 8px;
+  border-radius: 4px;
+  background-color: @secondary-color;
+}
+
+.app-search-entity-widget,
+.app-kill-widget {
+  padding: 8px;
+  margin-bottom: 8px;
+  background-color: white;
+  border: 1px solid @secondary-color;
+  border-radius: 4px;
+}
+
+.app-search-entity-widget {
+  margin-bottom: 16px;
 }
