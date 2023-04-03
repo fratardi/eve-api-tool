@@ -84,7 +84,7 @@ export class EveEsiService {
 		let proxy = this.hostpoint + "/latest";
 		this.http.post(proxy +  "/universe/names/?datasource=tranquility"  ,tab, 	{headers: httpHeaders2 })
 		.subscribe((data :any)=> {
-//			console.log("DAAAA TAAAA" , data)
+		console.log("getItemInfoFromId(" , data)
 			this.characterContactsWithName = [];
 			this.autoCompleteSearchresults = data;
 			if(!this.characterContactsWithName.length){
@@ -137,7 +137,7 @@ export class EveEsiService {
 			let proxy = this.hostpoint + "/latest"
 			this.http.post(proxy +  "/ui/autopilot/waypoint/?add_to_beginning=true&clear_other_waypoints=true&datasource=tranquility&destination_id=" + params.solar_system_id  ,payload, 	{headers: httpHeaders2 })
 			.subscribe((data :any)=> {
-//				console.log("DAAAA TAAAA" , data)
+			console.log("setDestination" , data)
 				return(data);
 			})
 

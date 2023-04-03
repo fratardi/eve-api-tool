@@ -33,6 +33,8 @@ export class KillWidgetComponent implements OnInit {
   eveKillReport: any;
   //itemIds: number[] = []; // array to store item IDs
 
+  solvedTabs: any[] = [];
+
   hasInit : boolean = false;
 
   constructor(
@@ -96,8 +98,14 @@ export class KillWidgetComponent implements OnInit {
     // if (obj.zkb && obj.zkb.locationID !== null) {
     //   ids.push(obj.zkb.locationID);
     // }
-    console.log( "HEHEHE",this.eveEsiService.getNamesInfoFromId(this.removeDuplicates(ids)))
+  //  console.log ( "Sometext dsdsd" , this.eveEsiService.getNamesInfoFromId(this.removeDuplicates(ids)))
+  //  this.solvedTabs.push( this.eveEsiService.getNamesInfoFromId(this.removeDuplicates(ids)))
+  this.eveEsiService.getNamesInfoFromId(this.removeDuplicates(ids)).subscribe((data: string[]) => {
+    console.log("getNamesInfoFromId(" , data);
+    this.solvedTabs.push(data);
+  });
 
+    console.log("Solved", this.solvedTabs)
   }
 
 

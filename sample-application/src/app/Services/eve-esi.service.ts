@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import * as Swagger from '../interfaces'
+import { Observable } from 'rxjs';
 
 const REFRESH_TOKEN = 	'refresh_token';
 const ACCESS_TOKEN  = 	'access_token';
@@ -57,34 +58,47 @@ export class EveEsiService {
 
 
 
-		getNamesInfoFromId( tab :string[]) : any
-		{
-			if(!tab)	{
-				this.autoCompleteSearchresults = []
-				return;
-			}
-			// let httpHeaders2 = new HttpHeaders(
-			// 	{"Authorization":" Bearer " +  this.token.access_token}
-			// )
-			let proxy = this.hostpoint + "/latest"
-			this.http.post(proxy +  "/universe/names/?datasource=tranquility"  ,tab)
-			.subscribe((data :any)=> {
-			console.log("DAAAA TAAAA" , data)
-				// this . characterContactsWithName = [];
-				// this.autoCompleteSearchresults = data;
-				// if(!this.characterContactsWithName.length){
-				// data.forEach(
-				// 	(element : any)=> {
-				// 		this . characterContactsWithName.push(element)	
-				// 	}
-			//	)
-			//	console.log(this . characterContactsWithName);
-			//	}	
-				return(data);
-			//	
-			})
+		// getNamesInfoFromId( tab :string[]) : any
+		// {
+		// 	if(!tab)	{
+		// 		this.autoCompleteSearchresults = []
+		// 		return;
+		// 	}
+		// 	// let httpHeaders2 = new HttpHeaders(
+		// 	// 	{"Authorization":" Bearer " +  this.token.access_token}
+		// 	// )
+		// 	let proxy = this.hostpoint + "/latest"
+		// 	this.http.post(proxy +  "/universe/names/?datasource=tranquility"  ,tab)
+		// 	.subscribe((data :any)=> {
+		// 		console.log("getNamesInfoFromId(" , data)
+		// 		// this . characterContactsWithName = [];
+		// 		// this.autoCompleteSearchresults = data;
+		// 		// if(!this.characterContactsWithName.length){
+		// 		// data.forEach(
+		// 		// 	(element : any)=> {
+		// 		// 		this . characterContactsWithName.push(element)	
+		// 		// 	}
+		// 	//	)
+		// 	//	console.log(this . characterContactsWithName);
+		// 	//	}	
+		// 		return(data);
+		// 	//	
+		// 	})
 	
-		}
+		// }
+
+
+		getNamesInfoFromId(tab: string[]): Observable<any> {
+			if (!tab) {
+			  return new Observable<any>(observer => {
+				observer.next([]);
+				observer.complete();
+			  });
+			}
+			let proxy = this.hostpoint + "/latest";
+			return this.http.post(proxy + "/universe/names/?datasource=tranquility", tab);
+		  }
+		
 
 
 		getIdFromNameAndEntityType(entityName : string,  entityType : string ,   )
@@ -127,7 +141,7 @@ export class EveEsiService {
 			let proxy = this.hostpoint + "/latest"
 			this.http.post(proxy +  "/ui/autopilot/waypoint/?add_to_beginning=true&clear_other_waypoints=true&datasource=tranquility&destination_id=" + params.solar_system_id  ,payload, 	{headers: httpHeaders2 })
 			.subscribe((data :any)=> {
-//				console.log("DAAAA TAAAA" , data)
+				console.log("setDestination(" , data)
 				return(data);
 			})
 
@@ -171,7 +185,7 @@ export class EveEsiService {
 		let proxy = this.hostpoint + "/latest"
 		this.http.post(proxy +  "/universe/names/?datasource=tranquility"  ,tab, 	{headers: httpHeaders2 })
 		.subscribe((data :any)=> {
-			console.log("DAAAA TAAAA" , data)
+			console.log("getItemInfoFromId(" , data)
 			this . characterContactsWithName = [];
 			this.autoCompleteSearchresults = data;
 			if(!this.characterContactsWithName.length){
