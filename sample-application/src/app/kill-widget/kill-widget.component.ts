@@ -27,9 +27,11 @@ export class KillWidgetComponent implements OnInit {
 
 
   @Input() data: any[] | undefined;
+  itemIds: number[] = []; // array to store item IDs
 
   zKillReport :truc | undefined;
   eveKillReport: any;
+  //itemIds: number[] = []; // array to store item IDs
 
   hasInit : boolean = false;
 
@@ -38,14 +40,10 @@ export class KillWidgetComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    console.log( "init widget " ,this.data)
-
-
-
-    this.zKillReport     = this.data as unknown as truc;
-
-    this.getKillReport(   );
-
+    console.log("init widget ", this.data)
+    this.zKillReport = this.data as unknown as truc;
+    this.getKillReport();
+    this.collectIds(this.zKillReport, this.itemIds); // Collect IDs and store them in itemIds array
   }
 
   lol()
@@ -68,6 +66,43 @@ export class KillWidgetComponent implements OnInit {
     console.log(this);
 
   }
+  collectIds(obj: any, ids: number[]): void {
+    if (obj.attackers && Array.isArray(obj.attackers)) {
+      for (const attacker of obj.attackers) {
+        if (attacker.character_id) ids.push(attacker.character_id);
+        if (attacker.corporation_id) ids.push(attacker.corporation_id);
+        if (attacker.ship_type_id) ids.push(attacker.ship_type_id);
+        if (attacker.weapon_type_id) ids.push(attacker.weapon_type_id);
+        if (attacker.alliance_id) ids.push(attacker.alliance_id);
+      }
+    }
+  
+    if (obj.solar_system_id) {
+      ids.push(obj.solar_system_id);
+    }
+  
+    if (obj.victim) {
+      if (obj.victim.character_id) ids.push(obj.victim.character_id);
+      if (obj.victim.corporation_id) ids.push(obj.victim.corporation_id);
+      if (obj.victim.ship_type_id) ids.push(obj.victim.ship_type_id);
+  
+      if (obj.victim.items && Array.isArray(obj.victim.items)) {
+        for (const item of obj.victim.items) {
+          if (item.item_type_id) ids.push(item.item_type_id);
+        }
+      }
+    }
+  
+    // if (obj.zkb && obj.zkb.locationID !== null) {
+    //   ids.push(obj.zkb.locationID);
+    // }
+    console.log( "HEHEHE",this.eveEsiService.getNamesInfoFromId(this.removeDuplicates(ids)))
 
+  }
+
+
+removeDuplicates(arr: any[]): any[] {
+    return Array.from(new Set(arr));
+  }
 
 }

@@ -69,7 +69,7 @@ export class EveEsiService {
 			let proxy = this.hostpoint + "/latest"
 			this.http.post(proxy +  "/universe/names/?datasource=tranquility"  ,tab)
 			.subscribe((data :any)=> {
-			//	console.log("DAAAA TAAAA" , data)
+			console.log("DAAAA TAAAA" , data)
 				// this . characterContactsWithName = [];
 				// this.autoCompleteSearchresults = data;
 				// if(!this.characterContactsWithName.length){
