@@ -1,86 +1,42 @@
-// Variables
-@details-background-color: darkslategrey;
-@details-text-color: lightgray;
-@details-inner-background-color: darkred;
-@details-inner-2-background-color: darkgreen;
-@button-background-color: #4caf50;
-@button-text-color: #ffffff;
-@button-padding: 8px 12px;
-@button-border-radius: 4px;
+@import url("https://fonts.googleapis.com/css2?family=Orbitron&display=swap");
 
-@font-size-small: 14px;
-@font-size-medium: 16px;
-@font-size-large: 20px;
-@line-height-small: 1.2;
-@line-height-medium: 1.4;
-@line-height-large: 1.6;
-@margin-small: 4px;
-@margin-medium: 8px;
-@margin-large: 16px;
+@primary-color: #2b3e50;
+@secondary-color: #f7f7f7;
+@accent-color: #e74c3c;
 
-// Details styles
-details {
-  background-color: @details-background-color;
-  color: @details-text-color;
-  padding: @margin-medium;
-  border-radius: @button-border-radius;
-  margin-bottom: @margin-large;
-
-  summary {
-    cursor: pointer;
-    font-weight: bold;
-    margin-bottom: @margin-medium;
-  }
-
-  details {
-    background-color: @details-inner-background-color;
-    border-radius: @button-border-radius;
-    margin-bottom: @margin-medium;
-
-    & + details {
-      background-color: @details-inner-2-background-color;
-    }
-
-    summary {
-      cursor: pointer;
-      font-weight: bold;
-      margin-bottom: @margin-medium;
-    }
-  }
+body {
+  font-family: 'Orbitron', sans-serif;
+  background-image: linear-gradient(to bottom, @primary-color, @secondary-color);
+  color: white;
 }
 
-// Button styles
-button {
-  background-color: @button-background-color;
-  color: @button-text-color;
-  padding: @button-padding;
-  border: none;
-  border-radius: @button-border-radius;
-  cursor: pointer;
-  font-size: @font-size-medium;
-  line-height: @line-height-medium;
-  margin: @margin-medium;
-
-  &:hover {
-    background-color: darken(@button-background-color, 10%);
-  }
-}
-
-// Table styles
 table {
   width: 100%;
   border-collapse: collapse;
-  margin-bottom: @margin-large;
-  font-size: @font-size-small;
-  line-height: @line-height-small;
+  margin-top: 50px;
 }
 
 th, td {
-  padding: @margin-small;
+  padding: 10px;
   text-align: left;
-  border-bottom: 1px solid @details-text-color;
 }
 
 th {
+  background-color: @accent-color;
+}
+
+tr:nth-child(even) {
+  background-color: @secondary-color;
+}
+
+.attacker-badge {
+  background-color: @accent-color;
+  padding: 10px 20px;
+  color: white;
+  border-radius: 20px;
   font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-size: 18px;
+  margin-bottom: 20px;
 }
