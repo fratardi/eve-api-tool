@@ -1,103 +1,58 @@
-<details style="background-color: darkblue; color: lightgray;">
-  <summary>Solved Tabs 
-        <button (click)="setDestination()">Set Destination</button></summary>
-  <table>
-    <thead>
-      <tr>
-        <th>Alliance</th>
-        <th>Corporation</th>
-        <th>Character</th>
-        <th>Item</th>
-        <!-- <th>Solar System</th> -->
-        <th>Damage Done</th>
-        <th>%</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let item of processedKillReport">
-        <td>{{ item.alliance?.name || 'N/A' }}</td>
-        <td>{{ item.corporation?.name || 'N/A' }}</td>
-        <td>{{ item.character?.name || 'N/A' }}</td>
-        <td>{{ item.item?.name || 'N/A' }}</td>
-        <!-- <td>{{ item.solar_system?.name || 'N/A' }}</td> -->
-        <td>{{ item?.damage_done || 'N/A' }}   </td>
-        <td>{{(100 *(item?.damage_done/zKillReport?.victim.damage_taken)). toFixed(2)}} %</td>
-      </tr>
-    </tbody>
-  </table>
 
+<details >
+    <summary>[{{ victimSolved.character?.name || 'N/A' }}]
+      
+     
+      <img class="image" src="https://images.evetech.net/types/{{zKillReport?.victim.ship_type_id}}/icon" width="32" height="32"  />
+     [{{victimSolved.ship?.name}}]
+     [{{zKillReport?.killmail_time}}]
+     [{{zKillReport?.attackers?.length}}]
+          <button (click)="setDestination()">[{{victimSolved.location?.name}}]</button>
+          <!-- <button (click)="lol()">lol</button> -->
+        </summary>
+   
+    <div>
+      <!-- <h2>Killmail ID: {{zKillReport?.killmail_id}}</h2> -->
+      <p>Killmail Time: {{zKillReport?.killmail_time}}</p>
+      <!-- <p>Solar System ID: {{zKillReport?.solar_system_id}} -->
+        {{victimSolved.location?.name}}
 
-  <!-- <div *ngFor="let tab of solvedTabs; index as i">
-    <h3>Tab {{i + 1}}</h3>
+    </div>
     <table>
       <thead>
         <tr>
-          <th>Category</th>
-          <th>ID</th>
-          <th>Name</th>
+          <th>Alliance</th>
+          <th>Corporation</th>
+          <th>Character</th>
+          <th>Ship</th>
+          <th>Item</th>  
+          <!-- <th>Solar System</th> -->
+          <th>Damage Done</th>
+          <th>%</th>
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let detail of tab">
-          <td>{{detail.category}}</td>
-          <td>{{detail.id}}</td>
-          <td>{{detail.name}}</td>
+        <tr *ngFor="let item of processedAttack">
+          <td>{{ item.alliance?.name || 'N/A' }}</td>
+          <td>{{ item.corporation?.name || 'N/A' }}</td>
+          <td>{{ item.character?.name || 'N/A' }}</td>
+          <td>{{ item.ship?.name || 'N/A' }}</td>
+          <td>{{ (item.ship?.name == item.item?.name) ? 'Not Provided by killmail': item.item?.name}}</td>
+          <!-- <td>{{ item.solar_system?.name || 'N/A' }}</td> -->
+          <td>{{ item?.damage_done || 'N/A' }}   </td>
+          <td>{{(100 *(item?.damage_done/victimSolved?.damage)). toFixed(2)}} %</td>
         </tr>
       </tbody>
     </table>
-  </div> -->
-</details>
-<button (click)="lol()">lol</button>
-<details style="background-color: darkslategrey; color: lightgray;">
-    <summary>Killmail Details {{zKillReport?.attackers.length}}</summary>
-    <div>
-      <h2>Killmail ID: {{zKillReport?.killmail_id}}</h2>
-      <p>Killmail Time: {{zKillReport?.killmail_time}}</p>
-      <p>Solar System ID: {{zKillReport?.solar_system_id}}
-        <button (click)="setDestination()">Set Destination</button></p>
-
-    </div>
-    <details style="background-color: darkred;">
-      <summary>Attackers tocheck {{processedKillReport?.attackers?.length}}</summary>
-      <div>
-        <table>
-          <thead>
-            <tr>
-              <th>Alliance ID</th>
-              <th>Character ID</th>
-              <th>Corporation ID</th>
-              <th>Damage Done</th>
-              <th>Final Blow</th>
-              <th>Security Status</th>
-              <th>Ship Type ID</th>
-              <th>Weapon Type ID</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let attacker of processedKillReport?.attackers">
-              <td>{{attacker.alliance_id}}</td>
-              <td>{{attacker.character_id}}</td>
-              <td>{{attacker.corporation_id}}</td>
-              <td>{{attacker.damage_done}}</td>
-              <td>{{attacker.final_blow}}</td>
-              <td>{{attacker.security_status}}</td>
-              <td>{{attacker.ship_type_id}}</td>
-              <td>{{attacker.weapon_type_id}}</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </details>
     
-    
-    <details style="background-color: darkgreen;">
-      <summary>Victim</summary>
+    <details >
+      <summary>Victim   {{victimSolved.ship?.name}} {{victimSolved.character?.name}}  {{victimSolved.corporation?.name}} {{victimSolved.alliance?.name}}  </summary>
       <div>
-        <p>Alliance ID: {{zKillReport?.victim.alliance_id}}</p>
-        <p>Character ID: {{zKillReport?.victim.character_id}}</p>
-        <p>Corporation ID: {{zKillReport?.victim.corporation_id}}</p>
-        <p>Damage Taken: {{zKillReport?.victim.damage_taken}}</p>
-        <p>Ship Type ID: {{zKillReport?.victim.ship_type_id}}</p>
+        <p>Alliance ID: {{victimSolved.alliance?.name}}</p>
+        <p>Character ID: {{victimSolved.character?.name}}</p>
+        <p>Corporation ID: {{victimSolved.corporation?.name}}</p>
+        <p>Damage Taken: {{victimSolved?.damage}}</p>
+        <p>Ship Type ID: {{victimSolved.ship?.name}}</p>
         <img class="image" src="https://images.evetech.net/types/{{zKillReport?.victim.ship_type_id}}/icon" width="32" height="32"  />
         <p>Position:</p>
         <ul>
@@ -128,27 +83,5 @@
             </table>
           </div>
         </details>
-        TEST
-        <button (click)="lol()">lol</button>
-        <table>
-          <thead>
-            <tr>
-              <th>Alliance</th>
-              <th>Corporation</th>
-              <th>Character</th>
-              <th>Item</th>
-              <!-- <th>Solar System</th> -->
-              <th>Damage Done</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let item of processedKillReport">
-              <td>{{ item.alliance?.name || 'N/A' }}</td>
-              <td>{{ item.corporation?.name || 'N/A' }}</td>
-              <td>{{ item.character?.name || 'N/A' }}</td>
-              <td>{{ item.item?.name || 'N/A' }}</td>
-              <!-- <td>{{ item.solar_system?.name || 'N/A' }}</td> -->
-              <td>{{ item?.damage_done || 'N/A' }}</td>
-            </tr>
-          </tbody>
-        </table>
+
+
