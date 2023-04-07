@@ -47,19 +47,26 @@ export class KillWidgetComponent implements OnInit {
     console.log("init widget ", this.data)
     this.zKillReport = this.data as unknown as truc;
     this.getKillReport();
-    this.collectIds(this.zKillReport, this.itemIds); // Collect IDs and store them in itemIds array
+//
+
+
+	this.eveEsiService.getKillHashId( this.data)
+   // this.collectIds(this.zKillReport, this.itemIds); // Collect IDs and store them in itemIds array
   }
 
   lol()
   {
-    this.zKillReport     = this.data as unknown as truc;
-    this.getKillReport();
+  //  this.zKillReport     = this.data as unknown as truc;
+  //  this.getKillReport();
   //  console.log(this.solvedTabs[0] , this.zKillReport);
    // this.final .push (this.solvedTabs[0]);//+  this.zKillReport;
  //this.resolveIds(  this.zKillReport, this.solvedTabs[0])
+	// this.getKillReport
+    // this.final = this.resolveIds(this.zKillReport, this.solvedTabs[0]);
+    // console.log( this.final)
 
-    this.final = this.resolveIds(this.zKillReport, this.solvedTabs[0]);
-    console.log( this.final)
+
+	console.log(this. data);
   }
 
   getKillReport(){

@@ -42,6 +42,21 @@ export class EveEsiService {
 	) {}
 
 
+	getKillHashId(param : any){
+		let proxy = this.hostpoint + "/latest"
+		console.log("getKillHashId" , param.zkb.url)
+		this.http.get( param.zkb.esi)
+		.subscribe((data :any )   => {
+				console.log("data Contact", data)
+
+			
+
+		})
+	//	console.log("regions = ," ,this.regions)
+	}
+	
+
+
 	getRegionsIds(){
 
 		let proxy = this.hostpoint + "/latest"
@@ -55,38 +70,6 @@ export class EveEsiService {
 			})
 		//	console.log("regions = ," ,this.regions)
 		}
-
-
-
-		// getNamesInfoFromId( tab :string[]) : any
-		// {
-		// 	if(!tab)	{
-		// 		this.autoCompleteSearchresults = []
-		// 		return;
-		// 	}
-		// 	// let httpHeaders2 = new HttpHeaders(
-		// 	// 	{"Authorization":" Bearer " +  this.token.access_token}
-		// 	// )
-		// 	let proxy = this.hostpoint + "/latest"
-		// 	this.http.post(proxy +  "/universe/names/?datasource=tranquility"  ,tab)
-		// 	.subscribe((data :any)=> {
-		// 		console.log("getNamesInfoFromId(" , data)
-		// 		// this . characterContactsWithName = [];
-		// 		// this.autoCompleteSearchresults = data;
-		// 		// if(!this.characterContactsWithName.length){
-		// 		// data.forEach(
-		// 		// 	(element : any)=> {
-		// 		// 		this . characterContactsWithName.push(element)	
-		// 		// 	}
-		// 	//	)
-		// 	//	console.log(this . characterContactsWithName);
-		// 	//	}	
-		// 		return(data);
-		// 	//	
-		// 	})
-	
-		// }
-
 
 		getNamesInfoFromId(tab: string[]): Observable<any> {
 			if (!tab) {
