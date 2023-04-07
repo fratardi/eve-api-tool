@@ -29,12 +29,18 @@ export class KillWidgetComponent implements OnInit {
 	solvedTabs: any[] = [];
 	final : any = {};
 	hasInit : boolean = false;
-	resolvedList : any = [];
-	processedAttack: any;
+	resolvedList : any[] = [];
+	processedAttack: any = [];
 	attackerSolved : any = [];
-	
-	victimSolved : any = [];
+	filterCharacter: string = '';
+filterAlliance: string = '';
+filterCorporation: string = '';
+sortColumn: string = 'damage_done';
+sortAscending: boolean = true;
 
+
+	victimSolved : any = [];
+	itemSolved : any = [];
 	constructor(
 	 private  eveEsiService : EveEsiService
 	) {}
@@ -71,6 +77,51 @@ export class KillWidgetComponent implements OnInit {
 
 			console.log(this.processedAttack , this);
 	}
+
+	getSortedAndGroupedAttackers(): any[] {
+		if (!Array.isArray(this.processedAttack)) {
+		  return [];
+		}
+	  
+		// Sort the attackers first
+		const sortedAttackers = [...this.processedAttack];
+		sortedAttackers.sort((a, b) => {
+		  if (this.sortAscending) {
+			return a[this.sortColumn] - b[this.sortColumn];
+		  } else {
+			return b[this.sortColumn] - a[this.sortColumn];
+		  }
+		});
+	  
+		// Group the attackers by alliance name
+		const groupedAttackers = sortedAttackers.reduce((groups, attacker) => {
+		  const allianceName = attacker.alliance?.name || 'N/A';
+		  if (!groups[allianceName]) {
+			groups[allianceName] = [];
+		  }
+		  groups[allianceName].push(attacker);
+		  return groups;
+		}, {});
+	  
+		// Flatten the grouped attackers into an array
+		const sortedAndGroupedAttackers = [];
+		for (const groupName in groupedAttackers) {
+		  sortedAndGroupedAttackers.push(...groupedAttackers[groupName]);
+		}
+	  
+		return sortedAndGroupedAttackers;
+	  }
+
+
+
+// Add this method to your component class
+isMatch(item: any): boolean {
+	const characterMatch = !this.filterCharacter || item.character?.name?.toLowerCase().includes(this.filterCharacter.toLowerCase());
+	const allianceMatch = !this.filterAlliance || item.alliance?.name?.toLowerCase().includes(this.filterAlliance.toLowerCase());
+	const corporationMatch = !this.filterCorporation || item.corporation?.name?.toLowerCase().includes(this.filterCorporation.toLowerCase());
+  
+	return characterMatch && allianceMatch && corporationMatch;
+  }
 
 	generateVictimBattleReportSummary(data: any, names: any) 
 	{
@@ -124,7 +175,13 @@ export class KillWidgetComponent implements OnInit {
 		return  returnValue
 	}
 
-
+	isCharacterMatch(item: any): boolean {
+		if (!this.filterCharacter) {
+		  return true;
+		}
+	  
+		return item.character?.name?.toLowerCase().includes(this.filterCharacter.toLowerCase());
+	  }
 	setDestination()
 	{
 		this.eveEsiService.setDestination(this.data)
@@ -167,8 +224,56 @@ export class KillWidgetComponent implements OnInit {
 		return(ids)
 	}
 
+
+	  
+	  // Add this method to your component class
+	  toggleSortOrder(): void {
+		this.sortAscending = !this.sortAscending;
+	  }
+
+
+
 	removeDuplicates(arr: any[]): any[] {
 		return Array.from(new Set(arr));
 	}
+
+	setSortColumn(column: string): void {
+		// If the column is already selected, toggle the sort order (ascending/descending)
+		if (this.sortColumn === column) {
+		  this.sortAscending = !this.sortAscending;
+		} else {
+		  this.sortColumn = column;
+		  this.sortAscending = true;
+		}
+	  }
+
+
+	  getSortedAttackers(): any[] {
+		if (!Array.isArray(this.processedAttack)) {
+		  return [];
+		}
+	  
+		// Make a copy of the processedAttack array
+		const sortedAttackers = [...this.processedAttack];
+	  
+		// Define the sorting logic for each column
+		const sortLogic : any = {
+		  alliance: (a: any, b: any) => (a.alliance?.name || '').localeCompare(b.alliance?.name || ''),
+		  corporation: (a: any, b: any) => (a.corporation?.name || '').localeCompare(b.corporation?.name || ''),
+		  character: (a: any, b: any) => (a.character?.name || '').localeCompare(b.character?.name || ''),
+		  ship: (a: any, b: any) => (a.ship?.id || '').localeCompare(b.ship?.id || ''),
+		  item: (a: any, b: any) => ((a.item?.id !== a.ship?.is ? a.item?.id : '') || '').localeCompare((b.item?.id !== b.ship?.id ? b.item?.id : '') || ''),
+		  damage_done: (a: any, b: any) => a.damage_done - b.damage_done,
+		};
+	  
+		// Update the sorting logic according to the selected sort column
+		sortedAttackers.sort((a, b) => {
+		  const sortResult = sortLogic[this.sortColumn](a, b);
+		  return this.sortAscending ? sortResult : -sortResult;
+		});
+	  
+		return sortedAttackers;
+	  }
+
 
 }

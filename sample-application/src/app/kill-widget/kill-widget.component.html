@@ -28,7 +28,38 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let item of processedAttack">
+
+        <div>
+          <label for="filterCharacter">Filter by Character Name:</label>
+          <input type="text" id="filterCharacter" [(ngModel)]="filterCharacter" placeholder="Enter character name...">
+        </div>
+        <div>
+          <label for="filterAlliance">Filter by Alliance Name:</label>
+          <input type="text" id="filterAlliance" [(ngModel)]="filterAlliance" placeholder="Enter alliance name...">
+        </div>
+        <div>
+          <label for="filterCorporation">Filter by Corporation Name:</label>
+          <input type="text" id="filterCorporation" [(ngModel)]="filterCorporation" placeholder="Enter corporation name...">
+        </div>
+        <div>
+          <label for="sortColumn">Sort by:</label>
+          <select id="sortColumn" [(ngModel)]="sortColumn">
+            <option value="damage_done">Damage Done</option>
+          </select>
+          <button (click)="toggleSortOrder()">Toggle Sort Order</button>
+          <!-- Add buttons for each column -->
+<button (click)="setSortColumn('alliance')">Sort by Alliance</button>
+<button (click)="setSortColumn('corporation')">Sort by Corporation</button>
+<button (click)="setSortColumn('character')">Sort by Character Name</button>
+<button (click)="setSortColumn('ship')">Sort by Ship</button>
+<button (click)="setSortColumn('item')">Sort by Item</button>
+<button (click)="setSortColumn('damage_done')">Sort by Damage Dealt</button>
+
+        </div>
+
+        <tr *ngFor="let item of getSortedAndGroupedAttackers(); let i = index" [hidden]="!isMatch(item)">
+<!-- 
+        <tr *ngFor="let item of getSortedAttackers(); let i = index" [hidden]="!isMatch(item)"> -->
           <td>
             <img class="image" src="https://images.evetech.net/alliances/{{item.alliance?.id}}/logo" width="32" height="32"  />
             {{ item.alliance?.name || 'N/A' }}</td>
