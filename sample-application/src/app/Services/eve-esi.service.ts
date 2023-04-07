@@ -9,7 +9,6 @@ const ACCESS_TOKEN  = 	'access_token';
 const secretKey     =  	"jcVXo0IZFt5YDr8AJ3Z7cKCDfVijNxKhupOKCQ2I"
 const client_id   	=	"7f45c8124b2640beba3a6902df6832a2";
 
-
 interface ItemInfo{
 	category:	string;
 	id		:	number;
@@ -26,113 +25,80 @@ export class EveEsiService {
 	token: any;
    	userOwn:any;
 	base64string:any;
-	
 	regions:any;
-
-
 	characterContactsId :any[]=[];
 	characterContactsWithName :any[]=[]
-
 	autoCompleteSearchresults :any[]=[]
-
 
   	constructor(
 		private http	: HttpClient,
 		private router	: Router,
 	) {}
 
-
-	getKillHashId(param : any){
-		let proxy = this.hostpoint + "/latest"
-		console.log("getKillHashId" , param.zkb.url)
-		this.http.get( param.zkb.esi)
-		.subscribe((data :any )   => {
-				console.log("data Contact", data)
-
-			
-
-		})
-	//	console.log("regions = ," ,this.regions)
+	getKillHashId(param : any): Observable<any> {
+		return this.http.get( param.zkb.esi);
 	}
-	
-
 
 	getRegionsIds(){
-
 		let proxy = this.hostpoint + "/latest"
-
-			this.http.get(proxy + "/universe/regions/")
-			.subscribe((data :any )   => {
-					console.log("data Contact", data)
-
+		this.http.get(proxy + "/universe/regions/")
+		.subscribe((data :any )   => {
+			console.log("data Contact", data)
 			this.regions	=	this.getNamesInfoFromId(data);
+		})
+	}
 
-			})
-		//	console.log("regions = ," ,this.regions)
+	getNamesInfoFromId(tab: string[]): Observable<any> {
+		if (!tab) {
+		  return new Observable<any>(observer => {
+			observer.next([]);
+			observer.complete();
+		  });
 		}
+		let proxy = this.hostpoint + "/latest";
+		return this.http.post(proxy + "/universe/names/?datasource=tranquility", tab);
+	}
 
-		getNamesInfoFromId(tab: string[]): Observable<any> {
-			if (!tab) {
-			  return new Observable<any>(observer => {
-				observer.next([]);
-				observer.complete();
-			  });
-			}
-			let proxy = this.hostpoint + "/latest";
-			return this.http.post(proxy + "/universe/names/?datasource=tranquility", tab);
-		  }
-		
-
-
-		getIdFromNameAndEntityType(entityName : string,  entityType : string ,   )
-		{
-			if(entityName == undefined || entityName.length < 3)
-				return;
-			if(entityType == undefined)
-				return;
-				let proxy = this.hostpoint + "/latest"
-				let httpHeaders2 = new HttpHeaders(
-					{"Authorization":" Bearer " +  this.token.access_token}
-				)
-			console.log("getIdFromEntityNAme", entityName, entityType);
-
-			this.http.get(proxy + "/characters/" + this.userOwn.CharacterID + "/search/?categories="+ entityType.toLowerCase()+"&datasource=tranquility&language=en&search=" + entityName + "&strict=false" 
-			, 	{headers: httpHeaders2 })
-			.subscribe((data :any )   => {
-				if(data == undefined){
-					console.log("data Contact", data.character.length)
-				}
-				console.log("data Contact", data)
-
-					})
-				}
-
-
-		setDestination(params : any)
-		{
-			console.log("Set Dest " , params.solar_system_id , this.userOwn.CharacterID)
-			let payload : any = {
-				add_to_beginning: "true",
-				clear_other_waypoints: "true",
-				datasource: "tranquility",
-				destination_id: params.solar_system_id,
-			}
-
+	getIdFromNameAndEntityType(entityName : string,  entityType : string ,   )
+	{
+		if(entityName == undefined || entityName.length < 3)
+			return;
+		if(entityType == undefined)
+			return;
+			let proxy = this.hostpoint + "/latest"
 			let httpHeaders2 = new HttpHeaders(
 				{"Authorization":" Bearer " +  this.token.access_token}
 			)
-			let proxy = this.hostpoint + "/latest"
-			this.http.post(proxy +  "/ui/autopilot/waypoint/?add_to_beginning=true&clear_other_waypoints=true&datasource=tranquility&destination_id=" + params.solar_system_id  ,payload, 	{headers: httpHeaders2 })
-			.subscribe((data :any)=> {
-				console.log("setDestination(" , data)
-				return(data);
-			})
+		console.log("getIdFromEntityNAme", entityName, entityType);
+		this.http.get(proxy + "/characters/" + this.userOwn.CharacterID + "/search/?categories="+ entityType.toLowerCase()+"&datasource=tranquility&language=en&search=" + entityName + "&strict=false" 
+		, 	{headers: httpHeaders2 })
+		.subscribe((data :any )   => {
+			if(data == undefined){
+				console.log("data Contact", data.character.length)
+			}
+			console.log("data Contact", data)
+		})
+	}
 
-
-
+	setDestination(params : any)
+	{
+		console.log("Set Dest " , params.solar_system_id , this.userOwn.CharacterID)
+		let payload : any = {
+			add_to_beginning: "true",
+			clear_other_waypoints: "true",
+			datasource: "tranquility",
+			destination_id: params.solar_system_id,
 		}
-
-
+		let httpHeaders2 = new HttpHeaders(
+			{"Authorization":" Bearer " +  this.token.access_token}
+		)
+		let proxy = this.hostpoint + "/latest"
+		this.http.post(proxy +  "/ui/autopilot/waypoint/?add_to_beginning=true&clear_other_waypoints=true&datasource=tranquility&destination_id=" + params.solar_system_id  ,payload, 	{headers: httpHeaders2 })
+		.subscribe((data :any)=> {
+			console.log("setDestination(" , data)
+			return(data);
+		})
+	}
 
 	getCharactersFromString(name : string) : any
 	{
@@ -172,15 +138,11 @@ export class EveEsiService {
 			this . characterContactsWithName = [];
 			this.autoCompleteSearchresults = data;
 			if(!this.characterContactsWithName.length){
-			data.forEach(
-				(element : any)=> {
+				data.forEach((element : any)=> {
 					this . characterContactsWithName.push(element)	
-				}
-			)
-		//	console.log(this . characterContactsWithName);
+				})
 			}	
-			return(data);
-		//	
+			return(data);	
 		})
 
 	}

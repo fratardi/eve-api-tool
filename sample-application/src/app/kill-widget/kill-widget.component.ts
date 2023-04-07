@@ -50,7 +50,12 @@ export class KillWidgetComponent implements OnInit {
 //
 
 
-	this.eveEsiService.getKillHashId( this.data)
+	this.eveEsiService.getKillHashId( this.data).subscribe(e =>{
+
+    console.log("Subscription ok"    , e  )
+
+
+  })
    // this.collectIds(this.zKillReport, this.itemIds); // Collect IDs and store them in itemIds array
   }
 
