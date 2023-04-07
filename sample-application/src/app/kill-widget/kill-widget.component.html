@@ -1,21 +1,17 @@
 
 <details >
     <summary>[{{ victimSolved.character?.name || 'N/A' }}]
-      
-     
       <img class="image" src="https://images.evetech.net/types/{{zKillReport?.victim.ship_type_id}}/icon" width="32" height="32"  />
      [{{victimSolved.ship?.name}}]
-     [{{zKillReport?.killmail_time}}]
+     [{{zKillReport?.killmail_time.toString()}}]
      [{{zKillReport?.attackers?.length}}]
           <button (click)="setDestination()">[{{victimSolved.location?.name}}]</button>
           <!-- <button (click)="lol()">lol</button> -->
         </summary>
    
     <div>
-      <!-- <h2>Killmail ID: {{zKillReport?.killmail_id}}</h2> -->
-      <p>Killmail Time: {{zKillReport?.killmail_time}}</p>
-      <!-- <p>Solar System ID: {{zKillReport?.solar_system_id}} -->
-        {{victimSolved.location?.name}}
+
+     location : [{{victimSolved.location?.name}}]  time : [{{zKillReport?.killmail_time}}]
 
     </div>
     <table>
@@ -33,11 +29,24 @@
       </thead>
       <tbody>
         <tr *ngFor="let item of processedAttack">
-          <td>{{ item.alliance?.name || 'N/A' }}</td>
-          <td>{{ item.corporation?.name || 'N/A' }}</td>
-          <td>{{ item.character?.name || 'N/A' }}</td>
-          <td>{{ item.ship?.name || 'N/A' }}</td>
-          <td>{{ (item.ship?.name == item.item?.name) ? 'Not Provided by killmail': item.item?.name}}</td>
+          <td>
+            <img class="image" src="https://images.evetech.net/alliances/{{item.alliance?.id}}/logo" width="32" height="32"  />
+            {{ item.alliance?.name || 'N/A' }}</td>
+          <td>
+            <img class="image" src="https://images.evetech.net/corporations/{{item.corporation?.id}}/logo" width="32" height="32"  />
+            {{ item.corporation?.name || 'N/A' }}</td>
+          <td>
+            <img class="image" src="https://images.evetech.net/characters/{{item.character?.id}}/portrait" width="32" height="32"  />
+            {{ item.character?.name || 'N/A' }}</td>
+          <td>
+            <img *ngIf="item.ship?.id" class="image" src="https://images.evetech.net/types/{{item.ship?.id}}/icon" width="32" height="32"  />
+            {{ item.ship?.name || 'N/A' }}
+          </td>
+          <td>
+
+            
+            <img  *ngIf="item.ship?.id != item.item?.id"   class="image" src="https://images.evetech.net/types/{{item.item?.id}}/icon" width="32" height="32"  />
+            {{ (item.ship?.name == item.item?.name) ? 'Not Provided by killmail': item.item?.name}}</td>
           <!-- <td>{{ item.solar_system?.name || 'N/A' }}</td> -->
           <td>{{ item?.damage_done || 'N/A' }}   </td>
           <td>{{(100 *(item?.damage_done/victimSolved?.damage)). toFixed(2)}} %</td>
@@ -45,43 +54,49 @@
       </tbody>
     </table>
     
-    <details >
-      <summary>Victim   {{victimSolved.ship?.name}} {{victimSolved.character?.name}}  {{victimSolved.corporation?.name}} {{victimSolved.alliance?.name}}  </summary>
+    <details>
+      <summary>Items ({{zKillReport?.victim.items.length}})</summary>
       <div>
-        <p>Alliance ID: {{victimSolved.alliance?.name}}</p>
-        <p>Character ID: {{victimSolved.character?.name}}</p>
-        <p>Corporation ID: {{victimSolved.corporation?.name}}</p>
-        <p>Damage Taken: {{victimSolved?.damage}}</p>
-        <p>Ship Type ID: {{victimSolved.ship?.name}}</p>
-        <img class="image" src="https://images.evetech.net/types/{{zKillReport?.victim.ship_type_id}}/icon" width="32" height="32"  />
-        <p>Position:</p>
-        <ul>
-          <li>X: {{zKillReport?.victim.position.x}}</li>
-          <li>Y: {{zKillReport?.victim.position.y}}</li>
-          <li>Z: {{zKillReport?.victim.position.z}}</li>
-        </ul>
-        <details>
-          <summary>Items ({{zKillReport?.victim.items.length}})</summary>
-          <div>
-            <table>
-              <thead>
-                <tr>
-                  <th>Flag</th>
-                  <th>Item Type ID</th>
-                  <th>Quantity Dropped</th>
-                  <th>Quantity Destroyed</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr *ngFor="let item of zKillReport?.victim.items">
-                  <td>{{item.flag}}</td>
-                  <td>{{item.item_type_id}}</td>
-                  <td>{{item.quantity_dropped}}</td>
-                  <td>{{item.quantity_destroyed}}</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </details>
+        <table>
+          <thead>
+            <tr>
+              <th>Flag</th>
+              <th>Item Type ID</th>
+              <th>Quantity Dropped</th>
+              <th>Quantity Destroyed</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of zKillReport?.victim.items">
+              <td>{{item.flag}}</td>
+              <td>{{item.item_type_id}}</td>
+              <td>{{item.quantity_dropped}}</td>
+              <td>{{item.quantity_destroyed}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+
+    <details>
+    <summary>Victim   {{victimSolved.ship?.name}} {{victimSolved.character?.name}}  {{victimSolved.corporation?.name}} {{victimSolved.alliance?.name}}  </summary>
+      <!-- <details> -->
+    <div>
+      <p>Alliance ID: {{victimSolved.alliance?.name}}</p>
+      <p>Character ID: {{victimSolved.character?.name}}</p>
+      <p>Corporation ID: {{victimSolved.corporation?.name}}</p>
+      <p>Damage Taken: {{victimSolved?.damage}}</p>
+      <p>Ship Type ID: {{victimSolved.ship?.name}}</p>
+      <img class="image" src="https://images.evetech.net/types/{{zKillReport?.victim.ship_type_id}}/icon" width="32" height="32"  />
+      <p>Position:</p>
+      <ul>
+        <li>X: {{zKillReport?.victim.position.x}}</li>
+        <li>Y: {{zKillReport?.victim.position.y}}</li>
+        <li>Z: {{zKillReport?.victim.position.z}}</li>
+      </ul>
+      </div>
+   
+
+  </details>
 
 

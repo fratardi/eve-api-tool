@@ -30,7 +30,7 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
 
 npm install
-
+  source ~/.nvm/nvm.sh
 
 
 npx -p @angular/cli@latest ng new sample-application
