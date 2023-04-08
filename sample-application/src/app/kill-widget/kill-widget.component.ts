@@ -33,10 +33,11 @@ export class KillWidgetComponent implements OnInit {
 	processedAttack: any = [];
 	attackerSolved : any = [];
 	filterCharacter: string = '';
-filterAlliance: string = '';
-filterCorporation: string = '';
-sortColumn: string = 'damage_done';
-sortAscending: boolean = true;
+	filterAlliance: string = '';
+	filterCorporation: string = '';
+	itemsSolved : any = [];
+	sortColumn: string = 'damage_done';
+	sortAscending: boolean = true;
 
 
 	victimSolved : any = [];
@@ -56,10 +57,9 @@ sortAscending: boolean = true;
 			.subscribe((data: string[]) => {
 				console.log("getNamesInfoFromId(" , data);
 				this.solvedTabs.push(data);
-			//	this.resolveIds( this.eveKillReport , this.solvedTabs  ) 
-				this.attackerSolved = this. generateAttackBattleReportSummary(this.eveKillReport, [data]);
-				this.victimSolved = this. generateVictimBattleReportSummary(this.eveKillReport, data);
-
+				this.attackerSolved 	= this. generateAttackBattleReportSummary(this.eveKillReport, [data]);
+				this.victimSolved 		= this. generateVictimBattleReportSummary(this.eveKillReport, data);
+				this.itemSolved 		= 	this.generateItemSummary(this.eveKillReport , data)
 
 				this.processedAttack =  this.attackerSolved;
 			});
@@ -67,14 +67,25 @@ sortAscending: boolean = true;
 	})
 	}
 
-
-	lol()
+	generateItemSummary(data: any, names: any) : any[] 
 	{
-	//	console.log("α" ,JSON.stringify(this.eveKillReport), "δ" ,JSON.stringify(this.solvedTabs));
-		//const linkedJson = this. generateAttackBattleReportSummary(this.eveKillReport, this.solvedTabs);
-		
+		let  returnValue : any[] = []; 
+		console.log('generateItemSummary(' , data.victim.items , names); 
+		// console.log(data , names)
+		data.victim.items.forEach((element  : any)=> {
+			names.forEach((name : any)  => {
+			//	console.log( "😑",name , element )
+				if(name.id == element.item_type_id)	{
+					element.name = name.name
+					returnValue.push(element )
+				}
+			});
+		})
+		console.log( "[][]", returnValue);
+		return(returnValue)
+	}
 
-
+	lol(){
 			console.log(this.processedAttack , this);
 	}
 
@@ -146,7 +157,6 @@ isMatch(item: any): boolean {
 		return  returnValue
 
 	}
-
 
 	generateAttackBattleReportSummary(data: any, names: any) : any[] {
 	let  returnValue : any[] = []; 
@@ -224,21 +234,15 @@ isMatch(item: any): boolean {
 		return(ids)
 	}
 
-
-	  
-	  // Add this method to your component class
-	  toggleSortOrder(): void {
+	toggleSortOrder(): void {
 		this.sortAscending = !this.sortAscending;
-	  }
-
-
+	}
 
 	removeDuplicates(arr: any[]): any[] {
 		return Array.from(new Set(arr));
 	}
 
 	setSortColumn(column: string): void {
-		// If the column is already selected, toggle the sort order (ascending/descending)
 		if (this.sortColumn === column) {
 		  this.sortAscending = !this.sortAscending;
 		} else {

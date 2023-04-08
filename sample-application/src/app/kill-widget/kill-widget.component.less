@@ -1,165 +1,71 @@
-@primary-color: #212121;
-@secondary-color: #4d4d4d;
-@accent-color: #0099ff;
-@background-color: #111;
-@text-color: #f0f0f0;
+@base-font-size: 14px;
 @font-family: 'Roboto', sans-serif;
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
+@victim-bg-color: #2d4059;
+@victim-text-color: #f9de59;
+@victim-border-color: #4e5d94;
+
+@attacker-bg-color: #4e5d94;
+@attacker-text-color: #f9de59;
+@attacker-border-color: #2d4059;
 
 body {
   font-family: @font-family;
-  color: @text-color;
-  background-color: @background-color;
-  background-image: url('https://www.transparenttextures.com/patterns/black-orchid.png');
-  line-height: 1.6;
+  font-size: @base-font-size;
+  background-color: #1e1e1e;
+  color: #ffffff;
 }
-
-h1, h2, h3, h4, h5, h6 {
-  font-weight: 300;
-}
-
-a {
-  color: @accent-color;
-  text-decoration: none;
-}
-
-img {
-  max-width: 100%;
-  height: auto;
-}
-
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 15px;
-}
-
-// Responsive styles
-@media (max-width: 1200px) {
-  .container {
-    max-width: 992px;
-  }
-}
-
-@media (max-width: 992px) {
-  .container {
-    max-width: 768px;
-  }
-}
-
-@media (max-width: 768px) {
-  .container {
-    max-width: 576px;
-  }
-}
-
-// Space-themed styles
-.space-theme {
-  background-color: @primary-color;
-  border: 1px solid @secondary-color;
-  border-radius: 4px;
-  padding: 15px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  color:  lightblue;
-}
-
-// Button styles
-button {
-  background-color: @accent-color;
-  color: @text-color;
-  border: none;
-  border-radius: 4px;
-  padding: 10px 20px;
-  cursor: pointer;
-  font-family: @font-family;
-  font-size: 1em;
-  font-weight: bold;
-  text-transform: uppercase;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  transition: background-color 0.3s ease, transform 0.2s ease;
-
-  &:hover {
-    background-color: darken(@accent-color, 10%);
-    transform: translateY(-2px);
-  }
-
-  &:active {
-    transform: translateY(0);
-  }
-
-  &:focus {
-    outline: none;
-  }
-}
-
 
 table {
   width: 100%;
   border-collapse: collapse;
-
-  thead {
-    background-color: @secondary-color;
-  }
-
-  th, td {
-    padding: 8px;
-    text-align: left;
-    border-bottom: 1px solid @primary-color;
-  }
-
-  tr:nth-child(even) {
-    color:  lightblue;
-  
-    background-color: @primary-color;
-  }
-
-  tr:nth-child(odd) {
-     color:  lightblue;
-  
-    background-color: @secondary-color;
-  }
 }
 
-summary {
-  cursor: pointer;
-  color: @text-color;
-  font-weight: bold;
+th,
+td {
+  padding: 8px;
+  text-align: left;
+  border-bottom: 1px solid #ccc;
+}
+
+.summary {
   font-size: 1.2em;
-  padding: 8px 12px;
-  background-color: @secondary-color;
-  border-radius: 4px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  margin-bottom: 10px;
-  user-select: none;
-
-  &:focus,
-  &:active {
-    outline: none;
-  }
-
-  &::-webkit-details-marker {
-    display: none;
-  }
-
-  &:before {
-    content: '';
-    display: inline-block;
-    margin-right: 8px;
-    transition: transform 0.3s ease;
-  }
+  font-weight: bold;
+  cursor: pointer;
+  padding: 8px;
+  background-color: @attacker-bg-color;
+  color: @attacker-text-color;
+  border: 1px solid @attacker-border-color;
 }
 
 details[open] > summary {
-  background-color: @primary-color;
-  border-bottom-left-radius: 0;
-  border-bottom-right-radius: 0;
+  background-color: @victim-bg-color;
+  color: @victim-text-color;
+  border: 1px solid @victim-border-color;
+}
 
-  &:before {
-    transform: rotate(90deg);
-  }
+details div {
+  padding: 8px;
+}
+
+label {
+  display: block;
+  margin-bottom: 8px;
+}
+
+input,
+select,
+button {
+  font-family: @font-family;
+  font-size: @base-font-size;
+  padding: 4px 8px;
+  margin-bottom: 16px;
+}
+
+tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+tr:hover {
+  background-color: #ddd;
 }
