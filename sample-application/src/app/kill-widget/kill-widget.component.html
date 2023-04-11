@@ -59,7 +59,7 @@
       </tbody>
     </table>
     <details> 
-      <summary>Items ({{zKillReport?.victim.items.length}})</summary>
+      <summary>Items ({{zKillReport?.victim.items.length}})   total value :   {{zKillReport?.zkb?.totalValue}} </summary>
       <div>
         <table>
           <thead>
@@ -71,6 +71,7 @@
             </tr>
           </thead>
           <tbody>
+
             <tr *ngFor="let item of itemSolved">
               <td>  
                    <img  *ngIf="item.item_type_id"   class="image" src="https://images.evetech.net/types/{{item.item_type_id}}/icon" width="32" height="32"  />{{item.name}}</td>
