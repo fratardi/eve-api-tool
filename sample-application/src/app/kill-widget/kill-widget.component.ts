@@ -35,7 +35,7 @@ export class KillWidgetComponent implements OnInit {
 	filterCharacter: string = '';
 	filterAlliance: string = '';
 	filterCorporation: string = '';
-	itemsSolved : any = [];
+	//itemsSolved : any = [];
 	sortColumn: string = 'damage_done';
 	sortAscending: boolean = true;
 
@@ -86,7 +86,7 @@ export class KillWidgetComponent implements OnInit {
 	}
 
 	lol(){
-			console.log(this.processedAttack , this);
+			console.log(this);
 	}
 
 	getSortedAndGroupedAttackers(): any[] {

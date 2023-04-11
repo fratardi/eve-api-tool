@@ -10,7 +10,7 @@
         </summary>
    
     <div>
-
+      <button (click)="lol()">[]ssss</button>
      location : [{{victimSolved.location?.name}}]  time : [{{zKillReport?.killmail_time}}]
      
     </div>
@@ -71,8 +71,9 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let item of zKillReport?.victim.items">
-              <td>{{item.flag}}</td>
+            <tr *ngFor="let item of itemSolved">
+              <td>  
+                   <img  *ngIf="item.item_type_id"   class="image" src="https://images.evetech.net/types/{{item.item_type_id}}/icon" width="32" height="32"  />{{item.name}}</td>
               <td>{{item.item_type_id}}</td>
               <td>{{item.quantity_dropped}}</td>
               <td>{{item.quantity_destroyed}}</td>
