@@ -29,7 +29,7 @@ export class SearchEntityWidgetComponent implements OnInit {
 
 		this.searchEntityForm = this.formBuilder.group({
 		  	name: '',
-        something : "Character"
+        entity : "Character"
 		});
 
     
@@ -47,7 +47,12 @@ export class SearchEntityWidgetComponent implements OnInit {
   updater()
   {
     console.log('updater', this.searchEntityForm.value.name, this.searchEntityForm.value.entityType);
+    this.esi_service.listenEntityType = this.selected;
+
+    console.log(this.selected , "]]]]")
+
     this.esi_service.getIdFromNameAndEntityType(this.searchEntityForm.value.name ,this.selected )
+
   }
 
 	onChanges(): void {

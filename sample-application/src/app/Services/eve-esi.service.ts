@@ -29,6 +29,7 @@ export class EveEsiService {
 	characterContactsId :any[]=[];
 	characterContactsWithName :any[]=[]
 	autoCompleteSearchresults :any[]=[]
+	listenEntityType:any  = "" 
 
   	constructor(
 		private http	: HttpClient,

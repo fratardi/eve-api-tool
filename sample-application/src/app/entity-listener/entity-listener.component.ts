@@ -42,9 +42,9 @@ export class EntityListenerComponent implements OnInit {
 
 
   sendMessage() {
-    console.log('new message from the client: ', this.message);
+    console.log('new message from the client: ', this.message, this);
     this.chatService.messages.next(this.message);
-    this.message.channel= "region:10000027";
+    this.message.channel=  this.esi.listenEntityType + ":10000027";
   }
 
 
