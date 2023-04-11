@@ -10,54 +10,36 @@ import { EveEsiService } from '../Services/eve-esi.service';
 
 export class SearchEntityWidgetComponent implements OnInit {
 
-
 	searchEntityForm!: FormGroup;
-
   selected = 'Character';
+
   constructor(
 		private esi_service : EveEsiService,
     private formBuilder: FormBuilder,
+  ) { }
 
-
-  ) { 
-
-
-    
-  }
   ngOnInit(): void {
 		console.log('hello from autocomplete', this);
-
 		this.searchEntityForm = this.formBuilder.group({
 		  	name: '',
         entity : "Character"
 		});
-
-    
-		this.onChanges();
-  	}
-
-
-  onSubmit(param : FormGroup)
-  {
-
-    console.warn(param , "onsumbit");
-
+    this.onChanges();
   }
 
-  updater()
-  {
+  onSubmit(param : FormGroup) {
+    console.warn(param , "onsumbit");
+  }
+
+  updater() {
     console.log('updater', this.searchEntityForm.value.name, this.searchEntityForm.value.entityType);
     this.esi_service.listenEntityType = this.selected;
-
     console.log(this.selected , "]]]]")
-
     this.esi_service.getIdFromNameAndEntityType(this.searchEntityForm.value.name ,this.selected )
-
   }
 
 	onChanges(): void {
- 
-
+    console.log("HELLO")
   		this.searchEntityForm.statusChanges.subscribe(
         data => {
           console.log("EVENT HAPPENED")
