@@ -29,7 +29,7 @@ export class EveEsiService {
 	characterContactsId :any[]=[];
 	characterContactsWithName :any[]=[]
 	autoCompleteSearchresults :any[]=[]
-	listenEntityType:any  = "" 
+	listenEntityType:any  = ""
 
   	constructor(
 		private http	: HttpClient,
@@ -71,7 +71,7 @@ export class EveEsiService {
 				{"Authorization":" Bearer " +  this.token.access_token}
 			)
 		console.log("getIdFromEntityNAme", entityName, entityType);
-		this.http.get(proxy + "/characters/" + this.userOwn.CharacterID + "/search/?categories="+ entityType.toLowerCase()+"&datasource=tranquility&language=en&search=" + entityName + "&strict=false" 
+		this.http.get(proxy + "/characters/" + this.userOwn.CharacterID + "/search/?categories="+ entityType.toLowerCase()+"&datasource=tranquility&language=en&search=" + entityName + "&strict=false"
 		, 	{headers: httpHeaders2 })
 		.subscribe((data :any )   => {
 			if(data == undefined){
@@ -112,7 +112,7 @@ export class EveEsiService {
 		)
 		let proxy = this.hostpoint + "/latest"
 		console.log(this.userOwn)
-		this.http.get(proxy + "/characters/" + this.userOwn.CharacterID + "/search/?categories=character&datasource=tranquility&language=en&search=" + name + "&strict=false" 
+		this.http.get(proxy + "/characters/" + this.userOwn.CharacterID + "/search/?categories=character&datasource=tranquility&language=en&search=" + name + "&strict=false"
 		, 	{headers: httpHeaders2 })
 		.subscribe((data :any )   => {
 			if(data == undefined){
@@ -128,7 +128,6 @@ export class EveEsiService {
 			this.autoCompleteSearchresults = []
 			return;
 		}
-
 		let httpHeaders2 = new HttpHeaders(
 			{"Authorization":" Bearer " +  this.token.access_token}
 		)
@@ -140,10 +139,10 @@ export class EveEsiService {
 			this.autoCompleteSearchresults = data;
 			if(!this.characterContactsWithName.length){
 				data.forEach((element : any)=> {
-					this . characterContactsWithName.push(element)	
+					this . characterContactsWithName.push(element)
 				})
-			}	
-			return(data);	
+			}
+			return(data);
 		})
 
 	}
@@ -191,7 +190,7 @@ export class EveEsiService {
   	init_service(callbackCode :any)  {
 		let something =  client_id+ ":" + secretKey;
 		let encodedSomething = btoa(something);
-		
+
 		let httpHeaders = new HttpHeaders({
 			"Authorization": "Basic " + encodedSomething,
 			'Content-Type': 'application/json',
@@ -218,7 +217,7 @@ export class EveEsiService {
 				.subscribe(e => {
 				this.userOwn = e as	 Swagger.UserInfo;
 				console.log(e , this.token.expires_in )
-				this.refreshWhenexpired() 
+				this.refreshWhenexpired()
 				this.router.navigate(['third-component']);
 				return(this.userOwn)
 			})
@@ -235,10 +234,10 @@ export class EveEsiService {
 		let httpHeaders = new HttpHeaders({
 			"Authorization": "Basic " + encodedSomething,
 			'Content-Type': 'application/json',});
-		let body = {	
+		let body = {
 			"grant_type":"refresh_token",
 			"refresh_token": "" +  localStorage.getItem(REFRESH_TOKEN)?.valueOf() + ""}
-		this.http.post( 
+		this.http.post(
 			this.hostpoint +  '/postCodes',
 			body,
 			{headers: httpHeaders }
