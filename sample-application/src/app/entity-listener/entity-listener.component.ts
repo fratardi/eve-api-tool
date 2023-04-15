@@ -21,8 +21,7 @@ export class EntityListenerComponent implements OnInit {
 		});
 	 }
 
-	 clearList()
-	 {
+	 clearList() {
 		this.killList = [];
 
 	 }
@@ -35,7 +34,7 @@ export class EntityListenerComponent implements OnInit {
 		channel : 'killstream',
 	};
 
-	sendMesage() {
+	sendMessage() {
 		console.log('new message from the client: ', this.message, this);
 		this.chatService.messages.next(this.message);
 		this.message.channel=  this.esi.listenEntityType.toString() + ":10000027";

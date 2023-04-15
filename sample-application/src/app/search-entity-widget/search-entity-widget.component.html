@@ -6,19 +6,35 @@
       </label>
     </div>
 </form>
-<mat-form-field appearance="fill">
-    <mat-label>Select entity Ty     pe</mat-label>
-    <mat-select [(value)]="selected">
-      <mat-option>None</mat-option>
-      <mat-option value="Character">Character</mat-option>
-      <mat-option value="Corporation">Corporation</mat-option>
-      <mat-option value="Alliance">Alliance</mat-option>
-      <mat-option value="Solar System">Solar System</mat-option>
-      <mat-option value="Constellation">Constellation</mat-option>
-      <mat-option value="Region">Region</mat-option>
-    </mat-select>
-  </mat-form-field>
-  
+
+<mat-form-field>
+  <mat-select [(value)]="selected">
+    <mat-option>None</mat-option>
+    <mat-option value="all">All</mat-option>
+    <mat-option value="corporation">Corporation</mat-option>
+    <mat-option value="alliance">Alliance</mat-option>
+    <mat-option value="faction">Faction</mat-option>
+    <mat-option value="ship">Ship</mat-option>
+    <mat-option value="group">Group</mat-option>
+    <mat-option value="solarSystem">Solar System</mat-option>
+    <mat-option value="constellation">Constellation</mat-option>
+    <mat-option value="region">Region</mat-option>
+    <mat-option value="location">Location</mat-option>
+    <mat-option value="label">Label</mat-option>
+  </mat-select>
+</mat-form-field>
+
   <p>You selected: {{selected ?selected  : 'None'}} </p>
   <!-- {{this.searchEntityForm.value.name}}
+    character:
+corporation:
+alliance:
+faction:
+ship:
+group:
+system:
+constellation:
+region:
+location:
+label:
    -->
